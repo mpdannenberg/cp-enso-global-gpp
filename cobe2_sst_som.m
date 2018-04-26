@@ -4,11 +4,11 @@ latlim = [-25 25];
 lonlim = [120 300];
 
 %% Load and process COBE-2 SST data
-info = ncinfo('sst.mon.mean.nc');
-lat = double(ncread('sst.mon.mean.nc','lat'));
-lon = double(ncread('sst.mon.mean.nc','lon'));
-t = ncread('sst.mon.mean.nc','time');
-sst = double(ncread('sst.mon.mean.nc','sst'));
+info = ncinfo('./data/sst.mon.mean.nc');
+lat = double(ncread('./data/sst.mon.mean.nc','lat'));
+lon = double(ncread('./data/sst.mon.mean.nc','lon'));
+t = ncread('./data/sst.mon.mean.nc','time');
+sst = double(ncread('./data/sst.mon.mean.nc','sst'));
 sst = permute(sst, [2 1 3]);
 sst(sst>40) = NaN;
 [nx, ny, nt] = size(sst);
