@@ -25,10 +25,8 @@ for i = 1:12
     ssta(:,:,mo==i) = temp-temp_mean;
     sstz(:,:,mo==i) = (temp-temp_mean)./temp_std;
 end
-clear temp*;
+clear temp* i;
 
-
-%% Fit SOM
 D = permute(ssta(lat>=min(latlim) & lat<=max(latlim), lon>=min(lonlim) & lon<=max(lonlim), :), [3 1 2]);
 D = reshape(D, nt, []);
 idx = sum(~isnan(D));
@@ -36,6 +34,41 @@ D = D(:, idx==nt);
 lat0 = lat(lat>=min(latlim) & lat<=max(latlim));
 lon0 = lon(lon>=min(lonlim) & lon<=max(lonlim));
 
+%% Find max. number of distinguishable nodes
+maxNodes = 25;
+IndisPairs = NaN(maxNodes-1, 2); % Number of indistinguishable pairs for each SOM
+for numNodes = 2:maxNodes
+    fprintf('Number of Nodes: %d\n',numNodes);
+    sM = som_make(D,'msize',[1 numNodes],'rect','sheet','tracking',0);
+    Bmus = som_bmus(sM,D);
+    
+    % Compare all node combinations
+    allCombs = nchoosek(1:numNodes, 2); % Find all possible node pairs
+    numCombs = size(allCombs, 1); % Count number of possible node pairs
+    nodeTests = NaN(1, numCombs); % Initialize vector of FDR tests for each node pair
+    for comb = 1:numCombs
+        node1 = allCombs(comb, 1);
+        node2 = allCombs(comb, 2);
+        
+        if sum(Bmus == node1)>0 & sum(Bmus == node2)>0
+            ci = D(Bmus == node1, :);
+            cj = D(Bmus == node2, :);
+
+            [~,ps] = ttest2(ci, cj); % Calculate local p-values
+            nodeTests(1, comb) = fdr(ps); % 1: distinguishable, 0: indistinguishable
+        else
+            nodeTests(1, comb) = NaN;
+        end
+        clear ci cj node1 node2 ps;
+    end
+    DistNodes = sum(nodeTests); % Number of distinguishable pairs
+    IndisPairs(numNodes-1,1) = numNodes;
+    IndisPairs(numNodes-1,2) = numCombs - DistNodes; % Number of indistinguishable pairs
+    clear allCombs numCombs nodeTests sM Bmus DistNodes;
+end
+clear numNodes comb maxNodes;
+
+%% Fit final SOM
 % Train SOM
 n = 9;
 sM=som_make(D,'msize',[1 n]);
