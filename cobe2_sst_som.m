@@ -91,7 +91,6 @@ clr = [103,0,31
     5,48,97]/255;
 ax = tight_subplot(6,2,0,[0.15 0.05],0.1);
 
-
 for i = 1:n
 
     temp = squeeze(nanmean(ssta(lat>=min(latlim) & lat<=max(latlim), lon>=min(lonlim) & lon<=max(lonlim),Bmus==i), 3));
@@ -131,4 +130,36 @@ xlabel(cb, ['SST anomaly (',sprintf('%c', char(176)),'C)'], 'FontSize',12);
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r600','./output/sst-som-12nodes.tif')
 close all;
+
+
+%% PDFs of Niño3.4 by node
+nino34 = mean( reshape(ssta(lat>=-5 & lat<=5, lon>=190 & lon<=240, :), [], nt));
+soi = xlsread('./data/NH_teleconnections',1, 'G14:G805');
+soi_yr = xlsread('./data/NH_teleconnections',1, 'A14:A805');
+soi_mo = xlsread('./data/NH_teleconnections',1, 'B14:B805');
+
+cbrew = flipud(cbrewer('div','RdBu',12));
+
+h = figure('Color','w');
+h.Units = 'inches';
+h.Position = [1 1 7 4];
+
+for i = 1:n
+    
+    hold on;
+    [f, xi] = ksdensity(nino34(Bmus==i));
+    plot(xi, f, '-', 'Color',cbrew(i, :), 'LineWidth',3);
+    
+end
+set(gca, 'TickDir','out', 'TickLength',[0.015 0.1], 'XLim',[-3.5 3.5])
+temp = cellstr([repmat('Node: ', n,1) num2str([1:n]')]);
+lgd = legend(temp,'Location','northeast');
+legend('boxoff');
+xlabel('Niño3.4 SST anomaly', 'FontSize',12);
+ylabel('Density', 'Rotation',90, 'FontSize',12)
+
+set(gcf,'PaperPositionMode','auto')
+print('-dtiff','-f1','-r600','./output/nino3_4-by-node.tif')
+close all;
+
 
