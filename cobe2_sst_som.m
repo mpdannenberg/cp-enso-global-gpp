@@ -128,7 +128,7 @@ cb.TickLength = 0.03;
 xlabel(cb, ['SST anomaly (',sprintf('%c', char(176)),'C)'], 'FontSize',12);
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r600','./output/sst-som-12nodes.tif')
+print('-dtiff','-f1','-r300','./output/sst-som-12nodes.tif')
 close all;
 
 
@@ -156,7 +156,7 @@ xlabel('Niño3.4 SST anomaly', 'FontSize',12);
 ylabel('Density', 'Rotation',90, 'FontSize',12)
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r600','./output/nino3_4-by-node.tif')
+print('-dtiff','-f1','-r300','./output/nino3_4-by-node.tif')
 close all;
 
 
@@ -187,7 +187,7 @@ xlabel('Southern Oscillation Index (SOI)', 'FontSize',12);
 ylabel('Density', 'Rotation',90, 'FontSize',12)
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r600','./output/soi-by-node.tif')
+print('-dtiff','-f1','-r300','./output/soi-by-node.tif')
 close all;
 
 
