@@ -134,9 +134,6 @@ close all;
 
 %% PDFs of Niño3.4 by node
 nino34 = mean( reshape(ssta(lat>=-5 & lat<=5, lon>=190 & lon<=240, :), [], nt));
-soi = xlsread('./data/NH_teleconnections',1, 'G14:G805');
-soi_yr = xlsread('./data/NH_teleconnections',1, 'A14:A805');
-soi_mo = xlsread('./data/NH_teleconnections',1, 'B14:B805');
 
 cbrew = flipud(cbrewer('div','RdBu',12));
 
@@ -160,6 +157,37 @@ ylabel('Density', 'Rotation',90, 'FontSize',12)
 
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r600','./output/nino3_4-by-node.tif')
+close all;
+
+
+%% PDFs of SOI by node
+soi = xlsread('./data/NH_teleconnections',1, 'G14:G805');
+soi_yr = xlsread('./data/NH_teleconnections',1, 'A14:A805');
+soi_mo = xlsread('./data/NH_teleconnections',1, 'B14:B805');
+
+cbrew = flipud(cbrewer('div','RdBu',12));
+idx = yr>=min(soi_yr) & yr<=max(soi_yr);
+
+h = figure('Color','w');
+h.Units = 'inches';
+h.Position = [1 1 7 4];
+
+for i = 1:n
+    
+    hold on;
+    [f, xi] = ksdensity(soi(Bmus(idx)==i));
+    plot(xi, f, '-', 'Color',cbrew(i, :), 'LineWidth',3);
+    
+end
+set(gca, 'TickDir','out', 'TickLength',[0.015 0.1], 'XLim',[-4.5 4.5])
+temp = cellstr([repmat('Node: ', n,1) num2str([1:n]')]);
+lgd = legend(temp,'Location','northwest');
+legend('boxoff');
+xlabel('Southern Oscillation Index (SOI)', 'FontSize',12);
+ylabel('Density', 'Rotation',90, 'FontSize',12)
+
+set(gcf,'PaperPositionMode','auto')
+print('-dtiff','-f1','-r600','./output/soi-by-node.tif')
 close all;
 
 
