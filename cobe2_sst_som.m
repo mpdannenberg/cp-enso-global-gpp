@@ -2,7 +2,7 @@
 t0 = datenum(1891, 1, 1);
 latlim = [-25 25];
 lonlim = [120 300];
-syear = 1901;
+syear = 1900;
 
 %% Load and process COBE-2 SST data
 info = ncinfo('./data/sst.mon.mean.nc');
