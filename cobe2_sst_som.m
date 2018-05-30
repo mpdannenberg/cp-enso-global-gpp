@@ -2,6 +2,7 @@
 t0 = datenum(1891, 1, 1);
 latlim = [-25 25];
 lonlim = [120 300];
+syear = 1901;
 
 %% Load and process COBE-2 SST data
 info = ncinfo('./data/sst.mon.mean.nc');
@@ -11,8 +12,14 @@ t = ncread('./data/sst.mon.mean.nc','time');
 sst = double(ncread('./data/sst.mon.mean.nc','sst'));
 sst = permute(sst, [2 1 3]);
 sst(sst>40) = NaN;
+[yr, mo] = datevec(t0 + t); clear t0 t;
+
+idx = yr >= syear;
+sst = sst(:, :, idx);
+yr = yr(idx);
+mo = mo(idx);
+clear idx;
 [nx, ny, nt] = size(sst);
-[yr, mo] = datevec(t0 + t);
 
 ssta = NaN(nx, ny, nt);
 sstz = NaN(nx, ny, nt);
