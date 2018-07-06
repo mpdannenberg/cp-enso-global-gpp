@@ -2,7 +2,7 @@
 t0 = datenum(1891, 1, 1);
 latlim = [-20 20];
 lonlim = [120 290];
-syear = 1901;
+syear = 1951;
 
 warning('off');
 
@@ -76,8 +76,8 @@ for i = 1:size(sst_tp, 2)
     lm_cp = fitlm(nino12, y);
     sst_cp(:, i) = lm_cp.Residuals.Raw;
 end
-[ep_coef, ep_pc] = pca(sst_ep, 'VariableWeights',w_tp);
-[cp_coef, cp_pc] = pca(sst_cp, 'VariableWeights',w_tp);
+[ep_coef, ep_pc, ep_latent] = pca(sst_ep, 'VariableWeights',w_tp);
+[cp_coef, cp_pc, cp_latent] = pca(sst_cp, 'VariableWeights',w_tp);
 ep_eof = NaN(size(sst_idx));
 cp_eof = NaN(size(sst_idx));
 ep_eof(sst_idx) = ep_coef(:, 1);
@@ -86,5 +86,4 @@ ep_eof = reshape(ep_eof, ny, nx);
 cp_eof = reshape(cp_eof, ny, nx);
 ep_idx = ep_pc(:, 1);
 cp_idx = cp_pc(:, 1);
-% SSTs probably need to be detrended first? Both show trends
 
