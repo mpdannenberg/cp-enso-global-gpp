@@ -109,6 +109,8 @@ cpi = (cp_idx - mean(cp_idx(yr>=1981 & yr<=2010))) / std(cp_idx(yr>=1981 & yr<=2
 epi = (ep_idx - mean(ep_idx(yr>=1981 & yr<=2010))) / std(ep_idx(yr>=1981 & yr<=2010));
 clear cp_coef cp_eof cp_idx cp_latent cp_pc ep_coef ep_eof ep_idx ep_latent ep_pc;
 
+save('./data/cpi_epi_1951-2016.mat', 'cpi','epi','yr', '-v7.3');
+
 %% Figure
 h = figure('Color','w');
 h.Units = 'inches';
