@@ -18,7 +18,6 @@ sst = double(ncread('./data/sst.mon.mean.nc','sst'));
 sst = permute(sst, [2 1 3]);
 sst(sst>40) = NaN;
 [yr, mo] = datevec(t0 + t); clear t0 t;
-[nx, ny, ~] = size(sst);
 
 %% Need to do monthly anomalies
 ssta = NaN(size(sst));
@@ -52,6 +51,7 @@ nino4 = reshape(permute(nino4, [3 1 2]), length(yr), []);
 w = repmat(reshape(lat_weight(lat>=-5 & lat<=5, lon>=160 & lon<=210), 1, []), length(yr), 1);
 % nino4 = mean(nino4, 2);
 nino4 = sum(nino4.*w, 2) ./ sum(w, 2);
+clear w;
 
 nino12 = ssta(lat>=-10 & lat<=0, lon>=270 & lon<=280, :);
 nino12 = reshape(permute(nino12, [3 1 2]), length(yr), []);
@@ -59,6 +59,7 @@ idx = sum(isnan(nino12))==0;
 w = repmat(reshape(lat_weight(lat>=-10 & lat<=0, lon>=270 & lon<=280), 1, []), length(yr), 1);
 % nino12 = nanmean(nino12, 2);
 nino12 = sum(nino12(:,idx).*w(:,idx), 2) ./ sum(w(:,idx), 2);
+clear w idx;
 
 sst_tp = ssta(lat>=min(latlim) & lat<=max(latlim), lon>=min(lonlim) & lon<=max(lonlim), :);
 [ny, nx, ~] = size(sst_tp);
@@ -76,6 +77,8 @@ for i = 1:size(sst_tp, 2)
     lm_cp = fitlm(nino12, y);
     sst_cp(:, i) = lm_cp.Residuals.Raw;
 end
+clear y lm_ep lm_cp i;
+
 [ep_coef, ep_pc, ep_latent] = pca(sst_ep, 'VariableWeights',w_tp);
 [cp_coef, cp_pc, cp_latent] = pca(sst_cp, 'VariableWeights',w_tp);
 ep_eof = NaN(size(sst_idx));
