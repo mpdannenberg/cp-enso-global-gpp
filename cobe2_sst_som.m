@@ -4,6 +4,8 @@ latlim = [-25 25];
 lonlim = [120 300];
 syear = 1900;
 
+warning('off');
+
 %% Load and process COBE-2 SST data
 info = ncinfo('./data/sst.mon.mean.nc');
 lat = double(ncread('./data/sst.mon.mean.nc','lat'));
@@ -14,6 +16,8 @@ sst = permute(sst, [2 1 3]);
 sst(sst>40) = NaN;
 [yr, mo] = datevec(t0 + t); clear t0 t;
 
+% Cut off early years (lower quality and no overlap with models or remote
+% sensing
 idx = yr >= syear;
 sst = sst(:, :, idx);
 yr = yr(idx);
