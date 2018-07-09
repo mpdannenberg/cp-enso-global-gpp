@@ -2,6 +2,7 @@
 % 1951-2010 period
 
 syear = 1951; % First year of analysis
+scale = 10^-9 % kg --> Tg
 
 models = {'BIOME-BGC','CLASS-CTEM-N','CLM4','CLM4VIC','DLEM','GTEC',...
     'ISAM','LPJ-wsl','ORCHIDEE-LSCE','SiB3','SiBCASA','TEM6','VEGAS2.1',...
@@ -54,7 +55,7 @@ for i = 1:size(GPP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
-            GPP_global_monthly(i,j,k) = nansum(nansum( gpp.*area )); % kgC day-1
+            GPP_global_monthly(i,j,k) = nansum(nansum( gpp.*area )) * scale; % TgC day-1
         end
     end
 end
@@ -64,7 +65,7 @@ GPP_global_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_annual(:,:,i,k);
-        GPP_global_annual(i, k) = nansum(nansum( gpp.*area )); % kgC yr-1
+        GPP_global_annual(i, k) = nansum(nansum( gpp.*area )) * scale; % TgC yr-1
     end
 end
 GPP_global_annual_mean = nanmean(GPP_global_annual, 2);
@@ -78,5 +79,71 @@ cpi = cpi(yr<=2010);
 epi = epi(yr<=2010);
 yr = yr(yr<=2010);
 
+EP_GPP_global_monthly_beta = NaN(12, length(models));
+EP_GPP_global_monthly_mean_beta = NaN(12, 1);
+EP_GPP_global_annual_beta = NaN(1, length(models));
+
+mdl = fitlm(epi, GPP_global_annual_mean);
+EP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
+for i = 1:12
+    mdl = fitlm(epi, GPP_global_monthly_mean(:, i));
+    EP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    for j = 1:length(models)
+        mdl = fitlm(epi, GPP_global_monthly(:, i, j));
+        EP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        if i == 1
+            mdl = fitlm(epi, GPP_global_annual(:, j));
+            EP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+        end
+    end
+    
+end
+
+CP_GPP_global_monthly_beta = NaN(12, length(models));
+CP_GPP_global_monthly_mean_beta = NaN(12, 1);
+CP_GPP_global_annual_beta = NaN(1, length(models));
+
+mdl = fitlm(cpi, GPP_global_annual_mean);
+CP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
+for i = 1:12
+    mdl = fitlm(cpi, GPP_global_monthly_mean(:, i));
+    CP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    for j = 1:length(models)
+        mdl = fitlm(cpi, GPP_global_monthly(:, i, j));
+        CP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        if i == 1
+            mdl = fitlm(cpi, GPP_global_annual(:, j));
+            CP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+        end
+    end
+    
+end
+
+%% Regress EPI and CPI vs. gridded GPP
+EP_GPP_annual_r = NaN(ny, nx);
+EP_GPP_annual_p = NaN(ny, nx);
+EP_GPP_annual_beta = NaN(ny, nx);
+CP_GPP_annual_r = NaN(ny, nx);
+CP_GPP_annual_p = NaN(ny, nx);
+CP_GPP_annual_beta = NaN(ny, nx);
+
+for i = 1:ny
+    for j = 1:nx
+        ts = squeeze(GPP_annual_mean(i,j,:));
+        if sum(isnan(ts))==0
+            [r,p] = corr(epi, ts);
+            mdl = fitlm(epi, ts);
+            EP_GPP_annual_r(i,j) = r;
+            EP_GPP_annual_p(i,j) = p;
+            EP_GPP_annual_beta(i,j) = mdl.Coefficients.Estimate(2);
+            
+            [r,p] = corr(cpi, ts);
+            mdl = fitlm(cpi, ts);
+            CP_GPP_annual_r(i,j) = r;
+            CP_GPP_annual_p(i,j) = p;
+            CP_GPP_annual_beta(i,j) = mdl.Coefficients.Estimate(2);
+        end
+    end
+end
 
 
