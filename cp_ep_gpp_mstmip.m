@@ -1,12 +1,20 @@
 % Examine relationships between modeled MsTMIP GPP and EPI/CPI over 
 % 1951-2010 period
 
-syear = 1951; % First year of analysis
-scale = 10^-9 % kg --> Tg
+%% Units for final GPP data (original: kgC m-2 s-1)
+% monthly gridded GPP: kgC m-2 day-1
+% monthly global GPP: TgC day-1
+% annual gridded GPP: kgC m-2 year-1
+% annual global GPP: TgC year-1
 
+%% Setup
+syear = 1951; % First year of analysis
+scale = 10^-9; % kg --> Tg
 models = {'BIOME-BGC','CLASS-CTEM-N','CLM4','CLM4VIC','DLEM','GTEC',...
     'ISAM','LPJ-wsl','ORCHIDEE-LSCE','SiB3','SiBCASA','TEM6','VEGAS2.1',...
     'VISIT'};
+
+%% Load MsTMIP GPP data
 cd('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP');
 lat = ncread('BIOME-BGC_SG1_Monthly_GPP.nc4','lat');
 lon = ncread('BIOME-BGC_SG1_Monthly_GPP.nc4','lon');
@@ -28,11 +36,11 @@ for i = 1:length(models)
     GPP(:, :, :, i) = permute(gpp(:, :, idx), [2 1 3]);
     
 end
+clear i gpp;
 
 %% Aggregate to monthly and annual scales
 % Multimodel monthly gridded mean
 GPP_monthly = bsxfun(@times,GPP,reshape(ndys,1,1,[])); % daily average --> monthly total GPP
-GPP_monthly_mean = nanmean(GPP_monthly, 4);
 
 % Multimodel annual gridded mean
 windowSize = 12;
@@ -41,6 +49,7 @@ a = 1;
 GPP_annual = filter(b, a, GPP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
 GPP_annual = GPP_annual(:, :, mo==12, :); % Get calendar year sum
 GPP_annual_mean = nanmean(GPP_annual, 4);
+clear GPP_monthly a b windowSize ndys;
 
 %% Calculate global GPP at monthly and annual scale
 [LON, LAT] = meshgrid(lon, lat);
@@ -69,6 +78,8 @@ for i = 1:length(yrs)
     end
 end
 GPP_global_annual_mean = nanmean(GPP_global_annual, 2);
+
+clear i j k gpp;
 
 
 %% Regress monthly & annual gpp against CPI and EPI indices
@@ -119,6 +130,8 @@ for i = 1:12
     
 end
 
+clear i j mdl;
+
 %% Regress EPI and CPI vs. gridded GPP
 EP_GPP_annual_r = NaN(ny, nx);
 EP_GPP_annual_p = NaN(ny, nx);
@@ -146,4 +159,4 @@ for i = 1:ny
     end
 end
 
-
+clear i j ts r p mdl;
