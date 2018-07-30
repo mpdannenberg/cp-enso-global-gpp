@@ -282,12 +282,13 @@ for i = 1:12
     plot([i-0.4 i+0.4], [EP_GPP_global_monthly_mean_beta(i) EP_GPP_global_monthly_mean_beta(i)],...
         'k-', 'LineWidth',3)
 end
-
+plot([0 15],[0 0],'k-')
 set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out',...
     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Year'});
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.08;
 set(gca, 'Position',pos);
+hold off;
 
 subplot(3,2,6)
 for i = 1:12
@@ -299,13 +300,13 @@ for i = 1:12
     plot([i-0.4 i+0.4], [CP_GPP_global_monthly_mean_beta(i) CP_GPP_global_monthly_mean_beta(i)],...
         'k-', 'LineWidth',3)
 end
-
+plot([0 15],[0 0],'k-')
 set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out',...
     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Year'});
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.1;
 set(gca, 'Position',pos);
-
+hold off;
 
 
 
