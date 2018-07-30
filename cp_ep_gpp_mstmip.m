@@ -36,7 +36,7 @@ for i = 1:length(models)
     GPP(:, :, :, i) = permute(gpp(:, :, idx), [2 1 3]);
     
 end
-clear i gpp;
+clear i gpp idx;
 
 %% Aggregate to monthly and annual scales
 % Multimodel monthly gridded mean
@@ -79,7 +79,7 @@ for i = 1:length(yrs)
 end
 GPP_global_annual_mean = nanmean(GPP_global_annual, 2);
 
-clear i j k gpp;
+clear i j k gpp yrs area;
 
 
 %% Regress monthly & annual gpp against CPI and EPI indices
@@ -159,4 +159,153 @@ for i = 1:ny
     end
 end
 
-clear i j ts r p mdl;
+clear i j ts r p mdl nt nx ny scale syear GPP mo;
+
+save('./data/cp_ep_gpp_mstmip.mat');
+
+%% Make some maps and stuff
+clr = [84,48,5
+140,81,10
+191,129,45
+223,194,125
+246,232,195
+199,234,229
+128,205,193
+53,151,143
+1,102,94
+0,60,48]/255;
+
+latlim = [-80 80];
+lonlim = [-180 180];
+worldland = shaperead('landareas','UseGeoCoords', true);
+
+h = figure('Color','w');
+h.Units = 'inches';
+h.Position = [1 1 7 6];
+
+% Correlations
+subplot(3,2,1)
+ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+        'on','PLineLocation',30,'MLineLocation',60,'MeridianLabel','off',...
+        'ParallelLabel','off','GLineWidth',0.5,'Frame','on','FFaceColor',...
+        'none', 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+        'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
+axis off;
+axis image;
+surfm(lat, lon, EP_GPP_annual_r)
+caxis([-1 1])
+colormap(gca, clr);
+geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.08;
+set(gca, 'Position',pos);
+ttl = title('Eastern Pacific Index','FontSize',14);
+ttl.Position = [0.0000    1.9    0.0000];
+text(-2.2,1.3,'A', 'FontSize',12);
+
+subplot(3,2,2)
+ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+        'on','PLineLocation',30,'MLineLocation',60,'MeridianLabel','off',...
+        'ParallelLabel','off','GLineWidth',0.5,'Frame','on','FFaceColor',...
+        'none', 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+        'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
+axis off;
+axis image;
+surfm(lat, lon, CP_GPP_annual_r)
+caxis([-1 1])
+colormap(gca, clr);
+geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.1;
+set(gca, 'Position',pos);
+ttl = title('Central Pacific Index','FontSize',14);
+ttl.Position = [0.0000    1.9    0.0000];
+text(-2.2,1.3,'B', 'FontSize',12);
+
+cb = colorbar('eastoutside');
+cb.Position = [0.84    0.74    0.04    0.22];
+cb.Ticks = -1:0.2:1;
+cb.TickLength = 0.21;
+cb.TickLabels = {'-1','','','','','0','','','','','1'};
+ylabel(cb, 'Pearson''s correlation (R)');
+
+% Beta
+subplot(3,2,3)
+ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+        'on','PLineLocation',30,'MLineLocation',60,'MeridianLabel','off',...
+        'ParallelLabel','off','GLineWidth',0.5,'Frame','on','FFaceColor',...
+        'none', 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+        'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
+axis off;
+axis image;
+surfm(lat, lon, EP_GPP_annual_beta)
+caxis([-0.05 0.05])
+colormap(gca, clr);
+geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.08;
+set(gca, 'Position',pos);
+text(-2.2,1.3,'C', 'FontSize',12);
+
+subplot(3,2,4)
+ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+        'on','PLineLocation',30,'MLineLocation',60,'MeridianLabel','off',...
+        'ParallelLabel','off','GLineWidth',0.5,'Frame','on','FFaceColor',...
+        'none', 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+        'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
+axis off;
+axis image;
+surfm(lat, lon, CP_GPP_annual_beta)
+caxis([-0.05 0.05])
+colormap(gca, clr);
+geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.1;
+set(gca, 'Position',pos);
+text(-2.2,1.3,'D', 'FontSize',12);
+
+cb = colorbar('eastoutside');
+cb.Position = [0.84    0.41    0.04    0.22];
+cb.Ticks = -0.05:0.01:0.05;
+cb.TickLength = 0.21;
+cb.TickLabels = {'-0.05','','','','','0','','','','','0.05'};
+ylabel(cb, '\beta (kg C m^{-2} yr^{-1})');
+
+% Plot beta through time
+subplot(3,2,5)
+for i = 1:12
+    lower = min(EP_GPP_global_monthly_beta(i, :));
+    upper = max(EP_GPP_global_monthly_beta(i, :));
+    fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+        [0.8 0.8 0.8], 'EdgeColor','none');
+    hold on;
+    plot([i-0.4 i+0.4], [EP_GPP_global_monthly_mean_beta(i) EP_GPP_global_monthly_mean_beta(i)],...
+        'k-', 'LineWidth',3)
+end
+
+set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out',...
+    'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Year'});
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.08;
+set(gca, 'Position',pos);
+
+subplot(3,2,6)
+for i = 1:12
+    lower = min(CP_GPP_global_monthly_beta(i, :));
+    upper = max(CP_GPP_global_monthly_beta(i, :));
+    fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+        [0.8 0.8 0.8], 'EdgeColor','none');
+    hold on;
+    plot([i-0.4 i+0.4], [CP_GPP_global_monthly_mean_beta(i) CP_GPP_global_monthly_mean_beta(i)],...
+        'k-', 'LineWidth',3)
+end
+
+set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out',...
+    'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Year'});
+pos = get(gca, 'Position');
+pos(1) = pos(1)-0.1;
+set(gca, 'Position',pos);
+
+
+
+
