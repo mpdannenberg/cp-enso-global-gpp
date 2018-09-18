@@ -1,5 +1,5 @@
-% Examine relationships between remotely sensed GPP and EPI/CPI over 
-% 1982-2016 period
+% Get 1982-2015 GPP data from CCW and format for comparison to other data
+% sources (MsTMIP, MOD17, and FluxCom)
 
 %% Units for final GPP data (original: kgC m-2 month-1)
 % monthly gridded GPP: kgC m-2 day-1
