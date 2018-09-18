@@ -1,7 +1,7 @@
 % Get 1982-2015 GPP data from CCW and format for comparison to other data
 % sources (MsTMIP, MOD17, and FluxCom)
 
-%% Units for final GPP data (original: kgC m-2 month-1)
+%% Units for final GPP data (original: g C m-2 month-1)
 % monthly gridded GPP: kgC m-2 day-1
 % monthly global GPP: TgC day-1
 % annual gridded GPP: kgC m-2 year-1
