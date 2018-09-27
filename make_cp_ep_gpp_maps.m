@@ -63,8 +63,10 @@ cb = colorbar('eastoutside');
 cb.Position = [0.5    0.41    0.04    0.22];
 cb.Ticks = -0.05:0.01:0.05;
 cb.TickLength = 0.21;
-cb.TickLabels = {'-0.05','','','','','0','','','','','0.05'};
-ylb = ylabel(cb, 'kg C m^{-2} yr^{-1}');
+% cb.TickLabels = {'-0.05','','','','','0','','','','','0.05'};
+% ylb = ylabel(cb, 'kg C m^{-2} yr^{-1}');
+cb.TickLabels = {'-50','','','','','0','','','','','50'};
+ylb = ylabel(cb, 'g C m^{-2} yr^{-1}');
 ylb.Position = [-0.75 0.0000 0];
 
 %% Plot MsTMIP beta through time
@@ -153,6 +155,8 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'A', 'FontSize',12);
+ttl = title('Eastern Pacific ENSO', 'FontSize',12);
+ttl.Position(2) = 1.75;
 
 subplot(3,2,2)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
@@ -170,6 +174,8 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'B', 'FontSize',12);
+ttl = title('Central Pacific ENSO', 'FontSize',12);
+ttl.Position(2) = 1.75;
 
 %% Plot LUE beta through time
 
@@ -207,6 +213,27 @@ plot([i-0.4 i+0.4], [CP_GPP_global_annual_beta(1) CP_GPP_global_annual_beta(1)]/
     '-', 'LineWidth',3, 'Color',clr2(1,:))
 plot([i-0.4 i+0.4], [CP_GPP_global_annual_beta(2) CP_GPP_global_annual_beta(2)]/1000,...
     '-', 'LineWidth',3, 'Color',clr2(2,:))
+
+% Manual legend
+i = 3.5;
+plot([i-0.4 i+0.4], [0.85 0.85],...
+    '-', 'LineWidth',3, 'Color',clr2(1,:));
+text(i+0.5, 0.85, 'CCW', 'Color',clr2(1,:), 'FontWeight','bold', 'FontSize',8,...
+    'VerticalAlignment','middle', 'HorizontalAlignment','left')
+plot([i-0.4 i+0.4], [0.65 0.65],...
+    '-', 'LineWidth',3, 'Color',clr2(2,:))
+text(i+0.5, 0.65, 'MOD17', 'Color',clr2(2,:), 'FontWeight','bold', 'FontSize',8,...
+    'VerticalAlignment','middle', 'HorizontalAlignment','left')
+
+i = 8.5;
+fill([i-0.3 i+0.3 i+0.3 i-0.3], [0.45 0.45 0.95 0.95],...
+    [0.8 0.8 0.8], 'EdgeColor','none');
+plot([i-0.3 i+0.3], [0.7 0.7],...
+    'k-', 'LineWidth',3)
+text(i+0.5, 0.7, 'MsTMIP mean', 'Color','k', 'FontWeight','bold', 'FontSize',8,...
+    'VerticalAlignment','middle', 'HorizontalAlignment','left')
+text(i+0.5, 0.9, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'FontSize',8,...
+    'VerticalAlignment','middle', 'HorizontalAlignment','left')
 
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r300','./output/epi-cpi-gpp.tif')
