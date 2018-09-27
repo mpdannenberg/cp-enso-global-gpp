@@ -12,6 +12,7 @@ syear = 1982; % First year of analysis
 eyear = 2015; % Last year of analysis
 scale = 10^-9; % kg --> Tg
 e = referenceEllipsoid('World Geodetic System 1984');
+biomes = ncread('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP\mstmip_driver_global_hd_biome_v1.nc4', 'biome_type');
 
 %% Load CCW GPP data - gC m-2 month-1
 years = syear:eyear;
@@ -71,13 +72,15 @@ for i = 1:length(newlat)
     end
 end
 
+GPP_halfdeg(repmat(biomes',1,1,nt)==0) = NaN;
+
 lat = newlat; ny = length(lat);
 lon = newlon; nx = length(lon);
 GPP = GPP_halfdeg;
 ndys = repmat([31,28,31,30,31,30,31,31,30,31,30,31]', length(years), ny, nx); % Number of days, excluding leap years
 ndys = permute(ndys, [2 3 1]);
 
-clear newlat newlon GPP_halfdeg i j area12 gpp latidx lonidx;
+clear newlat newlon GPP_halfdeg i j area12 gpp latidx lonidx biomes;
 
 %% Aggregate to monthly and annual scales
 % Monthly gridded mean
