@@ -12,6 +12,7 @@ syear = 1982; % First year of analysis
 eyear = 2015; % Last year of analysis
 scale = 10^-9; % kg --> Tg
 e = referenceEllipsoid('World Geodetic System 1984');
+biomes = ncread('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP\mstmip_driver_global_hd_biome_v1.nc4', 'biome_type');
 
 %% Load CCW GPP data - gC m-2 month-1
 years = syear:eyear;
@@ -38,6 +39,7 @@ for i = 1:length(years)
     GPP(:, :, yr==years(i)) = gpp;
     
 end
+GPP(repmat(biomes',1,1,nt)==0) = NaN;
 clear i gpp fn;
 cd('C:\Users\dannenberg\Documents\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
 
@@ -53,6 +55,7 @@ ndys = permute(ndys, [2 3 1]);
 %% Aggregate to monthly and annual scales
 % Monthly gridded mean
 GPP_monthly = GPP .* ndys; % daily average --> monthly total GPP (kgC m-2 month-1)
+GPP_monthly(isnan(GPP_monthly)) = 0; % For purposes of annual sums (i.e., ignore NaN in filter below)
 
 % Multimodel annual gridded mean
 windowSize = 12;
@@ -60,7 +63,9 @@ b = ones(1,windowSize);
 a = 1;
 GPP_annual = filter(b, a, GPP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
 GPP_annual = GPP_annual(:, :, mo==12); % Get calendar year sum
-clear GPP_monthly a b windowSize ndys;
+GPP_annual(repmat(biomes',1,1,length(years))==0) = NaN; % Return ocean values to NaN
+
+clear GPP_monthly a b windowSize ndys biomes;
 
 %% Calculate global GPP at monthly and annual scale
 yrs = years;
