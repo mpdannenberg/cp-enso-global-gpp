@@ -41,6 +41,8 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'A', 'FontSize',12);
+ttl = title('Eastern Pacific ENSO', 'FontSize',12);
+ttl.Position(2) = 1.75;
 
 subplot(2,2,2)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
@@ -58,6 +60,8 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'B', 'FontSize',12);
+ttl = title('Central Pacific ENSO', 'FontSize',12);
+ttl.Position(2) = 1.75;
 
 cb = colorbar('eastoutside');
 cb.Position = [0.5    0.6    0.04    0.3];
@@ -150,33 +154,37 @@ for i = 1:12
     for j = 1:4
         hold on;
         plot([i-0.4 i+0.4], [EP_NEP_global_monthly_beta(i,j) EP_NEP_global_monthly_beta(i,j)],...
-            'k-', 'LineWidth',3, 'Color',clr2(j,:))
+            'k-', 'LineWidth',2, 'Color',clr2(j,:))
     end
 end
 yyaxis right;
 i = 14;
 plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(1) EP_NEP_global_annual_beta(1)]/1000,...
-    '-', 'LineWidth',3, 'Color',clr2(1,:))
+    '-', 'LineWidth',2, 'Color',clr2(1,:))
 plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(2) EP_NEP_global_annual_beta(2)]/1000,...
-    '-', 'LineWidth',3, 'Color',clr2(2,:))
+    '-', 'LineWidth',2, 'Color',clr2(2,:))
+plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(3) EP_NEP_global_annual_beta(3)]/1000,...
+    '-', 'LineWidth',2, 'Color',clr2(3,:))
+plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(4) EP_NEP_global_annual_beta(4)]/1000,...
+    '-', 'LineWidth',2, 'Color',clr2(4,:))
 
 % Manual legend
 i = 4;
 plot([i-0.4 i+0.4], [0.85 0.85],...
-    '-', 'LineWidth',3, 'Color',clr2(1,:));
+    '-', 'LineWidth',2, 'Color',clr2(1,:));
 text(i+0.5, 0.85, 'CAMS v15r2', 'Color',clr2(1,:), 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 plot([i-0.4 i+0.4], [0.65 0.65],...
-    '-', 'LineWidth',3, 'Color',clr2(2,:))
+    '-', 'LineWidth',2, 'Color',clr2(2,:))
 text(i+0.5, 0.65, 'CAMS v15r4', 'Color',clr2(2,:), 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 i = 9.5;
 plot([i-0.4 i+0.4], [0.85 0.85],...
-    '-', 'LineWidth',3, 'Color',clr2(3,:));
+    '-', 'LineWidth',2, 'Color',clr2(3,:));
 text(i+0.5, 0.85, 'MACC v13r1', 'Color',clr2(3,:), 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 plot([i-0.4 i+0.4], [0.65 0.65],...
-    '-', 'LineWidth',3, 'Color',clr2(4,:))
+    '-', 'LineWidth',2, 'Color',clr2(4,:))
 text(i+0.5, 0.65, 'MACC v14r2', 'Color',clr2(4,:), 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 
@@ -186,15 +194,19 @@ for i = 1:12
     for j = 1:4
         hold on;
         plot([i-0.4 i+0.4], [CP_NEP_global_monthly_beta(i,j) CP_NEP_global_monthly_beta(i,j)],...
-            'k-', 'LineWidth',3, 'Color',clr2(j,:))
+            'k-', 'LineWidth',2, 'Color',clr2(j,:))
     end
 end
 yyaxis right;
 i = 14;
 plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(1) CP_NEP_global_annual_beta(1)]/1000,...
-    '-', 'LineWidth',3, 'Color',clr2(1,:))
+    '-', 'LineWidth',2, 'Color',clr2(1,:))
 plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(2) CP_NEP_global_annual_beta(2)]/1000,...
-    '-', 'LineWidth',3, 'Color',clr2(2,:))
+    '-', 'LineWidth',2, 'Color',clr2(2,:))
+plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(3) CP_NEP_global_annual_beta(3)]/1000,...
+    '-', 'LineWidth',2, 'Color',clr2(3,:))
+plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(4) CP_NEP_global_annual_beta(4)]/1000,...
+    '-', 'LineWidth',2, 'Color',clr2(4,:))
 
 % Manual legend
 i = 9.2;
@@ -208,6 +220,6 @@ text(i+0.5, 0.9, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'Fo
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-gpp.tif')
+print('-dtiff','-f1','-r300','./output/epi-cpi-nep.tif')
 close all;
 
