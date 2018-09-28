@@ -21,7 +21,6 @@ h.Position = [1 1 7 6];
 
 set(h, 'defaultAxesColorOrder',[0 0 0; 140,81,10]/255)
 
-
 %% Map MsTMIP Beta
 load('./data/cp_ep_gpp_mstmip.mat');
 
@@ -138,6 +137,8 @@ ylb.Position = [16.8    0.0000   -1.0000];
 
 %% Map LUE Beta
 load('./data/cp_ep_gpp_lue.mat');
+CP_GPP_annual_beta(CP_GPP_annual_beta==0) = NaN;
+EP_GPP_annual_beta(EP_GPP_annual_beta==0) = NaN;
 
 subplot(3,2,1)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
