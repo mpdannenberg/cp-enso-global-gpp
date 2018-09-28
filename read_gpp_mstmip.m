@@ -82,7 +82,208 @@ end
 GPP_global_annual_mean = nanmean(GPP_global_annual, 2);
 years = yrs;
 
-clear i j k gpp yrs area GPP GPP_annual mo nt nx ny scale syear yr eyear;
+clear i j k gpp yrs area mo nt nx ny scale syear yr eyear;
 
-save('./data/gpp_mstmip.mat');
+save('./data/gpp_mstmip.mat', 'GPP_annual_mean','GPP_global_annual',...
+    'GPP_global_annual_mean','GPP_global_monthly','GPP_global_monthly_mean',...
+    'lat','lon','models','years');
+
+%% Calculate regional GPP at monthly and annual scale
+
+yrs = years;
+scale = 10^-9; % kg --> Tg
+e = referenceEllipsoid('World Geodetic System 1984');
+[LON, LAT] = meshgrid(lon, lat);
+area = areaquad(reshape(LAT-(1/4),[],1),reshape(LON-(1/4),[],1),reshape(LAT+(1/4),[],1),reshape(LON+(1/4),[],1),e);
+area = reshape(area, length(lat), length(lon)); 
+clear LON LAT;
+
+% Amazon
+rlim = [-30 10; -80 -35];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_amazon_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_amazon_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_amazon_monthly_mean = nanmean(GPP_amazon_monthly, 3);
+GPP_amazon_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_amazon_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_amazon_annual_mean = nanmean(GPP_amazon_annual, 2);
+
+% Sahel
+rlim = [5 15; -20 50];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_sahel_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_sahel_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_sahel_monthly_mean = nanmean(GPP_sahel_monthly, 3);
+GPP_sahel_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_sahel_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_sahel_annual_mean = nanmean(GPP_sahel_annual, 2);
+
+% Tropical and subtropical Africa
+rlim = [-30 5; 10 40];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_africa_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_africa_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_africa_monthly_mean = nanmean(GPP_africa_monthly, 3);
+GPP_africa_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_africa_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_africa_annual_mean = nanmean(GPP_africa_annual, 2);
+
+% Australia
+rlim = [-40 -10; 110 155];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_austr_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_austr_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_austr_monthly_mean = nanmean(GPP_austr_monthly, 3);
+GPP_austr_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_austr_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_austr_annual_mean = nanmean(GPP_austr_annual, 2);
+
+% Western North America
+rlim = [20 70; -165 -100];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_westna_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_westna_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_westna_monthly_mean = nanmean(GPP_westna_monthly, 3);
+GPP_westna_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_westna_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_westna_annual_mean = nanmean(GPP_westna_annual, 2);
+
+% Eastern U.S.
+rlim = [25 50; -100 -60];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_eastus_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_eastus_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_eastus_monthly_mean = nanmean(GPP_eastus_monthly, 3);
+GPP_eastus_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_eastus_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_eastus_annual_mean = nanmean(GPP_eastus_annual, 2);
+
+% Europe
+rlim = [35 60; -10 40];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_europe_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_europe_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_europe_monthly_mean = nanmean(GPP_europe_monthly, 3);
+GPP_europe_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_europe_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_europe_annual_mean = nanmean(GPP_europe_annual, 2);
+
+% Central Asia and southern Russia
+rlim = [45 65; 50 100];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+GPP_casia_monthly = NaN(size(GPP_annual, 3), 12, length(models));
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            gpp = GPP(:, :, yr==yrs(i) & mo==j, k);
+            GPP_casia_monthly(i,j,k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+GPP_casia_monthly_mean = nanmean(GPP_casia_monthly, 3);
+GPP_casia_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = GPP_annual(:,:,i,k);
+        GPP_casia_annual(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+GPP_casia_annual_mean = nanmean(GPP_casia_annual, 2);
+
+clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim;
+
+save('./data/gpp_mstmip_regional.mat');
+
 
