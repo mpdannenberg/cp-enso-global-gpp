@@ -105,5 +105,28 @@ years = yrs;
 
 clear i j k nep yrs area NEP NEP_annual mo nt nx ny scale syear yr eyear info;
 
+%% Detrend (strong long-term increases in NEP)
+
+mdl = fitlm(years', NEP_global_annual_mean);
+NEP_global_annual_mean = mdl.Residuals.Raw;
+
+for k=1:4
+    mdl = fitlm(years', NEP_global_annual(:,k));
+    NEP_global_annual(:,k) = mdl.Residuals.Raw;
+end
+
+for i = 1:12
+    mdl = fitlm(years', NEP_global_monthly_mean(:,i));
+    NEP_global_monthly_mean(:,i) = mdl.Residuals.Raw;
+    
+    for k =1:4
+        
+        mdl = fitlm(years', NEP_global_monthly(:,i,k));
+        NEP_global_monthly(:,i,k) = mdl.Residuals.Raw;
+        
+    end
+end
+clear i k mdl;
+
 save('./data/nep_inversions.mat');
 
