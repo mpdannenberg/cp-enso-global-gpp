@@ -17,9 +17,9 @@ biomes = ncread('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP\mstmip_drive
 %% Load CCW GPP data - gC m-2 month-1
 years = syear:eyear;
 cd('C:\Users\dannenberg\Documents\Data_Analysis\GIMMS3g_GPP');
-info = ncinfo('gpp_V4_Standard_1982_Monthly_GEO_30min.nc');
-lat = ncread('gpp_V4_Standard_1982_Monthly_GEO_30min.nc', 'lat');
-lon = ncread('gpp_V4_Standard_1982_Monthly_GEO_30min.nc', 'lon');
+info = ncinfo('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc');
+lat = ncread('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc', 'lat');
+lon = ncread('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc', 'lon');
 ny = length(lat); nx = length(lon);
 
 yr = reshape(repmat(syear:eyear, 12, 1), [], 1);
@@ -32,7 +32,7 @@ GPP = NaN(ny, nx, nt);
 
 for i = 1:length(years)
     
-    fn = ['gpp_V4_Standard_',num2str(years(i)),'_Monthly_GEO_30min.nc'];
+    fn = ['gpp_CRUNCEP_V4P1_Standard_',num2str(years(i)),'_Monthly_GEO_30min.nc'];
     gpp = ncread(fn, 'GPP');
     gpp = 0.001 * permute(gpp, [2 1 3]) ./ ndys; % from gC m-2 month-1 --> kgC m-2 day-1
     
