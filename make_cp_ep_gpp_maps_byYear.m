@@ -197,6 +197,24 @@ set(gca, 'Position',pos);
 text(-0.55,-0.85,'2007', 'FontSize',14, 'FontWeight','bold');
 subplotsqueeze(gca,1.3);
 
+subplot(5,3,12)
+ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+        'on','PLineLocation',30,'MLineLocation',60,'MeridianLabel','off',...
+        'ParallelLabel','off','GLineWidth',0.5,'Frame','on','FFaceColor',...
+        'none', 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+        'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
+axis off;
+axis image;
+surfm(lat, lon, squeeze(GPP_annual_mean(:,:,years==2016)))
+caxis([-0.2 0.2])
+colormap(gca, clr);
+geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
+pos = get(gca, 'Position');
+pos(1) = pos(1)+0.04;
+set(gca, 'Position',pos);
+text(-0.55,-0.85,'2016', 'FontSize',14, 'FontWeight','bold');
+subplotsqueeze(gca,1.3);
+
 
 %% Color bar
 cb = colorbar('southoutside');
