@@ -9,7 +9,7 @@
 
 %% Setup
 syear = 1982; % First year of analysis
-eyear = 2015; % Last year of analysis
+eyear = 2016; % Last year of analysis
 scale = 10^-9; % kg --> Tg
 e = referenceEllipsoid('World Geodetic System 1984');
 biomes = ncread('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP\mstmip_driver_global_hd_biome_v1.nc4', 'biome_type');
