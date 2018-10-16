@@ -21,6 +21,9 @@ EP_NEP_global_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_global_annual_mean);
 EP_NEP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
+disp(['Global inversion mean response to EPI (PgC yr-1): ',...
+    num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+    num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
 for i = 1:12
     mdl = fitlm(epi, NEP_global_monthly_mean(:, i));
     EP_NEP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -41,6 +44,9 @@ CP_NEP_global_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_global_annual_mean);
 CP_NEP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
+disp(['Global inversion mean response to CPI (PgC yr-1): ',...
+    num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+    num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
 for i = 1:12
     mdl = fitlm(cpi, NEP_global_monthly_mean(:, i));
     CP_NEP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
