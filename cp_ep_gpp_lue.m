@@ -64,6 +64,9 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_global_annual(:, j));
             EP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            disp(['Global ',models{j},' response to EPI (PgC yr-1): ',...
+                num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+                num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
         end
     end
     
@@ -84,6 +87,9 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_global_annual(:, j));
             CP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            disp(['Global ',models{j},' response to CPI (PgC yr-1): ',...
+                num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+                num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
         end
     end
     
