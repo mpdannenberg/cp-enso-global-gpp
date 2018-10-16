@@ -82,7 +82,7 @@ end
 GPP_global_annual_mean = nanmean(GPP_global_annual, 2);
 years = yrs;
 
-clear i j k gpp yrs area mo nt nx ny scale syear yr eyear;
+clear i j k gpp yrs area nt nx ny scale syear eyear;
 
 save('./data/gpp_mstmip.mat', 'GPP_annual_mean','GPP_global_annual',...
     'GPP_global_annual_mean','GPP_global_monthly','GPP_global_monthly_mean',...
