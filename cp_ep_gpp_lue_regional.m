@@ -9,6 +9,10 @@ nt = length(syear:eyear);
 
 
 %% Regress monthly & annual gpp against CPI and EPI indices
+ep_gpp_95CI = cell2table(cell(8,2), 'VariableNames',{'CCW','MOD17'},...
+    'RowNames',{'Africa','Amazonia','Australia','Central Asia','Eastern US','Europe','The Sahel','Western North America'});
+cp_gpp_95CI = cell2table(cell(8,2), 'VariableNames',{'CCW','MOD17'},...
+    'RowNames',{'Africa','Amazonia','Australia','Central Asia','Eastern US','Europe','The Sahel','Western North America'});
 
 %% Africa
 % temporary arrays for all three models
@@ -54,6 +58,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_africa_annual(:, j));
             EP_GPP_africa_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{1,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -74,6 +80,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_africa_annual(:, j));
             CP_GPP_africa_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{1,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -81,7 +89,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Amazon
 % temporary arrays for all three models
 temp_amazon_annual = NaN(nt, nm);
 temp_amazon_monthly = NaN(nt, 12, nm);
@@ -125,6 +133,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_amazon_annual(:, j));
             EP_GPP_amazon_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{2,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -145,6 +155,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_amazon_annual(:, j));
             CP_GPP_amazon_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{2,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -152,7 +164,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Australia
 % temporary arrays for all three models
 temp_austr_annual = NaN(nt, nm);
 temp_austr_monthly = NaN(nt, 12, nm);
@@ -196,6 +208,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_austr_annual(:, j));
             EP_GPP_austr_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{3,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -216,6 +230,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_austr_annual(:, j));
             CP_GPP_austr_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{3,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -223,7 +239,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Central Asia
 % temporary arrays for all three models
 temp_casia_annual = NaN(nt, nm);
 temp_casia_monthly = NaN(nt, 12, nm);
@@ -267,6 +283,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_casia_annual(:, j));
             EP_GPP_casia_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{4,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -287,6 +305,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_casia_annual(:, j));
             CP_GPP_casia_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{4,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -294,7 +314,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Eastern US
 % temporary arrays for all three models
 temp_eastus_annual = NaN(nt, nm);
 temp_eastus_monthly = NaN(nt, 12, nm);
@@ -338,6 +358,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_eastus_annual(:, j));
             EP_GPP_eastus_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{5,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -358,6 +380,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_eastus_annual(:, j));
             CP_GPP_eastus_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{5,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -365,7 +389,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Europe
 % temporary arrays for all three models
 temp_europe_annual = NaN(nt, nm);
 temp_europe_monthly = NaN(nt, 12, nm);
@@ -409,6 +433,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_europe_annual(:, j));
             EP_GPP_europe_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{6,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -429,6 +455,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_europe_annual(:, j));
             CP_GPP_europe_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{6,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -436,7 +464,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% The Sahel
 % temporary arrays for all three models
 temp_sahel_annual = NaN(nt, nm);
 temp_sahel_monthly = NaN(nt, 12, nm);
@@ -480,6 +508,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_sahel_annual(:, j));
             EP_GPP_sahel_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{7,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -500,6 +530,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_sahel_annual(:, j));
             CP_GPP_sahel_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{7,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -507,7 +539,7 @@ end
 
 clear i j mdl;
 
-%% Africa
+%% Western North America
 % temporary arrays for all three models
 temp_westna_annual = NaN(nt, nm);
 temp_westna_monthly = NaN(nt, 12, nm);
@@ -551,6 +583,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_westna_annual(:, j));
             EP_GPP_westna_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            ep_gpp_95CI{8,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
@@ -571,6 +605,8 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_westna_annual(:, j));
             CP_GPP_westna_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            cp_gpp_95CI{8,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
+                mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
     end
     
