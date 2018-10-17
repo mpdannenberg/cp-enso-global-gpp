@@ -18,7 +18,7 @@ read_nep_inversions;
 % Process-based models
 read_nep_mstmip;
 
-%% Estimate responses of GPP to CP/EP ENSO events - Table 1 (TBD)
+%% Estimate responses of GPP to CP/EP ENSO events - Table 1
 % Global
 cp_ep_gpp_lue; % slow!
 cp_ep_gpp_mstmip; % slow!
@@ -27,7 +27,7 @@ cp_ep_gpp_mstmip; % slow!
 cp_ep_gpp_lue_regional;
 cp_ep_gpp_mstmip_regional;
 
-%% Estimate responses of NEP to CP/EP ENSO events - Table 2 (TBD)
+%% Estimate responses of NEP to CP/EP ENSO events - Table 2
 % Global
 cp_ep_nep_inversions; 
 cp_ep_nep_mstmip; % slow!
@@ -41,8 +41,10 @@ make_cp_ep_gpp_maps; % Figure 2
 make_cp_ep_nep_maps; % Figure 3
 
 %% Supplementary figures
-supplemental_map_regions;
-make_cp_ep_gpp_maps_byYear;
-make_cp_ep_gpp_regional_plots_temperate;
-make_cp_ep_gpp_regional_plots_tropics;
+make_cp_ep_gpp_maps_byYear; % Figure S1
+supplemental_map_regions; % Figure S2
+make_cp_ep_gpp_regional_plots_tropics; % Figure S3
+make_cp_ep_gpp_regional_plots_temperate; % Figure S4
+make_cp_ep_nep_regional_plots_tropics; % Figure S5
+make_cp_ep_nep_regional_plots_temperate; % Figure S6
 
