@@ -33,8 +33,8 @@ cp_ep_nep_inversions;
 cp_ep_nep_mstmip; % slow!
 
 % Regional
-% TBD
-% TBD
+cp_ep_nep_inversions_regional;
+cp_ep_nep_mstmip_regional;
 
 %% Main figures
 make_cp_ep_gpp_maps; % Figure 2
