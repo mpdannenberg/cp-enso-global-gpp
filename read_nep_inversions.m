@@ -71,12 +71,6 @@ NEP_annual = NEP_annual(:, :, mo==12, :); % Get calendar year sum
 clear NEP_monthly a b windowSize ndys;
 
 %% Calculate global NEP at monthly and annual scale
-% [LON, LAT] = meshgrid(lon, lat);
-% e = referenceEllipsoid('World Geodetic System 1984');
-% area = areaquad(reshape(LAT-0.25,[],1),reshape(LON-0.25,[],1),reshape(LAT+0.25,[],1),reshape(LON+0.25,[],1),e);
-% area = reshape(area, ny, nx); 
-% clear LON LAT e;
-
 yrs = syear:eyear;
 NEP_global_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
@@ -98,8 +92,6 @@ for i = 1:length(yrs)
 end
 NEP_global_annual_mean = nanmean(NEP_global_annual, 2);
 years = yrs;
-
-% clear i j k nep yrs area NEP NEP_annual mo nt nx ny scale syear yr eyear info;
 
 %% Detrend (strong long-term increases in NEP)
 
