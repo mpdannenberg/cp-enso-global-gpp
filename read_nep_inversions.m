@@ -14,13 +14,10 @@ scale = 10^-9; % kg --> Tg
 models = {'v15r2','v15r4','v13r1','v14r2'};
 
 %% Load MsTMIP NEP data
-years = syear:eyear;
 cd('C:\Users\dannenberg\Documents\Data_Analysis\CAMS_Inversion');
-info = ncinfo('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc');
 lat = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'latitude');
 lon = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'longitude');
 area = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'area');
-lsf = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'lsf');
 ny = length(lat); nx = length(lon);
 
 yr = reshape(repmat(syear:eyear, 12, 1), [], 1);
@@ -71,7 +68,6 @@ b = ones(1,windowSize);
 a = 1;
 NEP_annual = filter(b, a, NEP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
 NEP_annual = NEP_annual(:, :, mo==12, :); % Get calendar year sum
-NEP_annual_mean = nanmean(NEP_annual, 4);
 clear NEP_monthly a b windowSize ndys;
 
 %% Calculate global NEP at monthly and annual scale
@@ -450,7 +446,7 @@ for i = 1:12
     end
 end
 
-clear lsf i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim NEP_annual_mean;
+clear i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim;
 
 save('./data/nep_inversions_regional.mat');
 
