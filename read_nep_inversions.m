@@ -439,7 +439,7 @@ for i = 1:12
     end
 end
 
-clear i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim NEP_annual_mean;
+clear i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim;
 
 save('./data/nep_inversions_regional.mat');
 
