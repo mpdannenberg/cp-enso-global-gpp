@@ -126,7 +126,7 @@ for i = 1:12
         
     end
 end
-clear i j k mdl nep yrs area nt nx ny scale syear eyear info;
+clear i j k mdl nep yrs nt nx ny scale syear eyear info;
 
 save('./data/nep_inversions.mat', 'NEP_annual_mean','NEP_global_annual',...
     'NEP_global_annual_mean','NEP_global_monthly','NEP_global_monthly_mean',...
@@ -136,11 +136,6 @@ save('./data/nep_inversions.mat', 'NEP_annual_mean','NEP_global_annual',...
 
 yrs = years;
 scale = 10^-9; % kg --> Tg
-e = referenceEllipsoid('World Geodetic System 1984');
-[LON, LAT] = meshgrid(lon, lat);
-area = areaquad(reshape(LAT-(1/4),[],1),reshape(LON-(1/4),[],1),reshape(LAT+(1/4),[],1),reshape(LON+(1/4),[],1),e);
-area = reshape(area, length(lat), length(lon)); 
-clear LON LAT;
 
 % Amazon
 rlim = [-30 10; -80 -35];
@@ -151,7 +146,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_amazon_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_amazon_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -160,7 +155,7 @@ NEP_amazon_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_amazon_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_amazon_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_amazon_annual_mean = nanmean(NEP_amazon_annual, 2);
@@ -174,7 +169,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_sahel_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_sahel_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -183,7 +178,7 @@ NEP_sahel_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_sahel_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_sahel_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_sahel_annual_mean = nanmean(NEP_sahel_annual, 2);
@@ -197,7 +192,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_africa_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_africa_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -206,7 +201,7 @@ NEP_africa_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_africa_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_africa_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_africa_annual_mean = nanmean(NEP_africa_annual, 2);
@@ -220,7 +215,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_austr_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_austr_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -229,7 +224,7 @@ NEP_austr_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_austr_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_austr_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_austr_annual_mean = nanmean(NEP_austr_annual, 2);
@@ -243,7 +238,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_westna_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_westna_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -252,7 +247,7 @@ NEP_westna_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_westna_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_westna_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_westna_annual_mean = nanmean(NEP_westna_annual, 2);
@@ -266,7 +261,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_eastus_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_eastus_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -275,7 +270,7 @@ NEP_eastus_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_eastus_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_eastus_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_eastus_annual_mean = nanmean(NEP_eastus_annual, 2);
@@ -289,7 +284,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_europe_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_europe_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -298,7 +293,7 @@ NEP_europe_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_europe_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_europe_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_europe_annual_mean = nanmean(NEP_europe_annual, 2);
@@ -312,7 +307,7 @@ for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
             nep = NEP(:, :, yr==yrs(i) & mo==j, k);
-            NEP_casia_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+            NEP_casia_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
         end
     end
 end
@@ -321,7 +316,7 @@ NEP_casia_annual = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         nep = NEP_annual(:,:,i,k);
-        NEP_casia_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_casia_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
