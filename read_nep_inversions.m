@@ -321,7 +321,136 @@ for i = 1:length(yrs)
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 
-clear i j k nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim;
+%% Detrend regional NEP
+% Africa
+mdl = fitlm(years', NEP_africa_annual_mean);
+NEP_africa_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_africa_annual(:,k));
+    NEP_africa_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_africa_monthly_mean(:,i));
+    NEP_africa_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_africa_monthly(:,i,k));
+        NEP_africa_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_amazon_annual_mean);
+NEP_amazon_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_amazon_annual(:,k));
+    NEP_amazon_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_amazon_monthly_mean(:,i));
+    NEP_amazon_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_amazon_monthly(:,i,k));
+        NEP_amazon_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_austr_annual_mean);
+NEP_austr_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_austr_annual(:,k));
+    NEP_austr_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_austr_monthly_mean(:,i));
+    NEP_austr_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_austr_monthly(:,i,k));
+        NEP_austr_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_casia_annual_mean);
+NEP_casia_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_casia_annual(:,k));
+    NEP_casia_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_casia_monthly_mean(:,i));
+    NEP_casia_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_casia_monthly(:,i,k));
+        NEP_casia_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_eastus_annual_mean);
+NEP_eastus_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_eastus_annual(:,k));
+    NEP_eastus_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_eastus_monthly_mean(:,i));
+    NEP_eastus_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_eastus_monthly(:,i,k));
+        NEP_eastus_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_europe_annual_mean);
+NEP_europe_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_europe_annual(:,k));
+    NEP_europe_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_europe_monthly_mean(:,i));
+    NEP_europe_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_europe_monthly(:,i,k));
+        NEP_europe_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_sahel_annual_mean);
+NEP_sahel_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_sahel_annual(:,k));
+    NEP_sahel_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_sahel_monthly_mean(:,i));
+    NEP_sahel_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_sahel_monthly(:,i,k));
+        NEP_sahel_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Africa
+mdl = fitlm(years', NEP_westna_annual_mean);
+NEP_westna_annual_mean = mdl.Residuals.Raw;
+for k=1:4
+    mdl = fitlm(years', NEP_westna_annual(:,k));
+    NEP_westna_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_westna_monthly_mean(:,i));
+    NEP_westna_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:4
+        mdl = fitlm(years', NEP_westna_monthly(:,i,k));
+        NEP_westna_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+clear lsf i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim NEP_annual_mean;
 
 save('./data/nep_inversions_regional.mat');
 
