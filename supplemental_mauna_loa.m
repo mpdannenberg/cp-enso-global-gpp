@@ -33,28 +33,28 @@ ha = tight_subplot(4, 1, 0, [0.1 0.1], [0.1 0.1]);
 
 axes(ha(1))
 plot(yr, gr, 'k-', 'LineWidth',1.5);
-set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','','XColor','w');
+set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','','XColor','w', 'TickDir','out','TickLength',[0.01 0.02]);
 ylabel({'CO_{2} growth rate', 'anomaly (ppm)'},'FontSize',8)
 text(1961, 1.5, 'A', 'FontSize',12)
 box off;
 
 axes(ha(2))
 plot(yr, am, 'k-', 'LineWidth',1.5);
-set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','', 'YAxisLocation','right','XColor','w');
+set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','', 'YAxisLocation','right','XColor','w', 'TickDir','out','TickLength',[0.01 0.02]);
 ylabel({'CO_{2} seasonal','amplitude (ppm)'},'FontSize',8)
 text(1961, 7.5, 'B', 'FontSize',12)
 box off;
 
 axes(ha(3))
 plot(yr, epi, 'k-', 'LineWidth',1.5);
-set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','', 'YLim',[-3 3],'XColor','w');
+set(gca, 'XLim',[min(yr) max(yr)], 'XTickLabels','', 'YLim',[-3 3],'XColor','w', 'TickDir','out','TickLength',[0.01 0.02]);
 ylabel({'Eastern Pacific', 'ENSO index'},'FontSize',8)
 text(1961, 2.25, 'C', 'FontSize',12)
 box off;
 
 axes(ha(4))
 plot(yr, cpi, 'k-', 'LineWidth',1.5);
-set(gca, 'XLim',[min(yr) max(yr)], 'YAxisLocation','right', 'YLim',[-3 3]);
+set(gca, 'XLim',[min(yr) max(yr)], 'YAxisLocation','right', 'YLim',[-3 3], 'TickDir','out','TickLength',[0.01 0.02]);
 ylabel({'Central Pacific', 'ENSO index'},'FontSize',8)
 text(1961, 2.25, 'D', 'FontSize',12)
 box off;
