@@ -11,7 +11,7 @@
 syear = 1951; % First year of analysis
 eyear = 2010; % End year of analysis
 scale = 10^-9; % kg --> Tg
-models = {'BIOME-BGC','CLASS-CTEM-N','CLM4','CLM4VIC','DLEM','GTEC',...
+models = {'BIOME-BGC','CLM4','CLM4VIC','DLEM','GTEC',...
     'ISAM','LPJ-wsl','ORCHIDEE-LSCE','SiB3','SiBCASA','TEM6','VEGAS2.1',...
     'VISIT'};
 
@@ -35,7 +35,7 @@ for i = 1:length(models)
     nep = ncread([models{i},'_SG1_Monthly_NEE.nc4'],'NEE') * 60 * 60 * 24; % from kgC m-2 s-1 --> kgC m-2 day-1
     nep(nep==-9999) = NaN;
     
-    NEP(:, :, :, i) = -1 * permute(nep(:, :, idx), [2 1 3]); % NEE-->NEP and arrange dimensions
+    NEP(:, :, :, i) = permute(nep(:, :, idx), [2 1 3]); % NEE-->NEP and arrange dimensions
     
 end
 clear i nep idx;
