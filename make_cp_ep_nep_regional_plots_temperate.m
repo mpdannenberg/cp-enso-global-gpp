@@ -4,7 +4,7 @@ h = figure('Color','w');
 h.Units = 'inches';
 h.Position = [1 0 7 8];
 
-set(h, 'defaultAxesColorOrder',[0 0 0; 140,81,10]/255)
+set(h, 'defaultAxesColorOrder',[0 0 0; 0,0,0]/255)
 
 
 %% Plot MsTMIP beta through time
@@ -26,7 +26,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 pos(2) = pos(2)+0.02;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 text(1, 0.75, 'Central Asia', 'FontSize',10);
@@ -35,16 +35,16 @@ lower = min(EP_NEP_casia_annual_beta)/1000;
 upper = max(EP_NEP_casia_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [EP_NEP_casia_annual_mean_beta EP_NEP_casia_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000, 'FontSize',8);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'FontSize',8, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
 ttl = title('Eastern Pacific ENSO', 'FontSize',11);
-ttl.Position(2) = 1.25;
+ttl.Position(2) = -1.25;
 
 ax2 = subplot(4,2,2);
 yyaxis left;
@@ -62,7 +62,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 pos(2) = pos(2)+0.02;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 % text(1, 3, 'F', 'FontSize',12);
@@ -71,16 +71,16 @@ lower = min(CP_NEP_casia_annual_beta)/1000;
 upper = max(CP_NEP_casia_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [CP_NEP_casia_annual_mean_beta CP_NEP_casia_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
 ttl = title('Central Pacific ENSO', 'FontSize',11);
-ttl.Position(2) = 1.25;
+ttl.Position(2) = -1.25;
 
 % Eastern U.S.
 load('./data/cp_ep_nep_mstmip_regional.mat');
@@ -100,7 +100,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 pos(2) = pos(2)-0.0;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 text(1, 0.75, 'Eastern U.S.', 'FontSize',10);
@@ -109,11 +109,11 @@ lower = min(EP_NEP_eastus_annual_beta)/1000;
 upper = max(EP_NEP_eastus_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [EP_NEP_eastus_annual_mean_beta EP_NEP_eastus_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000, 'FontSize',8);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'FontSize',8, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -134,7 +134,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 pos(2) = pos(2)-0.0;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 % text(1, 3, 'F', 'FontSize',12);
@@ -143,11 +143,11 @@ lower = min(CP_NEP_eastus_annual_beta)/1000;
 upper = max(CP_NEP_eastus_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [CP_NEP_eastus_annual_mean_beta CP_NEP_eastus_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -170,7 +170,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 pos(2) = pos(2)-0.02;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 text(1, 0.75, 'Western North America', 'FontSize',10);
@@ -179,11 +179,11 @@ lower = min(EP_NEP_westna_annual_beta)/1000;
 upper = max(EP_NEP_westna_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [EP_NEP_westna_annual_mean_beta EP_NEP_westna_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000, 'FontSize',8);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'FontSize',8, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -204,7 +204,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 pos(2) = pos(2)-0.02;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 % text(1, 3, 'F', 'FontSize',12);
@@ -213,11 +213,11 @@ lower = min(CP_NEP_westna_annual_beta)/1000;
 upper = max(CP_NEP_westna_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [CP_NEP_westna_annual_mean_beta CP_NEP_westna_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -240,7 +240,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 pos(2) = pos(2)-0.04;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 text(1, 0.75, 'Europe', 'FontSize',10);
@@ -249,11 +249,11 @@ lower = min(EP_NEP_europe_annual_beta)/1000;
 upper = max(EP_NEP_europe_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [EP_NEP_europe_annual_mean_beta EP_NEP_europe_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000, 'FontSize',8);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'FontSize',8, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -274,7 +274,7 @@ set(gca, 'XLim',[0 15], 'YLim',[-1 1], 'XTick',[1:12 14], 'TickDir','out', 'Font
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 pos(2) = pos(2)-0.04;
-set(gca, 'Position',pos);
+set(gca, 'Position',pos, 'YDir','reverse');
 hold off;
 ylabel('Tg C day^{-1}', 'FontSize',8);
 yyaxis right;
@@ -282,11 +282,11 @@ lower = min(CP_NEP_europe_annual_beta)/1000;
 upper = max(CP_NEP_europe_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [CP_NEP_europe_annual_mean_beta CP_NEP_europe_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
-set(gca, 'YLim',[-200 200]/1000);
+    '-', 'LineWidth',3, 'Color','k')
+set(gca, 'YLim',[-200 200]/1000, 'YDir','reverse');
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
 ylb.Position = [16.8    0.0000   -1.0000];
@@ -494,13 +494,13 @@ text(i+0.5, -0.12, 'MACC v14r2', 'Color',clr2(4,:), 'FontWeight','bold', 'FontSi
 
 set(h, 'currentaxes',ax4);
 i = 8.5;
-fill([i-0.3 i+0.3 i+0.3 i-0.3], [0.08 0.08 0.18 0.18],...
+fill([i-0.3 i+0.3 i+0.3 i-0.3], -1*[0.08 0.08 0.18 0.18],...
     [0.8 0.8 0.8], 'EdgeColor','none');
-plot([i-0.3 i+0.3], [0.13 0.13],...
+plot([i-0.3 i+0.3], -1*[0.13 0.13],...
     'k-', 'LineWidth',3)
-text(i+0.5, 0.13, 'MsTMIP mean', 'Color','k', 'FontWeight','bold', 'FontSize',8,...
+text(i+0.5, -1*0.13, 'MsTMIP mean', 'Color','k', 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-text(i+0.5, 0.17, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'FontSize',8,...
+text(i+0.5, -1*0.17, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'FontSize',8,...
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 
 set(gcf,'PaperPositionMode','auto')
