@@ -33,12 +33,12 @@ for i = 1:nt
     
     fn = ['z_cams_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{1},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
+    nep = nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
     NEP(:, :, i, 1) = nep;
     
     fn = ['z_cams_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{2},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
+    nep = nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
     NEP(:, :, i, 2) = nep;
     
     % MACC-III 
@@ -46,12 +46,12 @@ for i = 1:nt
     
     fn = ['z_macc_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{3},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
+    nep = nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
     NEP(:, :, i, 3) = nep;
     
     fn = ['z_macc_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{4},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
+    nep = nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
     NEP(:, :, i, 4) = nep;
     
 end
