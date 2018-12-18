@@ -93,10 +93,10 @@ lower = min(EP_GPP_global_annual_beta)/1000;
 upper = max(EP_GPP_global_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [EP_GPP_global_annual_mean_beta EP_GPP_global_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
+    '-', 'LineWidth',3, 'Color','k')
 set(gca, 'YLim',[-1000 1000]/1000, 'FontSize',8);
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
@@ -126,10 +126,10 @@ lower = min(CP_GPP_global_annual_beta)/1000;
 upper = max(CP_GPP_global_annual_beta)/1000;
 i = 14;
 fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [223,194,125]/255, 'EdgeColor','none');
+    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
 plot([i-0.4 i+0.4], [CP_GPP_global_annual_mean_beta CP_GPP_global_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color',[140,81,10]/255)
+    '-', 'LineWidth',3, 'Color','k')
 set(gca, 'YLim',[-1000 1000]/1000);
 plot([0 15],[0 0],'k-')
 ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
