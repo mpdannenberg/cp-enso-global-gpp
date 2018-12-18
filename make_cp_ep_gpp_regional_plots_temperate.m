@@ -4,7 +4,7 @@ h = figure('Color','w');
 h.Units = 'inches';
 h.Position = [1 0 7 8];
 
-set(h, 'defaultAxesColorOrder',[0 0 0; 140,81,10]/255)
+set(h, 'defaultAxesColorOrder',[0 0 0; 0,0,0]/255)
 
 
 %% Plot MsTMIP beta through time

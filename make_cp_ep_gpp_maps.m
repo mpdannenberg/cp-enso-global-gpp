@@ -19,7 +19,7 @@ h = figure('Color','w');
 h.Units = 'inches';
 h.Position = [1 1 7 6];
 
-set(h, 'defaultAxesColorOrder',[0 0 0; 140,81,10]/255)
+set(h, 'defaultAxesColorOrder',[0 0 0; 0,0,0]/255)
 
 %% Map MsTMIP Beta
 load('./data/cp_ep_gpp_mstmip.mat');
