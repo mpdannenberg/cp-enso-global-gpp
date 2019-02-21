@@ -16,23 +16,23 @@ epi = epi(yr>=syear & yr<=eyear);
 yr = yr(yr>=syear & yr<=eyear);
 
 %% CRU climate data
-tmx = ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.tmx.dat.nc', 'tmx');
+tmx = ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.tmx.dat.nc', 'tmx');
 tmx = permute(tmx, [3 2 1]);
 tmx(tmx==9.9692e+36) = NaN;
-tmn = ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.tmn.dat.nc', 'tmn');
+tmn = ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.tmn.dat.nc', 'tmn');
 tmn = permute(tmn, [3 2 1]);
 tmn(tmn==9.9692e+36) = NaN;
-pre = ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.pre.dat.nc', 'pre');
+pre = ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.pre.dat.nc', 'pre');
 pre = permute(pre, [3 2 1]);
 pre(pre==9.9692e+36) = NaN;
-vap = ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'vap');
+vap = ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'vap');
 vap = permute(vap, [3 2 1]);
 vap(vap==9.9692e+36) = NaN;
 
 cru_yr = reshape(repmat(1901:2016, 12, 1), [], 1);
 cru_mo = repmat(1:12, 1, length(1901:2016))';
-cru_lat = double(ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'lat'));
-cru_lon = double(ncread('C:\Users\dannenberg\Documents\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'lon'));
+cru_lat = double(ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'lat'));
+cru_lon = double(ncread('D:\Data_Analysis\CRU\cru_ts4.01.1901.2016.vap.dat.nc', 'lon'));
 
 estmx = 10 * 0.611 * exp(17.502*tmx ./ (tmx+240.97)); % e(s) (hPa) at Tmax
 estmn = 10 * 0.611 * exp(17.502*tmn ./ (tmn+240.97)); % e(s) (hPa) at Tmin
