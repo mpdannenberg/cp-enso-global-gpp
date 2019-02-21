@@ -47,4 +47,5 @@ make_cp_ep_gpp_regional_plots_tropics; % Figure S3
 make_cp_ep_gpp_regional_plots_temperate; % Figure S4
 make_cp_ep_nep_regional_plots_tropics; % Figure S5
 make_cp_ep_nep_regional_plots_temperate; % Figure S6
+supplemental_mauna_loa; % Fig. S#
 
