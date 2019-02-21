@@ -89,6 +89,12 @@ grid on;
 [r,p] = corr(cpi, gr);
 text(2,1.4,['R = ',num2str(round(r,2))],'FontSize',10)
 text(2,1.1,['{\itp} = ',num2str(round(p,2))],'FontSize',10)
+mdl = fitlm(cpi, gr);
+hold on;
+plot([min(cpi) max(cpi)],...
+    mdl.Coefficients.Estimate(2)*[min(cpi) max(cpi)]+mdl.Coefficients.Estimate(1),...
+    '-', 'Color',[0.4 0.4 0.4], 'LineWidth',2)
+hold off;
 text(-2.9, 1.4, 'B', 'FontSize',14);
 xlabel('Central Pacific ENSO index','FontSize',9)
 
