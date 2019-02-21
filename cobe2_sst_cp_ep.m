@@ -32,18 +32,7 @@ for i = 1:12
 end
 clear x xclim xm i sst;
 
-%% Filter to 6-month mean SST
-b = ones(1,windowSize)/windowSize;
-a = 1;
-ssta = filter(b, a, ssta, [], 3);
-clear b a windowSize;
-
-%% Include only time period of interest
-idx = yr >= syear & mo == endMonth;
-ssta = ssta(:, :, idx);
-yr = yr(idx);
 lat_weight = repmat(sqrt(cosd(lat)), 1, length(lon));
-clear idx mo endMonth;
 
 %% Regress SST data onto Nino-4 and Nino-1+2 indices to get independent CP- and EP- SST anomalies
 nino4 = ssta(lat>=-5 & lat<=5, lon>=160 & lon<=210, :);
@@ -104,9 +93,23 @@ for i = 1:ny
 end
 clear i j y;
 
+
+%% Filter to 6-month mean CPI and EPI
+b = ones(1,windowSize)/windowSize;
+a = 1;
+cpi = filter(b, a, cp_idx, [], 1);
+epi = filter(b, a, ep_idx, [], 1);
+clear b a windowSize;
+
+%% Include only time period of interest
+idx = yr >= syear & mo == endMonth; % Sep-Feb 1951-2016
+cpi = cpi(idx);
+epi = epi(idx);
+yr = yr(idx);
+
 %% Standardize CPI and EPI
-cpi = (cp_idx - mean(cp_idx(yr>=1981 & yr<=2010))) / std(cp_idx(yr>=1981 & yr<=2010));
-epi = (ep_idx - mean(ep_idx(yr>=1981 & yr<=2010))) / std(ep_idx(yr>=1981 & yr<=2010));
+cpi = (cpi - mean(cpi(yr>=1981 & yr<=2010))) / std(cpi(yr>=1981 & yr<=2010));
+epi = (epi - mean(epi(yr>=1981 & yr<=2010))) / std(epi(yr>=1981 & yr<=2010));
 clear cp_coef cp_eof cp_idx cp_latent cp_pc ep_coef ep_eof ep_idx ep_latent ep_pc;
 
 save('./data/cpi_epi_1951-2016.mat', 'cpi','epi','yr', '-v7.3');
