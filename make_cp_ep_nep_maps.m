@@ -19,7 +19,7 @@ h = figure('Color','w');
 h.Units = 'inches';
 h.Position = [1 1 7 4];
 
-set(h, 'defaultAxesColorOrder',[0 0 0; 140,81,10]/255)
+set(h, 'defaultAxesColorOrder',[0 0 0; 0 0 0]/255)
 
 
 %% Map MsTMIP Beta
@@ -86,7 +86,7 @@ for i = 1:12
     plot([i-0.4 i+0.4], [EP_NEP_global_monthly_mean_beta(i) EP_NEP_global_monthly_mean_beta(i)],...
         'k-', 'LineWidth',3)
 end
-set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
