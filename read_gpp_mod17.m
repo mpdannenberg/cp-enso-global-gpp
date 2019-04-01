@@ -12,11 +12,11 @@ syear = 1982; % First year of analysis
 eyear = 2016; % Last year of analysis
 scale = 10^-9; % kg --> Tg
 e = referenceEllipsoid('World Geodetic System 1984');
-biomes = ncread('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP\mstmip_driver_global_hd_biome_v1.nc4', 'biome_type');
+biomes = ncread('D:\Data_Analysis\MsTMIP\mstmip_driver_global_hd_biome_v1.nc4', 'biome_type');
 
 %% Load CCW GPP data - gC m-2 month-1
 years = syear:eyear;
-cd('C:\Users\dannenberg\Documents\Data_Analysis\GIMMS3g_GPP');
+cd('D:\Data_Analysis\GIMMS3g_GPP');
 info = ncinfo('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc');
 lat = ncread('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc', 'lat');
 lon = ncread('gpp_CRUNCEP_V4P1_Standard_1982_Monthly_GEO_30min.nc', 'lon');
@@ -41,7 +41,7 @@ for i = 1:length(years)
 end
 GPP(repmat(biomes',1,1,nt)==0) = NaN;
 clear i gpp fn;
-cd('C:\Users\dannenberg\Documents\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
+cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
 
 %% Area (in m^2) of the 1/2 deg grid
 [LON, LAT] = meshgrid(lon, lat);
