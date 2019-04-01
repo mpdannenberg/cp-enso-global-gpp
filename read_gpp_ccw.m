@@ -272,7 +272,7 @@ for i = 1:length(yrs)
     GPP_casia_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
 
-clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim;
+clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim;
 
 save('./data/gpp_ccw_regional.mat');
 
