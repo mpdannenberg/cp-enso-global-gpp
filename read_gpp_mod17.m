@@ -41,7 +41,7 @@ for i = 1:length(years)
 end
 GPP(repmat(biomes',1,1,nt)==0) = NaN;
 clear i gpp fn;
-cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
+cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP');
 
 %% Area (in m^2) of the 1/2 deg grid
 [LON, LAT] = meshgrid(lon, lat);
@@ -244,8 +244,99 @@ for i = 1:length(yrs)
     GPP_casia_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
 
-clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim;
+
+%% Calculate regional GPP (Ahlstrom et al. 2015 version) at monthly and annual scale
+
+yrs = years;
+GPP = GPP_monthly;
+scale = 10^-9; % kg --> Tg
+e = referenceEllipsoid('World Geodetic System 1984');
+[LON, LAT] = meshgrid(lon, lat);
+area = areaquad(reshape(LAT-(1/4),[],1),reshape(LON-(1/4),[],1),reshape(LAT+(1/4),[],1),reshape(LON+(1/4),[],1),e);
+area = reshape(area, length(lat), length(lon)); 
+clear LON LAT;
+
+load ./data/ahlstrom_regions.mat;
+
+% Tropical forest
+GPP_tropical_monthly = NaN(size(GPP_annual, 3), 12);
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        
+        gpp = GPP(:, :, yr==yrs(i) & mo==j);
+        GPP_tropical_monthly(i,j) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC day-1
+    end
+end
+GPP_tropical_annual = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_annual(:,:,i);
+    GPP_tropical_annual(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+
+% Extratropical forest
+GPP_extratropical_monthly = NaN(size(GPP_annual, 3), 12);
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        
+        gpp = GPP(:, :, yr==yrs(i) & mo==j);
+        GPP_extratropical_monthly(i,j) = nansum(nansum( gpp(biome_half==2).*area(biome_half==2) )) * scale; % TgC day-1
+    end
+end
+GPP_extratropical_annual = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_annual(:,:,i);
+    GPP_extratropical_annual(i) = nansum(nansum( gpp(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
+end
+
+% Tundra & Arctic shrubland
+GPP_tundra_monthly = NaN(size(GPP_annual, 3), 12);
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        
+        gpp = GPP(:, :, yr==yrs(i) & mo==j);
+        GPP_tundra_monthly(i,j) = nansum(nansum( gpp(biome_half==3).*area(biome_half==3) )) * scale; % TgC day-1
+    end
+end
+GPP_tundra_annual = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_annual(:,:,i);
+    GPP_tundra_annual(i) = nansum(nansum( gpp(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
+end
+
+% Grass/crop
+GPP_grass_monthly = NaN(size(GPP_annual, 3), 12);
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        
+        gpp = GPP(:, :, yr==yrs(i) & mo==j);
+        GPP_grass_monthly(i,j) = nansum(nansum( gpp(biome_half==4).*area(biome_half==4) )) * scale; % TgC day-1
+    end
+end
+GPP_grass_annual = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_annual(:,:,i);
+    GPP_grass_annual(i) = nansum(nansum( gpp(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
+end
+
+% Semiarid
+GPP_semiarid_monthly = NaN(size(GPP_annual, 3), 12);
+for i = 1:size(GPP_annual, 3)
+    for j = 1:12
+        
+        gpp = GPP(:, :, yr==yrs(i) & mo==j);
+        GPP_semiarid_monthly(i,j) = nansum(nansum( gpp(biome_half==5).*area(biome_half==5) )) * scale; % TgC day-1
+    end
+end
+GPP_semiarid_annual = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_annual(:,:,i);
+    GPP_semiarid_annual(i) = nansum(nansum( gpp(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
+end
+
+
+clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim biome*;
 
 save('./data/gpp_mod17_regional.mat');
+
 
 
