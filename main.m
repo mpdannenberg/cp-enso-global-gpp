@@ -9,14 +9,14 @@ read_gpp_mod17;
 read_gpp_ccw;
 
 % Process-based models
-read_gpp_mstmip;
+read_gpp_mstmip; % Slow!
 
 %% Read and process NEP data
 % Data-driven models
 read_nep_inversions;
 
 % Process-based models
-read_nep_mstmip;
+read_nep_mstmip; % Slow!
 
 %% Estimate responses of GPP to CP/EP ENSO events - Table 1
 % Global
