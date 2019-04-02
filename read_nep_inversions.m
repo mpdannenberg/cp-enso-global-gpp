@@ -14,7 +14,7 @@ scale = 10^-9; % kg --> Tg
 models = {'v15r2','v15r4','v13r1','v14r2'};
 
 %% Load MsTMIP NEP data
-cd('C:\Users\dannenberg\Documents\Data_Analysis\CAMS_Inversion');
+cd('D:\Data_Analysis\CAMS_Inversion');
 lat = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'latitude');
 lon = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'longitude');
 area = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'area');
@@ -29,7 +29,7 @@ NEP = NaN(ny, nx, nt, length(models));
 for i = 1:nt
     
     % CAMS 
-    cd('C:\Users\dannenberg\Documents\Data_Analysis\CAMS_Inversion');
+    cd('D:\Data_Analysis\CAMS_Inversion');
     
     fn = ['z_cams_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{1},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
@@ -42,7 +42,7 @@ for i = 1:nt
     NEP(:, :, i, 2) = nep;
     
     % MACC-III 
-    cd('C:\Users\dannenberg\Documents\Data_Analysis\MACC-III_Inversion');
+    cd('D:\Data_Analysis\MACC-III_Inversion');
     
     fn = ['z_macc_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{3},'_ra_sfc_mm_co2flux.nc'];
     nep = ncread(fn, 'flux_apos_bio');
@@ -56,7 +56,7 @@ for i = 1:nt
     
 end
 clear i nep idx fn;
-cd('C:\Users\dannenberg\Documents\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
+cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP');
 
 %% Aggregate to monthly and annual scales
 % Multimodel monthly gridded mean
