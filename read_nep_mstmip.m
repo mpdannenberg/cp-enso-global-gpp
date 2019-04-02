@@ -16,7 +16,7 @@ models = {'BIOME-BGC','CLM4','CLM4VIC','DLEM','GTEC',...
     'VISIT'};
 
 %% Load MsTMIP NEP data
-cd('C:\Users\dannenberg\Documents\Data_Analysis\MsTMIP');
+cd('D:\Data_Analysis\MsTMIP');
 info = ncinfo('BIOME-BGC_SG1_Monthly_NEE.nc4');
 lat = ncread('BIOME-BGC_SG1_Monthly_NEE.nc4','lat');
 lon = ncread('BIOME-BGC_SG1_Monthly_NEE.nc4','lon');
@@ -39,17 +39,20 @@ for i = 1:length(models)
     
 end
 clear i nep idx;
-cd('C:\Users\dannenberg\Documents\Publications\Dannenberg_et_al_CPElNinoGlobalGPP\cp-enso-global-gpp');
+cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP');
 
 %% Aggregate to monthly and annual scales
 % Multimodel monthly gridded mean
 NEP_monthly = bsxfun(@times,NEP,reshape(ndys,1,1,[])); % daily average --> monthly total NEP
+save('./data/nep_mstmip_full.mat', 'NEP','NEP_monthly', '-v7.3');
+clear NEP NEP_monthly;
+NEP = matfile('./data/nep_mstmip_full.mat');
 
 % Multimodel annual gridded mean
 windowSize = 12;
 b = ones(1,windowSize);
 a = 1;
-NEP_annual = filter(b, a, NEP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
+NEP_annual = filter(b, a, NEP.NEP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
 NEP_annual = NEP_annual(:, :, mo==12, :); % Get calendar year sum
 NEP_annual_mean = nanmean(NEP_annual, 4);
 clear NEP_monthly a b windowSize ndys;
@@ -66,7 +69,7 @@ NEP_global_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_global_monthly(i,j,k) = nansum(nansum( nep.*area )) * scale; % TgC day-1
         end
     end
@@ -107,7 +110,7 @@ NEP_amazon_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_amazon_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -130,7 +133,7 @@ NEP_sahel_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_sahel_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -153,7 +156,7 @@ NEP_africa_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_africa_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -176,7 +179,7 @@ NEP_austr_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_austr_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -199,7 +202,7 @@ NEP_westna_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_westna_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -222,7 +225,7 @@ NEP_eastus_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_eastus_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -245,7 +248,7 @@ NEP_europe_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_europe_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -268,7 +271,7 @@ NEP_casia_monthly = NaN(size(NEP_annual, 3), 12, length(models));
 for i = 1:size(NEP_annual, 3)
     for j = 1:12
         for k = 1:length(models)
-            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
             NEP_casia_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
         end
     end
@@ -283,7 +286,121 @@ for i = 1:length(yrs)
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 
-clear i j k nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim;
+%% Calculate regional GPP (Ahlstrom et al. 2015 version) at monthly and annual scale
+
+yrs = years;
+scale = 10^-9; % kg --> Tg
+e = referenceEllipsoid('World Geodetic System 1984');
+[LON, LAT] = meshgrid(lon, lat);
+area = areaquad(reshape(LAT-(1/4),[],1),reshape(LON-(1/4),[],1),reshape(LAT+(1/4),[],1),reshape(LON+(1/4),[],1),e);
+area = reshape(area, length(lat), length(lon)); 
+clear LON LAT;
+
+load ./data/ahlstrom_regions.mat;
+biome_half = flipud(biome_half);
+
+% Tropical forest
+NEP_tropical_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_tropical_monthly(i,j,k) = nansum(nansum( nep(biome_half==1).*area(biome_half==1) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_tropical_monthly_mean = nanmean(NEP_tropical_monthly, 3);
+NEP_tropical_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_tropical_annual(i, k) = nansum(nansum( nep(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+    end
+end
+NEP_tropical_annual_mean = nanmean(NEP_tropical_annual, 2);
+
+% Extratropical forest
+NEP_extratropical_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_extratropical_monthly(i,j,k) = nansum(nansum( nep(biome_half==2).*area(biome_half==2) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_extratropical_monthly_mean = nanmean(NEP_extratropical_monthly, 3);
+NEP_extratropical_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_extratropical_annual(i, k) = nansum(nansum( nep(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
+    end
+end
+NEP_extratropical_annual_mean = nanmean(NEP_extratropical_annual, 2);
+
+% Tundra/Arctic shrubland
+NEP_tundra_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_tundra_monthly(i,j,k) = nansum(nansum( nep(biome_half==3).*area(biome_half==3) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_tundra_monthly_mean = nanmean(NEP_tundra_monthly, 3);
+NEP_tundra_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_tundra_annual(i, k) = nansum(nansum( nep(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
+    end
+end
+NEP_tundra_annual_mean = nanmean(NEP_tundra_annual, 2);
+
+% Grass/crop
+NEP_grass_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_grass_monthly(i,j,k) = nansum(nansum( nep(biome_half==4).*area(biome_half==4) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_grass_monthly_mean = nanmean(NEP_grass_monthly, 3);
+NEP_grass_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_grass_annual(i, k) = nansum(nansum( nep(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
+    end
+end
+NEP_grass_annual_mean = nanmean(NEP_grass_annual, 2);
+
+% Semiarid
+NEP_semiarid_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_semiarid_monthly(i,j,k) = nansum(nansum( nep(biome_half==5).*area(biome_half==5) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_semiarid_monthly_mean = nanmean(NEP_semiarid_monthly, 3);
+NEP_semiarid_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_semiarid_annual(i, k) = nansum(nansum( nep(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
+    end
+end
+NEP_semiarid_annual_mean = nanmean(NEP_semiarid_annual, 2);
+
+
+clear i j k nep yrs area e eyear syear R nt nx ny scale biome* NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim idx;
 
 save('./data/nep_mstmip_regional.mat');
 
