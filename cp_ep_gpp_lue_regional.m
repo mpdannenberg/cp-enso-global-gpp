@@ -653,6 +653,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_tropical_monthly_beta = NaN(12, length(models));
 EP_GPP_tropical_monthly_mean_beta = NaN(12, 1);
 EP_GPP_tropical_annual_beta = NaN(1, length(models));
+EP_GPP_tropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tropical_annual_mean);
 EP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -665,6 +666,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_tropical_annual(:, j));
             EP_GPP_tropical_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_tropical_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             ep_gpp_95CI{9,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -675,6 +677,7 @@ end
 CP_GPP_tropical_monthly_beta = NaN(12, length(models));
 CP_GPP_tropical_monthly_mean_beta = NaN(12, 1);
 CP_GPP_tropical_annual_beta = NaN(1, length(models));
+CP_GPP_tropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tropical_annual_mean);
 CP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -687,6 +690,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_tropical_annual(:, j));
             CP_GPP_tropical_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_tropical_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             cp_gpp_95CI{9,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -728,6 +732,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_extratropical_monthly_beta = NaN(12, length(models));
 EP_GPP_extratropical_monthly_mean_beta = NaN(12, 1);
 EP_GPP_extratropical_annual_beta = NaN(1, length(models));
+EP_GPP_extratropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_extratropical_annual_mean);
 EP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -740,6 +745,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_extratropical_annual(:, j));
             EP_GPP_extratropical_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_extratropical_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             ep_gpp_95CI{10,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -750,6 +756,7 @@ end
 CP_GPP_extratropical_monthly_beta = NaN(12, length(models));
 CP_GPP_extratropical_monthly_mean_beta = NaN(12, 1);
 CP_GPP_extratropical_annual_beta = NaN(1, length(models));
+CP_GPP_extratropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_extratropical_annual_mean);
 CP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -762,6 +769,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_extratropical_annual(:, j));
             CP_GPP_extratropical_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_extratropical_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             cp_gpp_95CI{10,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -803,6 +811,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_tundra_monthly_beta = NaN(12, length(models));
 EP_GPP_tundra_monthly_mean_beta = NaN(12, 1);
 EP_GPP_tundra_annual_beta = NaN(1, length(models));
+EP_GPP_tundra_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tundra_annual_mean);
 EP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -815,6 +824,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_tundra_annual(:, j));
             EP_GPP_tundra_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_tundra_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             ep_gpp_95CI{11,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -825,6 +835,7 @@ end
 CP_GPP_tundra_monthly_beta = NaN(12, length(models));
 CP_GPP_tundra_monthly_mean_beta = NaN(12, 1);
 CP_GPP_tundra_annual_beta = NaN(1, length(models));
+CP_GPP_tundra_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tundra_annual_mean);
 CP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -837,6 +848,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_tundra_annual(:, j));
             CP_GPP_tundra_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_tundra_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             cp_gpp_95CI{11,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -878,6 +890,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_grass_monthly_beta = NaN(12, length(models));
 EP_GPP_grass_monthly_mean_beta = NaN(12, 1);
 EP_GPP_grass_annual_beta = NaN(1, length(models));
+EP_GPP_grass_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_grass_annual_mean);
 EP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -890,6 +903,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_grass_annual(:, j));
             EP_GPP_grass_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_grass_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             ep_gpp_95CI{12,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -900,6 +914,7 @@ end
 CP_GPP_grass_monthly_beta = NaN(12, length(models));
 CP_GPP_grass_monthly_mean_beta = NaN(12, 1);
 CP_GPP_grass_annual_beta = NaN(1, length(models));
+CP_GPP_grass_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_grass_annual_mean);
 CP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -912,6 +927,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_grass_annual(:, j));
             CP_GPP_grass_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_grass_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             cp_gpp_95CI{12,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -953,6 +969,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_semiarid_monthly_beta = NaN(12, length(models));
 EP_GPP_semiarid_monthly_mean_beta = NaN(12, 1);
 EP_GPP_semiarid_annual_beta = NaN(1, length(models));
+EP_GPP_semiarid_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_semiarid_annual_mean);
 EP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -965,6 +982,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(epi, GPP_semiarid_annual(:, j));
             EP_GPP_semiarid_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_semiarid_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             ep_gpp_95CI{13,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end
@@ -975,6 +993,7 @@ end
 CP_GPP_semiarid_monthly_beta = NaN(12, length(models));
 CP_GPP_semiarid_monthly_mean_beta = NaN(12, 1);
 CP_GPP_semiarid_annual_beta = NaN(1, length(models));
+CP_GPP_semiarid_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_semiarid_annual_mean);
 CP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -987,6 +1006,7 @@ for i = 1:12
         if i == 1
             mdl = fitlm(cpi, GPP_semiarid_annual(:, j));
             CP_GPP_semiarid_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_semiarid_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             cp_gpp_95CI{13,j} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
                 mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
         end

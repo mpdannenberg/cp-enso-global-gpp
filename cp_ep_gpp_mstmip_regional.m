@@ -409,6 +409,7 @@ EP_GPP_tropical_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tropical_annual_mean);
 EP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_tropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI{9,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -431,6 +432,7 @@ CP_GPP_tropical_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tropical_annual_mean);
 CP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_tropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI{9,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -456,6 +458,7 @@ EP_GPP_extratropical_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_extratropical_annual_mean);
 EP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_extratropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI{10,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -478,6 +481,7 @@ CP_GPP_extratropical_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_extratropical_annual_mean);
 CP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_extratropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI{10,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -503,6 +507,7 @@ EP_GPP_tundra_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tundra_annual_mean);
 EP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_tundra_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI{11,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -525,6 +530,7 @@ CP_GPP_tundra_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tundra_annual_mean);
 CP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_tundra_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI{11,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -550,6 +556,7 @@ EP_GPP_grass_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_grass_annual_mean);
 EP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_grass_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI{12,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -572,6 +579,7 @@ CP_GPP_grass_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_grass_annual_mean);
 CP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_grass_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI{12,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -597,6 +605,7 @@ EP_GPP_semiarid_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_semiarid_annual_mean);
 EP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_semiarid_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI{13,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -619,6 +628,7 @@ CP_GPP_semiarid_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_semiarid_annual_mean);
 CP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_semiarid_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI{13,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
