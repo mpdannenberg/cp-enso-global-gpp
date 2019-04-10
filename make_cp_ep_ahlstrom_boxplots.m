@@ -17,12 +17,15 @@ clr = [103,0,31
 
 h = figure('Color','w');
 h.Units = 'inches';
-h.Position = [1 1 7 4];
+h.Position = [1 1 5 5];
 
+
+%% GPP
+subplot(2,1,1)
 plot([0 6], [0 0], 'k-')
 hold on;
 
-%% MsTMIP
+% MsTMIP
 load ./data/cp_ep_gpp_mstmip_regional.mat;
 
 % Ensemble
@@ -83,7 +86,7 @@ plot(4+offs,EP_GPP_grass_annual_mean_beta*scale,'^','Color',clr(8,:));
 plot(3+offs,EP_GPP_extratropical_annual_mean_beta*scale,'^','Color',clr(8,:));
 plot(5+offs,EP_GPP_tundra_annual_mean_beta*scale,'^','Color',clr(8,:));
 
-%% LUE
+% LUE
 clear CP* EP* ep_* cp_* models;
 load ./data/cp_ep_gpp_lue_regional.mat;
 
@@ -180,22 +183,103 @@ plot(5+offs-offs/2,EP_GPP_tundra_annual_beta(2)*scale,'s','Color',clr(8,:));
 
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Tropical Forest','Semiarid',...
-    'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'})
+    'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
+    'FontSize',7, 'YLim',[-0.6 0.4])
 box off;
+text(0.6, 0.4, 'B', 'FontSize',12, 'VerticalAlignment','top')
 
-ylabel('GPP response (Pg C yr^{-1} SD^{-1})')
+ylabel('GPP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
-plot(4.8, -0.3, 'ks');
-text(4.9, -0.3, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-plot(4.8, -0.36, 'k^');
-text(4.9, -0.36, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-plot(4.8, -0.42, 'kx');
-text(4.9, -0.42, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+plot(3.5, -0.36, 'ks');
+text(3.6, -0.36, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+plot(3.5, -0.44, 'k^');
+text(3.6, -0.44, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+plot(3.5, -0.52, 'kx');
+text(3.6, -0.52, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
 
+
+%% NEE
+clear *_GPP_*;
+subplot(2,1,2)
+plot([0 6], [0 0], 'k-')
+hold on;
+
+% MsTMIP
+load ./data/cp_ep_nep_mstmip_regional.mat;
+
+% Ensemble
+dberg_box(1-offs,CP_NEP_tropical_annual_beta*scale,clr(2,:),'w',wdth);
+dberg_box(2-offs,CP_NEP_semiarid_annual_beta*scale,clr(2,:),'w',wdth);
+dberg_box(4-offs,CP_NEP_grass_annual_beta*scale,clr(2,:),'w',wdth);
+dberg_box(3-offs,CP_NEP_extratropical_annual_beta*scale,clr(2,:),'w',wdth);
+dberg_box(5-offs,CP_NEP_tundra_annual_beta*scale,clr(2,:),'w',wdth);
+
+dberg_box(1+offs,EP_NEP_tropical_annual_beta*scale,clr(10,:),'w',wdth);
+dberg_box(2+offs,EP_NEP_semiarid_annual_beta*scale,clr(10,:),'w',wdth);
+dberg_box(4+offs,EP_NEP_grass_annual_beta*scale,clr(10,:),'w',wdth);
+dberg_box(3+offs,EP_NEP_extratropical_annual_beta*scale,clr(10,:),'w',wdth);
+dberg_box(5+offs,EP_NEP_tundra_annual_beta*scale,clr(10,:),'w',wdth);
+
+% Means and CIs
+plot([1-offs 1-offs],...
+    [CP_NEP_tropical_annual_mean_beta(1)-CP_NEP_tropical_annual_mean_beta_CI(1) CP_NEP_tropical_annual_mean_beta(1)+CP_NEP_tropical_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(4,:));
+plot([2-offs 2-offs],...
+    [CP_NEP_semiarid_annual_mean_beta(1)-CP_NEP_semiarid_annual_mean_beta_CI(1) CP_NEP_semiarid_annual_mean_beta(1)+CP_NEP_semiarid_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(4,:));
+plot([4-offs 4-offs],...
+    [CP_NEP_grass_annual_mean_beta(1)-CP_NEP_grass_annual_mean_beta_CI(1) CP_NEP_grass_annual_mean_beta(1)+CP_NEP_grass_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(4,:));
+plot([3-offs 3-offs],...
+    [CP_NEP_extratropical_annual_mean_beta(1)-CP_NEP_extratropical_annual_mean_beta_CI(1) CP_NEP_extratropical_annual_mean_beta(1)+CP_NEP_extratropical_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(4,:));
+plot([5-offs 5-offs],...
+    [CP_NEP_tundra_annual_mean_beta(1)-CP_NEP_tundra_annual_mean_beta_CI(1) CP_NEP_tundra_annual_mean_beta(1)+CP_NEP_tundra_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(4,:));
+
+plot([1+offs 1+offs],...
+    [EP_NEP_tropical_annual_mean_beta(1)-EP_NEP_tropical_annual_mean_beta_CI(1) EP_NEP_tropical_annual_mean_beta(1)+EP_NEP_tropical_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(8,:));
+plot([2+offs 2+offs],...
+    [EP_NEP_semiarid_annual_mean_beta(1)-EP_NEP_semiarid_annual_mean_beta_CI(1) EP_NEP_semiarid_annual_mean_beta(1)+EP_NEP_semiarid_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(8,:));
+plot([4+offs 4+offs],...
+    [EP_NEP_grass_annual_mean_beta(1)-EP_NEP_grass_annual_mean_beta_CI(1) EP_NEP_grass_annual_mean_beta(1)+EP_NEP_grass_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(8,:));
+plot([3+offs 3+offs],...
+    [EP_NEP_extratropical_annual_mean_beta(1)-EP_NEP_extratropical_annual_mean_beta_CI(1) EP_NEP_extratropical_annual_mean_beta(1)+EP_NEP_extratropical_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(8,:));
+plot([5+offs 5+offs],...
+    [EP_NEP_tundra_annual_mean_beta(1)-EP_NEP_tundra_annual_mean_beta_CI(1) EP_NEP_tundra_annual_mean_beta(1)+EP_NEP_tundra_annual_mean_beta_CI(1)]/1000,...
+    '-','Color',clr(8,:));
+
+plot(1-offs,CP_NEP_tropical_annual_mean_beta*scale,'^','Color',clr(4,:));
+plot(2-offs,CP_NEP_semiarid_annual_mean_beta*scale,'^','Color',clr(4,:));
+plot(4-offs,CP_NEP_grass_annual_mean_beta*scale,'^','Color',clr(4,:));
+plot(3-offs,CP_NEP_extratropical_annual_mean_beta*scale,'^','Color',clr(4,:));
+plot(5-offs,CP_NEP_tundra_annual_mean_beta*scale,'^','Color',clr(4,:));
+
+plot(1+offs,EP_NEP_tropical_annual_mean_beta*scale,'^','Color',clr(8,:));
+plot(2+offs,EP_NEP_semiarid_annual_mean_beta*scale,'^','Color',clr(8,:));
+plot(4+offs,EP_NEP_grass_annual_mean_beta*scale,'^','Color',clr(8,:));
+plot(3+offs,EP_NEP_extratropical_annual_mean_beta*scale,'^','Color',clr(8,:));
+plot(5+offs,EP_NEP_tundra_annual_mean_beta*scale,'^','Color',clr(8,:));
+
+
+set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
+    'TickLength',[0.02 0.04], 'XTickLabels',{'Tropical Forest','Semiarid',...
+    'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
+    'FontSize',7, 'YLim',[-0.1 0.4], 'YDir','reverse')
+box off;
+text(0.6, -0.1, 'B', 'FontSize',12, 'VerticalAlignment','top')
+
+ylabel('NEE response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+
+
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-gpp-byAhlstromRegion.tif')
+print('-dtiff','-f1','-r300','./output/epi-cpi-gpp-nee-byAhlstromRegion.tif')
 close all;
 
