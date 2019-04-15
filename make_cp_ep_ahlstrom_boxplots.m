@@ -186,7 +186,7 @@ set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
     'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
     'FontSize',7, 'YLim',[-0.6 0.4])
 box off;
-text(0.6, 0.4, 'B', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, 0.4, 'A', 'FontSize',12, 'VerticalAlignment','top')
 
 ylabel('GPP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
