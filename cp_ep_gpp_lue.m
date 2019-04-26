@@ -50,8 +50,10 @@ epi = epi(yr>=syear & yr<=eyear);
 yr = yr(yr>=syear & yr<=eyear);
 
 EP_GPP_global_monthly_beta = NaN(12, length(models));
+EP_GPP_global_monthly_beta_CI = NaN(12, length(models));
 EP_GPP_global_monthly_mean_beta = NaN(12, 1);
 EP_GPP_global_annual_beta = NaN(1, length(models));
+EP_GPP_global_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_global_annual_mean);
 EP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -61,9 +63,11 @@ for i = 1:12
     for j = 1:length(models)
         mdl = fitlm(epi, GPP_global_monthly(:, i, j));
         EP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        EP_GPP_global_monthly_beta_CI(i, j) = 1.96*mdl.Coefficients.SE(2);
         if i == 1
             mdl = fitlm(epi, GPP_global_annual(:, j));
             EP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            EP_GPP_global_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             disp(['Global ',models{j},' response to EPI (PgC yr-1): ',...
                 num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
                 num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
@@ -73,8 +77,10 @@ for i = 1:12
 end
 
 CP_GPP_global_monthly_beta = NaN(12, length(models));
+CP_GPP_global_monthly_beta_CI = NaN(12, length(models));
 CP_GPP_global_monthly_mean_beta = NaN(12, 1);
 CP_GPP_global_annual_beta = NaN(1, length(models));
+CP_GPP_global_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_global_annual_mean);
 CP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
@@ -84,9 +90,11 @@ for i = 1:12
     for j = 1:length(models)
         mdl = fitlm(cpi, GPP_global_monthly(:, i, j));
         CP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        CP_GPP_global_monthly_beta_CI(i, j) = 1.96*mdl.Coefficients.SE(2);
         if i == 1
             mdl = fitlm(cpi, GPP_global_annual(:, j));
             CP_GPP_global_annual_beta(j) = mdl.Coefficients.Estimate(2);
+            CP_GPP_global_annual_beta_CI(j) = 1.96*mdl.Coefficients.SE(2);
             disp(['Global ',models{j},' response to CPI (PgC yr-1): ',...
                 num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
                 num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
