@@ -40,7 +40,8 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'C', 'FontSize',12);
-text(-2.2,1.3,'MsTMIP', 'FontSize',12);
+text(-3.2,0,'MsTMIP', 'FontSize',12, 'FontWeight','bold','Rotation',90,...
+    'HorizontalAlignment','center','VerticalAlignment','middle');
 
 subplot(3,2,4)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
@@ -160,6 +161,8 @@ set(gca, 'Position',pos);
 text(-2.2,1.3,'A', 'FontSize',12);
 ttl = title('Eastern Pacific ENSO', 'FontSize',12);
 ttl.Position(2) = 1.75;
+text(-3.2,0,'LUE', 'FontSize',12, 'FontWeight','bold','Rotation',90,...
+    'HorizontalAlignment','center','VerticalAlignment','middle');
 
 subplot(3,2,2)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
