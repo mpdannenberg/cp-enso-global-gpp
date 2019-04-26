@@ -72,71 +72,136 @@ ylb = ylabel(cb, 'Mean GPP response (g C m^{-2} yr^{-1} SD^{-1})', 'FontSize',9)
 ylb.Position = [-0.95 0.0000 0];
 
 %% Plot MsTMIP beta through time
-ax1 = subplot(3,2,5);
-yyaxis left;
-for i = 1:12
-    lower = min(EP_GPP_global_monthly_beta(i, :));
-    upper = max(EP_GPP_global_monthly_beta(i, :));
-    fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-        [0.8 0.8 0.8], 'EdgeColor','none');
-    hold on;
-    plot([i-0.4 i+0.4], [EP_GPP_global_monthly_mean_beta(i) EP_GPP_global_monthly_mean_beta(i)],...
-        'k-', 'LineWidth',3)
-end
-set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-    'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-pos = get(gca, 'Position');
-pos(1) = pos(1)-0.04;
-set(gca, 'Position',pos);
-hold off;
-ylabel('Tg C day^{-1}', 'FontSize',8);
-text(1, 3, 'E', 'FontSize',12);
-yyaxis right;
-lower = min(EP_GPP_global_annual_beta)/1000;
-upper = max(EP_GPP_global_annual_beta)/1000;
-i = 14;
-fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [0.8 0.8 0.8], 'EdgeColor','none');
-hold on;
-plot([i-0.4 i+0.4], [EP_GPP_global_annual_mean_beta EP_GPP_global_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color','k')
-set(gca, 'YLim',[-1000 1000]/1000, 'FontSize',8);
-plot([0 15],[0 0],'k-')
-ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-ylb.Position = [16.8    0.0000   -1.0000];
+% ax1 = subplot(3,2,5);
+% yyaxis left;
+% for i = 1:12
+%     lower = min(EP_GPP_global_monthly_beta(i, :));
+%     upper = max(EP_GPP_global_monthly_beta(i, :));
+%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+%         [0.8 0.8 0.8], 'EdgeColor','none');
+%     hold on;
+%     plot([i-0.4 i+0.4], [EP_GPP_global_monthly_mean_beta(i) EP_GPP_global_monthly_mean_beta(i)],...
+%         'k-', 'LineWidth',3)
+% end
+% set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
+%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
+% pos = get(gca, 'Position');
+% pos(1) = pos(1)-0.04;
+% set(gca, 'Position',pos);
+% hold off;
+% ylabel('Tg C day^{-1}', 'FontSize',8);
+% text(1, 3, 'E', 'FontSize',12);
+% yyaxis right;
+% lower = min(EP_GPP_global_annual_beta)/1000;
+% upper = max(EP_GPP_global_annual_beta)/1000;
+% i = 14;
+% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+%     [0.8 0.8 0.8], 'EdgeColor','none');
+% hold on;
+% plot([i-0.4 i+0.4], [EP_GPP_global_annual_mean_beta EP_GPP_global_annual_mean_beta]/1000,...
+%     '-', 'LineWidth',3, 'Color','k')
+% set(gca, 'YLim',[-1000 1000]/1000, 'FontSize',8);
+% plot([0 15],[0 0],'k-')
+% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
+% ylb.Position = [16.8    0.0000   -1.0000];
+% 
+% ax2 = subplot(3,2,6);
+% yyaxis left;
+% for i = 1:12
+%     lower = min(CP_GPP_global_monthly_beta(i, :));
+%     upper = max(CP_GPP_global_monthly_beta(i, :));
+%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+%         [0.8 0.8 0.8], 'EdgeColor','none');
+%     hold on;
+%     plot([i-0.4 i+0.4], [CP_GPP_global_monthly_mean_beta(i) CP_GPP_global_monthly_mean_beta(i)],...
+%         'k-', 'LineWidth',3)
+% end
+% set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
+%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
+% pos = get(gca, 'Position');
+% pos(1) = pos(1)+0.02;
+% set(gca, 'Position',pos);
+% hold off;
+% ylabel('Tg C day^{-1}', 'FontSize',8);
+% text(1, 3, 'F', 'FontSize',12);
+% yyaxis right;
+% lower = min(CP_GPP_global_annual_beta)/1000;
+% upper = max(CP_GPP_global_annual_beta)/1000;
+% i = 14;
+% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
+%     [0.8 0.8 0.8], 'EdgeColor','none');
+% hold on;
+% plot([i-0.4 i+0.4], [CP_GPP_global_annual_mean_beta CP_GPP_global_annual_mean_beta]/1000,...
+%     '-', 'LineWidth',3, 'Color','k')
+% set(gca, 'YLim',[-1000 1000]/1000);
+% plot([0 15],[0 0],'k-')
+% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
+% ylb.Position = [16.8    0.0000   -1.0000];
 
-ax2 = subplot(3,2,6);
+% Parameters
+wdth = 0.22;
+offs = 0.15;
+scale = 0.001;
+clr2 = [103,0,31
+    178,24,43
+    214,96,77
+    244,165,130
+    253,219,199
+    224,224,224
+    186,186,186
+    135,135,135
+    77,77,77
+    26,26,26]/255;
+
+ax1 = subplot(3,2,[5 6]);
+plot([0 15], [0 0], 'k-')
+set(gca, 'Position', [0.09 0.1100 0.835 0.2157])
+
+% Monthly
 yyaxis left;
-for i = 1:12
-    lower = min(CP_GPP_global_monthly_beta(i, :));
-    upper = max(CP_GPP_global_monthly_beta(i, :));
-    fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-        [0.8 0.8 0.8], 'EdgeColor','none');
-    hold on;
-    plot([i-0.4 i+0.4], [CP_GPP_global_monthly_mean_beta(i) CP_GPP_global_monthly_mean_beta(i)],...
-        'k-', 'LineWidth',3)
-end
-set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-    'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-pos = get(gca, 'Position');
-pos(1) = pos(1)+0.02;
-set(gca, 'Position',pos);
-hold off;
-ylabel('Tg C day^{-1}', 'FontSize',8);
-text(1, 3, 'F', 'FontSize',12);
-yyaxis right;
-lower = min(CP_GPP_global_annual_beta)/1000;
-upper = max(CP_GPP_global_annual_beta)/1000;
-i = 14;
-fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-    [0.8 0.8 0.8], 'EdgeColor','none');
 hold on;
-plot([i-0.4 i+0.4], [CP_GPP_global_annual_mean_beta CP_GPP_global_annual_mean_beta]/1000,...
-    '-', 'LineWidth',3, 'Color','k')
-set(gca, 'YLim',[-1000 1000]/1000);
-plot([0 15],[0 0],'k-')
-ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-ylb.Position = [16.8    0.0000   -1.0000];
+for i = 1:12
+    
+    dberg_box(i-offs,CP_GPP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth);
+    dberg_box(i+offs,EP_GPP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth);
+    
+    plot([i-offs i-offs],...
+        [CP_GPP_global_monthly_mean_beta(i)-CP_GPP_global_monthly_mean_beta_CI(i) CP_GPP_global_monthly_mean_beta(i)+CP_GPP_global_monthly_mean_beta_CI(i)],...
+        '-','Color',clr2(2,:));
+    scatter(i-offs,CP_GPP_global_monthly_mean_beta(i),10,clr2(2,:),'filled','^');
+    
+    plot([i+offs i+offs],...
+        [EP_GPP_global_monthly_mean_beta(i)-EP_GPP_global_monthly_mean_beta_CI(i) EP_GPP_global_monthly_mean_beta(i)+EP_GPP_global_monthly_mean_beta_CI(i)],...
+        '-','Color',clr2(10,:));
+    scatter(i+offs,EP_GPP_global_monthly_mean_beta(i),10,clr2(10,:),'filled','^');
+    
+    
+end
+set(gca, 'XLim',[0.5 14.5], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
+    'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
+ylabel('Monthly GPP response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
+text(0.9, 3, 'E', 'FontSize',12);
+
+% Annual
+yyaxis right;
+b1 = dberg_box(14-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth);
+b2 = dberg_box(14+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth);
+
+plot([14-offs 14-offs],...
+    [CP_GPP_global_annual_mean_beta*scale-CP_GPP_global_annual_mean_beta_CI*scale CP_GPP_global_annual_mean_beta*scale+CP_GPP_global_annual_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(14-offs,CP_GPP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
+
+plot([14+offs 14+offs],...
+    [EP_GPP_global_annual_mean_beta*scale-EP_GPP_global_annual_mean_beta_CI*scale EP_GPP_global_annual_mean_beta*scale+EP_GPP_global_annual_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(14+offs,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
+set(gca, 'YLim',[-700 700]/1000);
+ylb = ylabel('Annual GPP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
+ylb.Position = [15.2    0.0000   -1.0000];
+
+hold off;
+box off;
 
 %% Map LUE Beta
 load('./data/cp_ep_gpp_lue.mat');
@@ -242,6 +307,6 @@ text(i+0.5, 0.9, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'Fo
     'VerticalAlignment','middle', 'HorizontalAlignment','left')
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-gpp.tif')
+print('-dtiff','-f1','-r300','./output/temp.tif')
 close all;
 
