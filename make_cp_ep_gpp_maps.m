@@ -40,6 +40,7 @@ pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'C', 'FontSize',12);
+text(-2.2,1.3,'MsTMIP', 'FontSize',12);
 
 subplot(3,2,4)
 ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
@@ -59,14 +60,15 @@ set(gca, 'Position',pos);
 text(-2.2,1.3,'D', 'FontSize',12);
 
 cb = colorbar('eastoutside');
-cb.Position = [0.5    0.41    0.04    0.22];
+cb.Position = [0.51    0.41    0.04    0.52];
 cb.Ticks = -0.05:0.01:0.05;
-cb.TickLength = 0.21;
+cb.TickLength = 0.09;
 % cb.TickLabels = {'-0.05','','','','','0','','','','','0.05'};
 % ylb = ylabel(cb, 'kg C m^{-2} yr^{-1}');
-cb.TickLabels = {'-50','','','','','0','','','','','50'};
-ylb = ylabel(cb, 'g C m^{-2} yr^{-1}');
-ylb.Position = [-0.75 0.0000 0];
+% cb.TickLabels = {'-50','','','','','0','','','','','50'};
+cb.TickLabels = {'-50','-40','-30','-20','-10','0','10','20','30','40','50'};
+ylb = ylabel(cb, 'Mean GPP response (g C m^{-2} yr^{-1} SD^{-1})', 'FontSize',9);
+ylb.Position = [-0.95 0.0000 0];
 
 %% Plot MsTMIP beta through time
 ax1 = subplot(3,2,5);
