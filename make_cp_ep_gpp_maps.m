@@ -64,80 +64,11 @@ cb = colorbar('eastoutside');
 cb.Position = [0.51    0.41    0.04    0.52];
 cb.Ticks = -0.05:0.01:0.05;
 cb.TickLength = 0.09;
-% cb.TickLabels = {'-0.05','','','','','0','','','','','0.05'};
-% ylb = ylabel(cb, 'kg C m^{-2} yr^{-1}');
-% cb.TickLabels = {'-50','','','','','0','','','','','50'};
 cb.TickLabels = {'-50','-40','-30','-20','-10','0','10','20','30','40','50'};
 ylb = ylabel(cb, 'Mean GPP response (g C m^{-2} yr^{-1} SD^{-1})', 'FontSize',9);
 ylb.Position = [-0.95 0.0000 0];
 
 %% Plot MsTMIP beta through time
-% ax1 = subplot(3,2,5);
-% yyaxis left;
-% for i = 1:12
-%     lower = min(EP_GPP_global_monthly_beta(i, :));
-%     upper = max(EP_GPP_global_monthly_beta(i, :));
-%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%         [0.8 0.8 0.8], 'EdgeColor','none');
-%     hold on;
-%     plot([i-0.4 i+0.4], [EP_GPP_global_monthly_mean_beta(i) EP_GPP_global_monthly_mean_beta(i)],...
-%         'k-', 'LineWidth',3)
-% end
-% set(gca, 'XLim',[0 15], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-% pos = get(gca, 'Position');
-% pos(1) = pos(1)-0.04;
-% set(gca, 'Position',pos);
-% hold off;
-% ylabel('Tg C day^{-1}', 'FontSize',8);
-% text(1, 3, 'E', 'FontSize',12);
-% yyaxis right;
-% lower = min(EP_GPP_global_annual_beta)/1000;
-% upper = max(EP_GPP_global_annual_beta)/1000;
-% i = 14;
-% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% hold on;
-% plot([i-0.4 i+0.4], [EP_GPP_global_annual_mean_beta EP_GPP_global_annual_mean_beta]/1000,...
-%     '-', 'LineWidth',3, 'Color','k')
-% set(gca, 'YLim',[-1000 1000]/1000, 'FontSize',8);
-% plot([0 15],[0 0],'k-')
-% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-% ylb.Position = [16.8    0.0000   -1.0000];
-% 
-% ax2 = subplot(3,2,6);
-% yyaxis left;
-% for i = 1:12
-%     lower = min(CP_GPP_global_monthly_beta(i, :));
-%     upper = max(CP_GPP_global_monthly_beta(i, :));
-%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%         [0.8 0.8 0.8], 'EdgeColor','none');
-%     hold on;
-%     plot([i-0.4 i+0.4], [CP_GPP_global_monthly_mean_beta(i) CP_GPP_global_monthly_mean_beta(i)],...
-%         'k-', 'LineWidth',3)
-% end
-% set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-% pos = get(gca, 'Position');
-% pos(1) = pos(1)+0.02;
-% set(gca, 'Position',pos);
-% hold off;
-% ylabel('Tg C day^{-1}', 'FontSize',8);
-% text(1, 3, 'F', 'FontSize',12);
-% yyaxis right;
-% lower = min(CP_GPP_global_annual_beta)/1000;
-% upper = max(CP_GPP_global_annual_beta)/1000;
-% i = 14;
-% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% hold on;
-% plot([i-0.4 i+0.4], [CP_GPP_global_annual_mean_beta CP_GPP_global_annual_mean_beta]/1000,...
-%     '-', 'LineWidth',3, 'Color','k')
-% set(gca, 'YLim',[-1000 1000]/1000);
-% plot([0 15],[0 0],'k-')
-% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-% ylb.Position = [16.8    0.0000   -1.0000];
-
 % Parameters
 wdth = 0.22;
 offs = 0.15;
@@ -249,63 +180,6 @@ ttl = title('Central Pacific ENSO', 'FontSize',12);
 ttl.Position(2) = 1.75;
 
 %% Plot LUE beta through time
-
-% clr2 = [55,126,184
-% 77,175,74]/255;
-% 
-% set(h, 'currentaxes',ax1);
-% yyaxis left;
-% for i = 1:12
-%     for j = 1:2
-%         hold on;
-%         plot([i-0.4 i+0.4], [EP_GPP_global_monthly_beta(i,j) EP_GPP_global_monthly_beta(i,j)],...
-%             'k-', 'LineWidth',3, 'Color',clr2(j,:))
-%     end
-% end
-% yyaxis right;
-% i = 14;
-% plot([i-0.4 i+0.4], [EP_GPP_global_annual_beta(1) EP_GPP_global_annual_beta(1)]/1000,...
-%     '-', 'LineWidth',3, 'Color',clr2(1,:))
-% plot([i-0.4 i+0.4], [EP_GPP_global_annual_beta(2) EP_GPP_global_annual_beta(2)]/1000,...
-%     '-', 'LineWidth',3, 'Color',clr2(2,:))
-% 
-% set(h, 'currentaxes',ax2); 
-% yyaxis left;
-% for i = 1:12
-%     for j = 1:2
-%         hold on;
-%         plot([i-0.4 i+0.4], [CP_GPP_global_monthly_beta(i,j) CP_GPP_global_monthly_beta(i,j)],...
-%             'k-', 'LineWidth',3, 'Color',clr2(j,:))
-%     end
-% end
-% yyaxis right;
-% i = 14;
-% plot([i-0.4 i+0.4], [CP_GPP_global_annual_beta(1) CP_GPP_global_annual_beta(1)]/1000,...
-%     '-', 'LineWidth',3, 'Color',clr2(1,:))
-% plot([i-0.4 i+0.4], [CP_GPP_global_annual_beta(2) CP_GPP_global_annual_beta(2)]/1000,...
-%     '-', 'LineWidth',3, 'Color',clr2(2,:))
-% 
-% % Manual legend
-% i = 3.5;
-% plot([i-0.4 i+0.4], [0.85 0.85],...
-%     '-', 'LineWidth',3, 'Color',clr2(1,:));
-% text(i+0.5, 0.85, 'CCW', 'Color',clr2(1,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% plot([i-0.4 i+0.4], [0.65 0.65],...
-%     '-', 'LineWidth',3, 'Color',clr2(2,:))
-% text(i+0.5, 0.65, 'MOD17', 'Color',clr2(2,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% 
-% i = 8.5;
-% fill([i-0.3 i+0.3 i+0.3 i-0.3], [0.45 0.45 0.95 0.95],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% plot([i-0.3 i+0.3], [0.7 0.7],...
-%     'k-', 'LineWidth',3)
-% text(i+0.5, 0.7, 'MsTMIP mean', 'Color','k', 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% text(i+0.5, 0.9, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-
 set(h, 'currentaxes',ax1);
 
 % CCW
@@ -371,16 +245,16 @@ plot([14+offs-offs/2 14+offs-offs/2],...
 scatter(14+offs-offs/2,EP_GPP_global_annual_beta(2)*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
-scatter(2, 0.9, 20, 'k', 'filled','s');
-text(2.1, 0.9, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(2, 0.75, 20, 'k', 'filled','^');
-text(2.1, 0.75, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(2, 0.6, 20, 'k', 'x');
-text(2.1, 0.6, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(2, 0.95, 20, 'k', 'filled','s');
+text(2.1, 0.95, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(2, 0.8, 20, 'k', 'filled','^');
+text(2.1, 0.8, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(2, 0.65, 20, 'k', 'x');
+text(2.1, 0.65, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','northwest', 'FontSize',9);
 legend('boxoff');
-lgd.Position = [0.27    0.3    0.1012    0.0634];
+lgd.Position = [0.27    0.32    0.1012    0.0634];
 
 %% Save
 set(gcf,'PaperPositionMode','auto')
