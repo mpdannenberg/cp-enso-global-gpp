@@ -70,8 +70,8 @@ ylb.Position = [-0.95 0.0000 0];
 
 %% Plot MsTMIP beta through time
 % Parameters
-wdth = 0.22;
-offs = 0.15;
+wdth = 0.32;
+offs = 0.19;
 scale = 0.001;
 clr2 = [103,0,31
     178,24,43
@@ -108,25 +108,25 @@ for i = 1:12
     
     
 end
-set(gca, 'XLim',[0.5 14.5], 'YLim',[-5 5], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0.5 14], 'YLim',[-5 5], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
 ylabel('Monthly GPP response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
 text(0.9, 4.5, 'E', 'FontSize',12);
 
 % Annual
 yyaxis right;
-b1 = dberg_box(14-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth);
-b2 = dberg_box(14+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth);
+b1 = dberg_box(13.5-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth);
+b2 = dberg_box(13.5+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth);
 
-plot([14-offs 14-offs],...
+plot([13.5-offs 13.5-offs],...
     [CP_GPP_global_annual_mean_beta*scale-CP_GPP_global_annual_mean_beta_CI*scale CP_GPP_global_annual_mean_beta*scale+CP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(14-offs,CP_GPP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
+scatter(13.5-offs,CP_GPP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
 
-plot([14+offs 14+offs],...
+plot([13.5+offs 13.5+offs],...
     [EP_GPP_global_annual_mean_beta*scale-EP_GPP_global_annual_mean_beta_CI*scale EP_GPP_global_annual_mean_beta*scale+EP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(14+offs,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
+scatter(13.5+offs,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
 set(gca, 'YLim',[-1000 1000]/1000);
 ylb = ylabel('Annual GPP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [15.2    0.0000   -1.0000];
@@ -203,15 +203,15 @@ end
 
 % Annual
 yyaxis right;
-plot([14-offs+offs/2 14-offs+offs/2],...
+plot([13.5-offs+offs/2 13.5-offs+offs/2],...
     [CP_GPP_global_annual_beta(1)*scale-CP_GPP_global_annual_beta_CI(1)*scale CP_GPP_global_annual_beta(1)*scale+CP_GPP_global_annual_beta_CI(1)*scale],...
     '-','Color',clr2(2,:));
-scatter(14-offs+offs/2,CP_GPP_global_annual_beta(1)*scale,15,clr2(2,:),'x');
+scatter(13.5-offs+offs/2,CP_GPP_global_annual_beta(1)*scale,15,clr2(2,:),'x');
 
-plot([14+offs+offs/2 14+offs+offs/2],...
+plot([13.5+offs+offs/2 13.5+offs+offs/2],...
     [EP_GPP_global_annual_beta(1)*scale-EP_GPP_global_annual_beta_CI(1)*scale EP_GPP_global_annual_beta(1)*scale+EP_GPP_global_annual_beta_CI(1)*scale],...
     '-','Color',clr2(10,:));
-scatter(14+offs+offs/2,EP_GPP_global_annual_beta(1)*scale,15,clr2(10,:),'x');
+scatter(13.5+offs+offs/2,EP_GPP_global_annual_beta(1)*scale,15,clr2(10,:),'x');
 
 % MOD17
 % Monthly
@@ -234,15 +234,15 @@ end
 
 % Annual
 yyaxis right;
-plot([14-offs-offs/2 14-offs-offs/2],...
+plot([13.5-offs-offs/2 13.5-offs-offs/2],...
     [CP_GPP_global_annual_beta(2)*scale-CP_GPP_global_annual_beta_CI(2)*scale CP_GPP_global_annual_beta(2)*scale+CP_GPP_global_annual_beta_CI(2)*scale],...
     '-','Color',clr2(2,:));
-scatter(14-offs-offs/2,CP_GPP_global_annual_beta(2)*scale,12,clr2(2,:),'filled','s');
+scatter(13.5-offs-offs/2,CP_GPP_global_annual_beta(2)*scale,12,clr2(2,:),'filled','s');
 
-plot([14+offs-offs/2 14+offs-offs/2],...
+plot([13.5+offs-offs/2 13.5+offs-offs/2],...
     [EP_GPP_global_annual_beta(2)*scale-EP_GPP_global_annual_beta_CI(2)*scale EP_GPP_global_annual_beta(2)*scale+EP_GPP_global_annual_beta_CI(2)*scale],...
     '-','Color',clr2(10,:));
-scatter(14+offs-offs/2,EP_GPP_global_annual_beta(2)*scale,12,clr2(10,:),'filled','s');
+scatter(13.5+offs-offs/2,EP_GPP_global_annual_beta(2)*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
 scatter(2, 0.95, 20, 'k', 'filled','s');
