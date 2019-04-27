@@ -1,15 +1,15 @@
 % Make some maps and stuff
 
-clr = [84,48,5
-140,81,10
-191,129,45
-223,194,125
-246,232,195
-199,234,229
-128,205,193
-53,151,143
-1,102,94
-0,60,48]/255;
+clr = [103,0,31
+178,24,43
+214,96,77
+244,165,130
+253,219,199
+209,229,240
+146,197,222
+67,147,195
+33,102,172
+5,48,97]/255;
 
 latlim = [-80 80];
 lonlim = [-180 180];
@@ -34,7 +34,7 @@ axis off;
 axis image;
 surfm(lat, lon, EP_GPP_annual_beta)
 caxis([-0.05 0.05])
-colormap(gca, clr);
+colormap(clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
@@ -53,7 +53,7 @@ axis off;
 axis image;
 surfm(lat, lon, CP_GPP_annual_beta)
 caxis([-0.05 0.05])
-colormap(gca, clr);
+colormap(clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
@@ -155,7 +155,7 @@ clr2 = [103,0,31
 
 ax1 = subplot(3,2,[5 6]);
 plot([0 15], [0 0], 'k-')
-set(gca, 'Position', [0.09 0.1100 0.835 0.2157])
+set(ax1, 'Position', [0.09 0.07 0.835 0.3])
 
 % Monthly
 yyaxis left;
