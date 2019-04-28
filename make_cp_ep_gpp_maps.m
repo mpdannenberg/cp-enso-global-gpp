@@ -93,8 +93,8 @@ yyaxis left;
 hold on;
 for i = 1:12
     
-    dberg_box(i-offs,CP_GPP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth);
-    dberg_box(i+offs,EP_GPP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth);
+    dberg_box(i-offs,CP_GPP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth, 10);
+    dberg_box(i+offs,EP_GPP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth, 10);
     
     plot([i-offs i-offs],...
         [CP_GPP_global_monthly_mean_beta(i)-CP_GPP_global_monthly_mean_beta_CI(i) CP_GPP_global_monthly_mean_beta(i)+CP_GPP_global_monthly_mean_beta_CI(i)],...
@@ -115,8 +115,8 @@ text(0.9, 4.5, 'E', 'FontSize',12);
 
 % Annual
 yyaxis right;
-b1 = dberg_box(13.5-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth);
-b2 = dberg_box(13.5+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth);
+b1 = dberg_box(13.5-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
+b2 = dberg_box(13.5+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
 
 plot([13.5-offs 13.5-offs],...
     [CP_GPP_global_annual_mean_beta*scale-CP_GPP_global_annual_mean_beta_CI*scale CP_GPP_global_annual_mean_beta*scale+CP_GPP_global_annual_mean_beta_CI*scale],...
@@ -129,7 +129,7 @@ plot([13.5+offs 13.5+offs],...
 scatter(13.5+offs,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
 set(gca, 'YLim',[-1000 1000]/1000);
 ylb = ylabel('Annual GPP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
-ylb.Position = [15.2    0.0000   -1.0000];
+ylb.Position = [14.7    0.0000   -1.0000];
 
 hold off;
 box off;
