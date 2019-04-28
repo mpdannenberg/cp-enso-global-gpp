@@ -29,62 +29,62 @@ hold on;
 load ./data/cp_ep_gpp_mstmip_regional.mat;
 
 % Ensemble
-b1 = dberg_box(1-offs,CP_GPP_tropical_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(2-offs,CP_GPP_semiarid_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(4-offs,CP_GPP_grass_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(3-offs,CP_GPP_extratropical_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(5-offs,CP_GPP_tundra_annual_beta*scale,clr(2,:),'w',wdth);
+b1 = dberg_box(1-offs,CP_GPP_tropical_annual_beta*scale,clr(4,:),'w',wdth,10);
+dberg_box(2-offs,CP_GPP_semiarid_annual_beta*scale,clr(4,:),'w',wdth,10);
+dberg_box(4-offs,CP_GPP_grass_annual_beta*scale,clr(4,:),'w',wdth,10);
+dberg_box(3-offs,CP_GPP_extratropical_annual_beta*scale,clr(4,:),'w',wdth,10);
+dberg_box(5-offs,CP_GPP_tundra_annual_beta*scale,clr(4,:),'w',wdth,10);
 
-b2 = dberg_box(1+offs,EP_GPP_tropical_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(2+offs,EP_GPP_semiarid_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(4+offs,EP_GPP_grass_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(3+offs,EP_GPP_extratropical_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(5+offs,EP_GPP_tundra_annual_beta*scale,clr(10,:),'w',wdth);
+b2 = dberg_box(1+offs,EP_GPP_tropical_annual_beta*scale,clr(8,:),'w',wdth,10);
+dberg_box(2+offs,EP_GPP_semiarid_annual_beta*scale,clr(8,:),'w',wdth,10);
+dberg_box(4+offs,EP_GPP_grass_annual_beta*scale,clr(8,:),'w',wdth,10);
+dberg_box(3+offs,EP_GPP_extratropical_annual_beta*scale,clr(8,:),'w',wdth,10);
+dberg_box(5+offs,EP_GPP_tundra_annual_beta*scale,clr(8,:),'w',wdth,10);
 
 % Means and CIs
 plot([1-offs 1-offs],...
     [CP_GPP_tropical_annual_mean_beta(1)-CP_GPP_tropical_annual_mean_beta_CI(1) CP_GPP_tropical_annual_mean_beta(1)+CP_GPP_tropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([2-offs 2-offs],...
     [CP_GPP_semiarid_annual_mean_beta(1)-CP_GPP_semiarid_annual_mean_beta_CI(1) CP_GPP_semiarid_annual_mean_beta(1)+CP_GPP_semiarid_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([4-offs 4-offs],...
     [CP_GPP_grass_annual_mean_beta(1)-CP_GPP_grass_annual_mean_beta_CI(1) CP_GPP_grass_annual_mean_beta(1)+CP_GPP_grass_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([3-offs 3-offs],...
     [CP_GPP_extratropical_annual_mean_beta(1)-CP_GPP_extratropical_annual_mean_beta_CI(1) CP_GPP_extratropical_annual_mean_beta(1)+CP_GPP_extratropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([5-offs 5-offs],...
     [CP_GPP_tundra_annual_mean_beta(1)-CP_GPP_tundra_annual_mean_beta_CI(1) CP_GPP_tundra_annual_mean_beta(1)+CP_GPP_tundra_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 
 plot([1+offs 1+offs],...
     [EP_GPP_tropical_annual_mean_beta(1)-EP_GPP_tropical_annual_mean_beta_CI(1) EP_GPP_tropical_annual_mean_beta(1)+EP_GPP_tropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([2+offs 2+offs],...
     [EP_GPP_semiarid_annual_mean_beta(1)-EP_GPP_semiarid_annual_mean_beta_CI(1) EP_GPP_semiarid_annual_mean_beta(1)+EP_GPP_semiarid_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([4+offs 4+offs],...
     [EP_GPP_grass_annual_mean_beta(1)-EP_GPP_grass_annual_mean_beta_CI(1) EP_GPP_grass_annual_mean_beta(1)+EP_GPP_grass_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([3+offs 3+offs],...
     [EP_GPP_extratropical_annual_mean_beta(1)-EP_GPP_extratropical_annual_mean_beta_CI(1) EP_GPP_extratropical_annual_mean_beta(1)+EP_GPP_extratropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([5+offs 5+offs],...
     [EP_GPP_tundra_annual_mean_beta(1)-EP_GPP_tundra_annual_mean_beta_CI(1) EP_GPP_tundra_annual_mean_beta(1)+EP_GPP_tundra_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 
-plot(1-offs,CP_GPP_tropical_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(2-offs,CP_GPP_semiarid_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(4-offs,CP_GPP_grass_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(3-offs,CP_GPP_extratropical_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(5-offs,CP_GPP_tundra_annual_mean_beta*scale,'^','Color',clr(4,:));
+scatter(1-offs,CP_GPP_tropical_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(2-offs,CP_GPP_semiarid_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(4-offs,CP_GPP_grass_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(3-offs,CP_GPP_extratropical_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(5-offs,CP_GPP_tundra_annual_mean_beta*scale,15,clr(2,:),'filled','^');
 
-plot(1+offs,EP_GPP_tropical_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(2+offs,EP_GPP_semiarid_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(4+offs,EP_GPP_grass_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(3+offs,EP_GPP_extratropical_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(5+offs,EP_GPP_tundra_annual_mean_beta*scale,'^','Color',clr(8,:));
+scatter(1+offs,EP_GPP_tropical_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(2+offs,EP_GPP_semiarid_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(4+offs,EP_GPP_grass_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(3+offs,EP_GPP_extratropical_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(5+offs,EP_GPP_tundra_annual_mean_beta*scale,15,clr(10,:),'filled','^');
 
 % LUE
 clear CP* EP* ep_* cp_* models;
@@ -93,92 +93,92 @@ load ./data/cp_ep_gpp_lue_regional.mat;
 % CCW
 plot([1-offs+offs/2 1-offs+offs/2],...
     [CP_GPP_tropical_annual_beta(1)-CP_GPP_tropical_annual_beta_CI(1) CP_GPP_tropical_annual_beta(1)+CP_GPP_tropical_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([2-offs+offs/2 2-offs+offs/2],...
     [CP_GPP_semiarid_annual_beta(1)-CP_GPP_semiarid_annual_beta_CI(1) CP_GPP_semiarid_annual_beta(1)+CP_GPP_semiarid_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([4-offs+offs/2 4-offs+offs/2],...
     [CP_GPP_grass_annual_beta(1)-CP_GPP_grass_annual_beta_CI(1) CP_GPP_grass_annual_beta(1)+CP_GPP_grass_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([3-offs+offs/2 3-offs+offs/2],...
     [CP_GPP_extratropical_annual_beta(1)-CP_GPP_extratropical_annual_beta_CI(1) CP_GPP_extratropical_annual_beta(1)+CP_GPP_extratropical_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([5-offs+offs/2 5-offs+offs/2],...
     [CP_GPP_tundra_annual_beta(1)-CP_GPP_tundra_annual_beta_CI(1) CP_GPP_tundra_annual_beta(1)+CP_GPP_tundra_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 
 plot([1+offs+offs/2 1+offs+offs/2],...
     [EP_GPP_tropical_annual_beta(1)-EP_GPP_tropical_annual_beta_CI(1) EP_GPP_tropical_annual_beta(1)+EP_GPP_tropical_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([2+offs+offs/2 2+offs+offs/2],...
     [EP_GPP_semiarid_annual_beta(1)-EP_GPP_semiarid_annual_beta_CI(1) EP_GPP_semiarid_annual_beta(1)+EP_GPP_semiarid_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([4+offs+offs/2 4+offs+offs/2],...
     [EP_GPP_grass_annual_beta(1)-EP_GPP_grass_annual_beta_CI(1) EP_GPP_grass_annual_beta(1)+EP_GPP_grass_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([3+offs+offs/2 3+offs+offs/2],...
     [EP_GPP_extratropical_annual_beta(1)-EP_GPP_extratropical_annual_beta_CI(1) EP_GPP_extratropical_annual_beta(1)+EP_GPP_extratropical_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([5+offs+offs/2 5+offs+offs/2],...
     [EP_GPP_tundra_annual_beta(1)-EP_GPP_tundra_annual_beta_CI(1) EP_GPP_tundra_annual_beta(1)+EP_GPP_tundra_annual_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 
-plot(1-offs+offs/2,CP_GPP_tropical_annual_beta(1)*scale,'x','Color',clr(4,:));
-plot(2-offs+offs/2,CP_GPP_semiarid_annual_beta(1)*scale,'x','Color',clr(4,:));
-plot(4-offs+offs/2,CP_GPP_grass_annual_beta(1)*scale,'x','Color',clr(4,:));
-plot(3-offs+offs/2,CP_GPP_extratropical_annual_beta(1)*scale,'x','Color',clr(4,:));
-plot(5-offs+offs/2,CP_GPP_tundra_annual_beta(1)*scale,'x','Color',clr(4,:));
+scatter(1-offs+offs/2,CP_GPP_tropical_annual_beta(1)*scale,15,clr(2,:),'x');
+scatter(2-offs+offs/2,CP_GPP_semiarid_annual_beta(1)*scale,15,clr(2,:),'x');
+scatter(4-offs+offs/2,CP_GPP_grass_annual_beta(1)*scale,15,clr(2,:),'x');
+scatter(3-offs+offs/2,CP_GPP_extratropical_annual_beta(1)*scale,15,clr(2,:),'x');
+scatter(5-offs+offs/2,CP_GPP_tundra_annual_beta(1)*scale,15,clr(2,:),'x');
 
-plot(1+offs+offs/2,EP_GPP_tropical_annual_beta(1)*scale,'x','Color',clr(8,:));
-plot(2+offs+offs/2,EP_GPP_semiarid_annual_beta(1)*scale,'x','Color',clr(8,:));
-plot(4+offs+offs/2,EP_GPP_grass_annual_beta(1)*scale,'x','Color',clr(8,:));
-plot(3+offs+offs/2,EP_GPP_extratropical_annual_beta(1)*scale,'x','Color',clr(8,:));
-plot(5+offs+offs/2,EP_GPP_tundra_annual_beta(1)*scale,'x','Color',clr(8,:));
+scatter(1+offs+offs/2,EP_GPP_tropical_annual_beta(1)*scale,15,clr(10,:),'x');
+scatter(2+offs+offs/2,EP_GPP_semiarid_annual_beta(1)*scale,15,clr(10,:),'x');
+scatter(4+offs+offs/2,EP_GPP_grass_annual_beta(1)*scale,15,clr(10,:),'x');
+scatter(3+offs+offs/2,EP_GPP_extratropical_annual_beta(1)*scale,15,clr(10,:),'x');
+scatter(5+offs+offs/2,EP_GPP_tundra_annual_beta(1)*scale,15,clr(10,:),'x');
 
 % MOD17
 plot([1-offs-offs/2 1-offs-offs/2],...
     [CP_GPP_tropical_annual_beta(2)-CP_GPP_tropical_annual_beta_CI(2) CP_GPP_tropical_annual_beta(2)+CP_GPP_tropical_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([2-offs-offs/2 2-offs-offs/2],...
     [CP_GPP_semiarid_annual_beta(2)-CP_GPP_semiarid_annual_beta_CI(2) CP_GPP_semiarid_annual_beta(2)+CP_GPP_semiarid_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([4-offs-offs/2 4-offs-offs/2],...
     [CP_GPP_grass_annual_beta(2)-CP_GPP_grass_annual_beta_CI(2) CP_GPP_grass_annual_beta(2)+CP_GPP_grass_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([3-offs-offs/2 3-offs-offs/2],...
     [CP_GPP_extratropical_annual_beta(2)-CP_GPP_extratropical_annual_beta_CI(2) CP_GPP_extratropical_annual_beta(2)+CP_GPP_extratropical_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([5-offs-offs/2 5-offs-offs/2],...
     [CP_GPP_tundra_annual_beta(2)-CP_GPP_tundra_annual_beta_CI(2) CP_GPP_tundra_annual_beta(2)+CP_GPP_tundra_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 
 plot([1+offs-offs/2 1+offs-offs/2],...
     [EP_GPP_tropical_annual_beta(2)-EP_GPP_tropical_annual_beta_CI(2) EP_GPP_tropical_annual_beta(2)+EP_GPP_tropical_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([2+offs-offs/2 2+offs-offs/2],...
     [EP_GPP_semiarid_annual_beta(2)-EP_GPP_semiarid_annual_beta_CI(2) EP_GPP_semiarid_annual_beta(2)+EP_GPP_semiarid_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([4+offs-offs/2 4+offs-offs/2],...
     [EP_GPP_grass_annual_beta(2)-EP_GPP_grass_annual_beta_CI(2) EP_GPP_grass_annual_beta(2)+EP_GPP_grass_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([3+offs-offs/2 3+offs-offs/2],...
     [EP_GPP_extratropical_annual_beta(2)-EP_GPP_extratropical_annual_beta_CI(2) EP_GPP_extratropical_annual_beta(2)+EP_GPP_extratropical_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([5+offs-offs/2 5+offs-offs/2],...
     [EP_GPP_tundra_annual_beta(2)-EP_GPP_tundra_annual_beta_CI(2) EP_GPP_tundra_annual_beta(2)+EP_GPP_tundra_annual_beta_CI(2)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 
-plot(1-offs-offs/2,CP_GPP_tropical_annual_beta(2)*scale,'s','Color',clr(4,:));
-plot(2-offs-offs/2,CP_GPP_semiarid_annual_beta(2)*scale,'s','Color',clr(4,:));
-plot(4-offs-offs/2,CP_GPP_grass_annual_beta(2)*scale,'s','Color',clr(4,:));
-plot(3-offs-offs/2,CP_GPP_extratropical_annual_beta(2)*scale,'s','Color',clr(4,:));
-plot(5-offs-offs/2,CP_GPP_tundra_annual_beta(2)*scale,'s','Color',clr(4,:));
+scatter(1-offs-offs/2,CP_GPP_tropical_annual_beta(2)*scale,15,clr(2,:),'filled','s');
+scatter(2-offs-offs/2,CP_GPP_semiarid_annual_beta(2)*scale,15,clr(2,:),'filled','s');
+scatter(4-offs-offs/2,CP_GPP_grass_annual_beta(2)*scale,15,clr(2,:),'filled','s');
+scatter(3-offs-offs/2,CP_GPP_extratropical_annual_beta(2)*scale,15,clr(2,:),'filled','s');
+scatter(5-offs-offs/2,CP_GPP_tundra_annual_beta(2)*scale,15,clr(2,:),'filled','s');
 
-plot(1+offs-offs/2,EP_GPP_tropical_annual_beta(2)*scale,'s','Color',clr(8,:));
-plot(2+offs-offs/2,EP_GPP_semiarid_annual_beta(2)*scale,'s','Color',clr(8,:));
-plot(4+offs-offs/2,EP_GPP_grass_annual_beta(2)*scale,'s','Color',clr(8,:));
-plot(3+offs-offs/2,EP_GPP_extratropical_annual_beta(2)*scale,'s','Color',clr(8,:));
-plot(5+offs-offs/2,EP_GPP_tundra_annual_beta(2)*scale,'s','Color',clr(8,:));
+scatter(1+offs-offs/2,EP_GPP_tropical_annual_beta(2)*scale,15,clr(10,:),'filled','s');
+scatter(2+offs-offs/2,EP_GPP_semiarid_annual_beta(2)*scale,15,clr(10,:),'filled','s');
+scatter(4+offs-offs/2,EP_GPP_grass_annual_beta(2)*scale,15,clr(10,:),'filled','s');
+scatter(3+offs-offs/2,EP_GPP_extratropical_annual_beta(2)*scale,15,clr(10,:),'filled','s');
+scatter(5+offs-offs/2,EP_GPP_tundra_annual_beta(2)*scale,15,clr(10,:),'filled','s');
 
 
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
@@ -190,11 +190,11 @@ text(0.6, 0.4, 'A', 'FontSize',12, 'VerticalAlignment','top')
 
 ylabel('GPP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
-plot(3.5, -0.36, 'ks');
+scatter(3.5, -0.36, 20, 'k', 'filled','s');
 text(3.6, -0.36, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-plot(3.5, -0.44, 'k^');
+scatter(3.5, -0.44, 20, 'k', 'filled','^');
 text(3.6, -0.44, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-plot(3.5, -0.52, 'kx');
+scatter(3.5, -0.52, 20, 'k', 'x');
 text(3.6, -0.52, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
@@ -211,62 +211,62 @@ hold on;
 load ./data/cp_ep_nep_mstmip_regional.mat;
 
 % Ensemble
-dberg_box(1-offs,CP_NEP_tropical_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(2-offs,CP_NEP_semiarid_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(4-offs,CP_NEP_grass_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(3-offs,CP_NEP_extratropical_annual_beta*scale,clr(2,:),'w',wdth);
-dberg_box(5-offs,CP_NEP_tundra_annual_beta*scale,clr(2,:),'w',wdth);
+dberg_box(1-offs,CP_NEP_tropical_annual_beta*scale,clr(4,:),'w',wdth,15);
+dberg_box(2-offs,CP_NEP_semiarid_annual_beta*scale,clr(4,:),'w',wdth,15);
+dberg_box(4-offs,CP_NEP_grass_annual_beta*scale,clr(4,:),'w',wdth,15);
+dberg_box(3-offs,CP_NEP_extratropical_annual_beta*scale,clr(4,:),'w',wdth,15);
+dberg_box(5-offs,CP_NEP_tundra_annual_beta*scale,clr(4,:),'w',wdth,15);
 
-dberg_box(1+offs,EP_NEP_tropical_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(2+offs,EP_NEP_semiarid_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(4+offs,EP_NEP_grass_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(3+offs,EP_NEP_extratropical_annual_beta*scale,clr(10,:),'w',wdth);
-dberg_box(5+offs,EP_NEP_tundra_annual_beta*scale,clr(10,:),'w',wdth);
+dberg_box(1+offs,EP_NEP_tropical_annual_beta*scale,clr(8,:),'w',wdth,15);
+dberg_box(2+offs,EP_NEP_semiarid_annual_beta*scale,clr(8,:),'w',wdth,15);
+dberg_box(4+offs,EP_NEP_grass_annual_beta*scale,clr(8,:),'w',wdth,15);
+dberg_box(3+offs,EP_NEP_extratropical_annual_beta*scale,clr(8,:),'w',wdth,15);
+dberg_box(5+offs,EP_NEP_tundra_annual_beta*scale,clr(8,:),'w',wdth,15);
 
 % Means and CIs
 plot([1-offs 1-offs],...
     [CP_NEP_tropical_annual_mean_beta(1)-CP_NEP_tropical_annual_mean_beta_CI(1) CP_NEP_tropical_annual_mean_beta(1)+CP_NEP_tropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([2-offs 2-offs],...
     [CP_NEP_semiarid_annual_mean_beta(1)-CP_NEP_semiarid_annual_mean_beta_CI(1) CP_NEP_semiarid_annual_mean_beta(1)+CP_NEP_semiarid_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([4-offs 4-offs],...
     [CP_NEP_grass_annual_mean_beta(1)-CP_NEP_grass_annual_mean_beta_CI(1) CP_NEP_grass_annual_mean_beta(1)+CP_NEP_grass_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([3-offs 3-offs],...
     [CP_NEP_extratropical_annual_mean_beta(1)-CP_NEP_extratropical_annual_mean_beta_CI(1) CP_NEP_extratropical_annual_mean_beta(1)+CP_NEP_extratropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 plot([5-offs 5-offs],...
     [CP_NEP_tundra_annual_mean_beta(1)-CP_NEP_tundra_annual_mean_beta_CI(1) CP_NEP_tundra_annual_mean_beta(1)+CP_NEP_tundra_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(4,:));
+    '-','Color',clr(2,:));
 
 plot([1+offs 1+offs],...
     [EP_NEP_tropical_annual_mean_beta(1)-EP_NEP_tropical_annual_mean_beta_CI(1) EP_NEP_tropical_annual_mean_beta(1)+EP_NEP_tropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([2+offs 2+offs],...
     [EP_NEP_semiarid_annual_mean_beta(1)-EP_NEP_semiarid_annual_mean_beta_CI(1) EP_NEP_semiarid_annual_mean_beta(1)+EP_NEP_semiarid_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([4+offs 4+offs],...
     [EP_NEP_grass_annual_mean_beta(1)-EP_NEP_grass_annual_mean_beta_CI(1) EP_NEP_grass_annual_mean_beta(1)+EP_NEP_grass_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([3+offs 3+offs],...
     [EP_NEP_extratropical_annual_mean_beta(1)-EP_NEP_extratropical_annual_mean_beta_CI(1) EP_NEP_extratropical_annual_mean_beta(1)+EP_NEP_extratropical_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 plot([5+offs 5+offs],...
     [EP_NEP_tundra_annual_mean_beta(1)-EP_NEP_tundra_annual_mean_beta_CI(1) EP_NEP_tundra_annual_mean_beta(1)+EP_NEP_tundra_annual_mean_beta_CI(1)]/1000,...
-    '-','Color',clr(8,:));
+    '-','Color',clr(10,:));
 
-plot(1-offs,CP_NEP_tropical_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(2-offs,CP_NEP_semiarid_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(4-offs,CP_NEP_grass_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(3-offs,CP_NEP_extratropical_annual_mean_beta*scale,'^','Color',clr(4,:));
-plot(5-offs,CP_NEP_tundra_annual_mean_beta*scale,'^','Color',clr(4,:));
+scatter(1-offs,CP_NEP_tropical_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(2-offs,CP_NEP_semiarid_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(4-offs,CP_NEP_grass_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(3-offs,CP_NEP_extratropical_annual_mean_beta*scale,15,clr(2,:),'filled','^');
+scatter(5-offs,CP_NEP_tundra_annual_mean_beta*scale,15,clr(2,:),'filled','^');
 
-plot(1+offs,EP_NEP_tropical_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(2+offs,EP_NEP_semiarid_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(4+offs,EP_NEP_grass_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(3+offs,EP_NEP_extratropical_annual_mean_beta*scale,'^','Color',clr(8,:));
-plot(5+offs,EP_NEP_tundra_annual_mean_beta*scale,'^','Color',clr(8,:));
+scatter(1+offs,EP_NEP_tropical_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(2+offs,EP_NEP_semiarid_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(4+offs,EP_NEP_grass_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(3+offs,EP_NEP_extratropical_annual_mean_beta*scale,15,clr(10,:),'filled','^');
+scatter(5+offs,EP_NEP_tundra_annual_mean_beta*scale,15,clr(10,:),'filled','^');
 
 
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
