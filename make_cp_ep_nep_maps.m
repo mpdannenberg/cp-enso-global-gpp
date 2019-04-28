@@ -1,15 +1,15 @@
 % Make some maps and stuff
 
-clr = flipud([84,48,5
-    140,81,10
-    191,129,45
-    223,194,125
-    246,232,195
-    199,234,229
-    128,205,193
-    53,151,143
-    1,102,94
-    0,60,48]/255);
+clr = flipud([103,0,31
+178,24,43
+214,96,77
+244,165,130
+253,219,199
+209,229,240
+146,197,222
+67,147,195
+33,102,172
+5,48,97]/255);
 
 latlim = [-80 80];
 lonlim = [-180 180];
@@ -20,7 +20,6 @@ h.Units = 'inches';
 h.Position = [1 1 7 4];
 
 set(h, 'defaultAxesColorOrder',[0 0 0; 0 0 0]/255)
-
 
 %% Map MsTMIP Beta
 load('./data/cp_ep_nep_mstmip.mat');
@@ -64,14 +63,12 @@ ttl = title('Central Pacific ENSO', 'FontSize',12);
 ttl.Position(2) = 1.75;
 
 cb = colorbar('eastoutside');
-cb.Position = [0.5    0.6    0.04    0.3];
+cb.Position = [0.52 0.6 0.04 0.3];
 cb.Ticks = -0.025:0.005:0.025;
 cb.TickLength = 0.24;
-% cb.TickLabels = {'-0.025','','','','','0','','','','','0.025'};
-% ylb = ylabel(cb, 'kg C m^{-2} yr^{-1}');
 cb.TickLabels = {'-25','','','','','0','','','','','25'};
 cb.YDir = 'reverse';
-ylb = ylabel(cb, 'g C m^{-2} yr^{-1}');
+ylb = ylabel(cb, {'Mean NEE response'; '(g C m^{-2} yr^{-1} SD^{-1})'});
 ylb.Position = [-0.75 0.0000 0];
 
 %% Plot MsTMIP beta through time
