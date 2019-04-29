@@ -72,72 +72,6 @@ ylb = ylabel(cb, {'Mean NEE response'; '(g C m^{-2} yr^{-1} SD^{-1})'});
 ylb.Position = [-0.75 0.0000 0];
 
 %% Plot MsTMIP beta through time
-% ax1 = subplot(2,2,3);
-% yyaxis left;
-% for i = 1:12
-%     lower = min(EP_NEP_global_monthly_beta(i, :));
-%     upper = max(EP_NEP_global_monthly_beta(i, :));
-%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%         [0.8 0.8 0.8], 'EdgeColor','none');
-%     hold on;
-%     plot([i-0.4 i+0.4], [EP_NEP_global_monthly_mean_beta(i) EP_NEP_global_monthly_mean_beta(i)],...
-%         'k-', 'LineWidth',3)
-% end
-% set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-% pos = get(gca, 'Position');
-% pos(1) = pos(1)-0.04;
-% set(gca, 'Position',pos, 'YDir','reverse');
-% hold off;
-% ylabel('Tg C day^{-1}', 'FontSize',8);
-% text(1, -3, 'C', 'FontSize',12);
-% yyaxis right;
-% lower = min(EP_NEP_global_annual_beta)/1000;
-% upper = max(EP_NEP_global_annual_beta)/1000;
-% i = 14;
-% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% hold on;
-% plot([i-0.4 i+0.4], [EP_NEP_global_annual_mean_beta EP_NEP_global_annual_mean_beta]/1000,...
-%     '-', 'LineWidth',3, 'Color','k')
-% set(gca, 'YLim',[-1000 1000]/1000, 'FontSize',8, 'YDir','reverse');
-% plot([0 15],[0 0],'k-')
-% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-% ylb.Position = [16.8    0.0000   -1.0000];
-% 
-% ax2 = subplot(2,2,4);
-% yyaxis left;
-% for i = 1:12
-%     lower = min(CP_NEP_global_monthly_beta(i, :));
-%     upper = max(CP_NEP_global_monthly_beta(i, :));
-%     fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%         [0.8 0.8 0.8], 'EdgeColor','none');
-%     hold on;
-%     plot([i-0.4 i+0.4], [CP_NEP_global_monthly_mean_beta(i) CP_NEP_global_monthly_mean_beta(i)],...
-%         'k-', 'LineWidth',3)
-% end
-% set(gca, 'XLim',[0 15], 'YLim',[-4 4], 'XTick',[1:12 14], 'TickDir','out', 'FontSize',8,...
-%     'TickLength',[0.025 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-% pos = get(gca, 'Position');
-% pos(1) = pos(1)+0.02;
-% set(gca, 'Position',pos, 'YDir','reverse');
-% hold off;
-% ylabel('Tg C day^{-1}', 'FontSize',8);
-% text(1, -3, 'D', 'FontSize',12);
-% yyaxis right;
-% lower = min(CP_NEP_global_annual_beta)/1000;
-% upper = max(CP_NEP_global_annual_beta)/1000;
-% i = 14;
-% fill([i-0.4 i+0.4 i+0.4 i-0.4], [lower lower upper upper],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% hold on;
-% plot([i-0.4 i+0.4], [CP_NEP_global_annual_mean_beta CP_NEP_global_annual_mean_beta]/1000,...
-%     '-', 'LineWidth',3, 'Color','k')
-% set(gca, 'YLim',[-1000 1000]/1000, 'YDir','reverse');
-% plot([0 15],[0 0],'k-')
-% ylb = ylabel('Pg C yr^{-1}', 'FontSize',8);
-% ylb.Position = [16.8    0.0000   -1.0000];
-
 wdth = 0.32;
 offs = 0.19;
 scale = 0.001;
@@ -176,11 +110,12 @@ for i = 1:12
     
     
 end
-set(gca, 'XLim',[0.5 14], 'YLim',[-2 4], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0.5 14], 'YLim',[-3 5], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'},...
     'YDir','reverse');
-ylabel('Monthly NEE response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
-text(0.9, -1.75, 'E', 'FontSize',12);
+ylb = ylabel('Monthly NEE response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
+ylb.Position = [-0.1 0.5 -1];
+text(0.9, -2.75, 'C', 'FontSize',12);
 
 % Annual
 yyaxis right;
@@ -196,7 +131,7 @@ plot([13.5+offs+offs/3 13.5+offs+offs/3],...
     [EP_NEP_global_annual_mean_beta*scale-EP_NEP_global_annual_mean_beta_CI*scale EP_NEP_global_annual_mean_beta*scale+EP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
 scatter(13.5+offs+offs/3,EP_NEP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
-set(gca, 'YLim',[-500 1000]/1000, 'YDir','reverse');
+set(gca, 'YLim',[-750 1250]/1000, 'YDir','reverse');
 ylb = ylabel('Annual NEP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [14.7    0.25   -1.0000];
 
@@ -205,83 +140,46 @@ box off;
 
 
 %% Plot inversion beta through time
-% load('./data/cp_ep_nep_inversions.mat');
-% 
-% clr2 = [166,206,227
-% 31,120,180
-% 178,223,138
-% 51,160,44]/255;
-% 
-% set(h, 'currentaxes',ax1);
-% yyaxis left;
-% for i = 1:12
-%     for j = 1:4
-%         hold on;
-%         plot([i-0.4 i+0.4], [EP_NEP_global_monthly_beta(i,j) EP_NEP_global_monthly_beta(i,j)],...
-%             'k-', 'LineWidth',2, 'Color',clr2(j,:))
-%     end
-% end
-% yyaxis right;
-% i = 14;
-% plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(1) EP_NEP_global_annual_beta(1)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(1,:))
-% plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(2) EP_NEP_global_annual_beta(2)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(2,:))
-% plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(3) EP_NEP_global_annual_beta(3)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(3,:))
-% plot([i-0.4 i+0.4], [EP_NEP_global_annual_beta(4) EP_NEP_global_annual_beta(4)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(4,:))
-% 
-% % Manual legend
-% i = 4;
-% plot([i-0.4 i+0.4], -1*[0.85 0.85],...
-%     '-', 'LineWidth',2, 'Color',clr2(1,:));
-% text(i+0.5, -1*0.85, 'CAMS v15r2', 'Color',clr2(1,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% plot([i-0.4 i+0.4], -1*[0.65 0.65],...
-%     '-', 'LineWidth',2, 'Color',clr2(2,:))
-% text(i+0.5, -1*0.65, 'CAMS v15r4', 'Color',clr2(2,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% i = 9.5;
-% plot([i-0.4 i+0.4], -1*[0.85 0.85],...
-%     '-', 'LineWidth',2, 'Color',clr2(3,:));
-% text(i+0.5, -1*0.85, 'MACC v13r1', 'Color',clr2(3,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% plot([i-0.4 i+0.4], -1*[0.65 0.65],...
-%     '-', 'LineWidth',2, 'Color',clr2(4,:))
-% text(i+0.5, -1*0.65, 'MACC v14r2', 'Color',clr2(4,:), 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% 
-% set(h, 'currentaxes',ax2); 
-% yyaxis left;
-% for i = 1:12
-%     for j = 1:4
-%         hold on;
-%         plot([i-0.4 i+0.4], [CP_NEP_global_monthly_beta(i,j) CP_NEP_global_monthly_beta(i,j)],...
-%             'k-', 'LineWidth',2, 'Color',clr2(j,:))
-%     end
-% end
-% yyaxis right;
-% i = 14;
-% plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(1) CP_NEP_global_annual_beta(1)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(1,:))
-% plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(2) CP_NEP_global_annual_beta(2)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(2,:))
-% plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(3) CP_NEP_global_annual_beta(3)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(3,:))
-% plot([i-0.4 i+0.4], [CP_NEP_global_annual_beta(4) CP_NEP_global_annual_beta(4)]/1000,...
-%     '-', 'LineWidth',2, 'Color',clr2(4,:))
-% 
-% % Manual legend
-% i = 9.2;
-% fill([i-0.3 i+0.3 i+0.3 i-0.3], -1*[0.45 0.45 0.95 0.95],...
-%     [0.8 0.8 0.8], 'EdgeColor','none');
-% plot([i-0.3 i+0.3], -1*[0.7 0.7],...
-%     'k-', 'LineWidth',3)
-% text(i+0.5, -1*0.7, 'MsTMIP mean', 'Color','k', 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
-% text(i+0.5, -1*0.9, 'MsTMIP range', 'Color',[0.7 0.7 0.7], 'FontWeight','bold', 'FontSize',8,...
-%     'VerticalAlignment','middle', 'HorizontalAlignment','left')
+load('./data/cp_ep_nep_inversions.mat');
+yyaxis left;
+hold on;
+for i = 1:12
+    
+    plot([i-offs-offs/3 i-offs-offs/3],...
+        [CP_NEP_global_monthly_mean_beta(i)-CP_NEP_global_monthly_mean_beta_CI(i) CP_NEP_global_monthly_mean_beta(i)+CP_NEP_global_monthly_mean_beta_CI(i)],...
+        '-','Color',clr2(2,:));
+    scatter(i-offs-offs/3,CP_NEP_global_monthly_mean_beta(i),12,clr2(2,:),'filled','s');
+    
+    plot([i+offs-offs/3 i+offs-offs/3],...
+        [EP_NEP_global_monthly_mean_beta(i)-EP_NEP_global_monthly_mean_beta_CI(i) EP_NEP_global_monthly_mean_beta(i)+EP_NEP_global_monthly_mean_beta_CI(i)],...
+        '-','Color',clr2(10,:));
+    scatter(i+offs-offs/3,EP_NEP_global_monthly_mean_beta(i),12,clr2(10,:),'filled','s');
+    
+    
+end
+
+% Annual
+yyaxis right;
+plot([13.5-offs-offs/3 13.5-offs-offs/3],...
+    [CP_NEP_global_annual_mean_beta*scale-CP_NEP_global_annual_mean_beta_CI*scale CP_NEP_global_annual_mean_beta*scale+CP_NEP_global_annual_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(13.5-offs-offs/3,CP_NEP_global_annual_mean_beta*scale,12,clr2(2,:),'filled','s');
+
+plot([13.5+offs-offs/3 13.5+offs-offs/3],...
+    [EP_NEP_global_annual_mean_beta*scale-EP_NEP_global_annual_mean_beta_CI*scale EP_NEP_global_annual_mean_beta*scale+EP_NEP_global_annual_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(13.5+offs-offs/3,EP_NEP_global_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
+
+%% Legend
+scatter(11, 1.05, 20, 'k', 'filled','s');
+text(11.1, 1.05, 'Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(11, 0.85, 20, 'k', 'filled','^');
+text(11.1, 0.85, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+
+lgd = legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
+legend('boxoff');
+lgd.Position = [0.6 0.09 0.1012 0.0951];
+
 
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r300','./output/epi-cpi-nep.tif')
