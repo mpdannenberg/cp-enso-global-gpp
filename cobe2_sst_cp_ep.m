@@ -160,7 +160,7 @@ textm(0,175, 'Niño 4', 'HorizontalAlignment','center','VerticalAlignment','middl
 textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
-textm(20,125,'A. Eastern Pacific ENSO Index', 'FontSize',12);
+textm(20,125,'A', 'FontSize',12);
 
 axes(ax(2))
 axesm('mercator','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
@@ -182,7 +182,7 @@ textm(0,175, 'Niño 4', 'HorizontalAlignment','center','VerticalAlignment','middl
 textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
-textm(20,125,'B. Central Pacific ENSO Index', 'FontSize',12);
+textm(20,125,'B', 'FontSize',12);
 
 cb = colorbar('eastoutside');
 cb.Position = [0.87 0.367 0.04 0.535];
@@ -198,11 +198,11 @@ set(gca, 'YLim',[-3.5 3.5],'YTick',-3:3, 'XLim',[1950 2016], 'TickLength',[0 0],
 grid on;
 hold off;
 xlabel('Year')
-text(1952,2.5, 'C. Time series', 'FontSize',12)
-lgd = legend('Eastern Pacific ENSO Index (EPI)','Central Pacific ENSO Index (CPI)','Location','southwest');
+text(1952,2.5, 'C', 'FontSize',12)
+lgd = legend('Eastern Pacific ENSO','Central Pacific ENSO','Location','southwest');
 legend('boxoff');
 lgd.FontSize = 11;
-lgd.Position = [0.22 0.1 0.1161 0.0757];
+lgd.Position = [0.15 0.1 0.1161 0.0757];
 
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r300','./output/epi-cpi-1951-2016.tif')
