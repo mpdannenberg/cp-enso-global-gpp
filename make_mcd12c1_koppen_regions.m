@@ -96,13 +96,17 @@ cb = colorbar('eastoutside');
 cb.TickLength = 0;
 cb.TickLabels = {'Tropical Forest','Extratropical Forest','Tundra/Arctic Shrub','Grass/Crop','Semiarid'};
 
-% Amazon
-rlim = [-30 10; -80 -35];
+% Tropical South America
+rlim = [-25 10; -80 -35];
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,1) rlim(2,1)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,1)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,2) rlim(1,2)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,2) rlim(2,2)], 'k-','LineWidth',1.5)
-textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'Amazonia',...
+textm(mean([rlim(1,1) rlim(1,2)])+10, mean([rlim(2,1) rlim(2,2)]),'Tropical',...
+    'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
+textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'South',...
+    'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
+textm(mean([rlim(1,1) rlim(1,2)])-10, mean([rlim(2,1) rlim(2,2)]),'America',...
     'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
 
 % Sahel
@@ -114,15 +118,15 @@ plotm([rlim(1,1) rlim(1,2)], [rlim(2,2) rlim(2,2)], 'k-','LineWidth',1.5)
 textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'Sahel',...
     'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
 
-% Tropical & subtropical Africa
-rlim = [-30 5; 8 42];
+% Tropical & southern Africa
+rlim = [-35 5; 8 42];
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,1) rlim(2,1)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,1)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,2) rlim(1,2)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,2) rlim(2,2)], 'k-','LineWidth',1.5)
 textm(mean([rlim(1,1) rlim(1,2)])+10, mean([rlim(2,1) rlim(2,2)]),'Tropical &',...
     'FontSize',7, 'HorizontalAlignment','center','VerticalAlignment','middle')
-textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'subtropical',...
+textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'southern',...
     'FontSize',7, 'HorizontalAlignment','center','VerticalAlignment','middle')
 textm(mean([rlim(1,1) rlim(1,2)])-10, mean([rlim(2,1) rlim(2,2)]),'Africa',...
     'FontSize',7, 'HorizontalAlignment','center','VerticalAlignment','middle')
@@ -167,15 +171,13 @@ plotm([rlim(1,1) rlim(1,2)], [rlim(2,2) rlim(2,2)], 'k-','LineWidth',1.5)
 textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'Europe',...
     'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
 
-% Central Asia & SW Russia
-rlim = [45 65; 50 100];
+% Tropical Asia
+rlim = [-10 25; 80 150];
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,1) rlim(2,1)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,1)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,2) rlim(1,2)], [rlim(2,1) rlim(2,2)], 'k-','LineWidth',1.5)
 plotm([rlim(1,1) rlim(1,2)], [rlim(2,2) rlim(2,2)], 'k-','LineWidth',1.5)
-textm(mean([rlim(1,1) rlim(1,2)])+5, mean([rlim(2,1) rlim(2,2)]),'SW Russia &',...
-    'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
-textm(mean([rlim(1,1) rlim(1,2)])-5, mean([rlim(2,1) rlim(2,2)]),'central Asia',...
+textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'Tropical Asia',...
     'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
 
 set(gcf,'PaperPositionMode','auto')
