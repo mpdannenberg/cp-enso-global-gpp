@@ -29,6 +29,7 @@ EP_NEP_africa_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_africa_annual_mean);
 EP_NEP_africa_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_africa_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{1,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -52,6 +53,7 @@ CP_NEP_africa_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_africa_annual_mean);
 CP_NEP_africa_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_africa_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{1,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -77,6 +79,7 @@ EP_NEP_amazon_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_amazon_annual_mean);
 EP_NEP_amazon_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_amazon_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{2,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -100,6 +103,7 @@ CP_NEP_amazon_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_amazon_annual_mean);
 CP_NEP_amazon_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_amazon_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{2,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -125,6 +129,7 @@ EP_NEP_austr_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_austr_annual_mean);
 EP_NEP_austr_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_austr_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{3,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -148,6 +153,7 @@ CP_NEP_austr_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_austr_annual_mean);
 CP_NEP_austr_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_austr_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{3,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -173,6 +179,7 @@ EP_NEP_casia_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_casia_annual_mean);
 EP_NEP_casia_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_casia_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{4,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -196,6 +203,7 @@ CP_NEP_casia_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_casia_annual_mean);
 CP_NEP_casia_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_casia_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{4,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -221,6 +229,7 @@ EP_NEP_eastus_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_eastus_annual_mean);
 EP_NEP_eastus_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_eastus_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{5,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -243,6 +252,7 @@ CP_NEP_eastus_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_eastus_annual_mean);
 CP_NEP_eastus_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_eastus_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{5,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -268,6 +278,7 @@ EP_NEP_europe_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_europe_annual_mean);
 EP_NEP_europe_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_europe_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{6,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -290,6 +301,7 @@ CP_NEP_europe_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_europe_annual_mean);
 CP_NEP_europe_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_europe_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{6,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -315,6 +327,7 @@ EP_NEP_sahel_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_sahel_annual_mean);
 EP_NEP_sahel_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_sahel_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{7,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -337,6 +350,7 @@ CP_NEP_sahel_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_sahel_annual_mean);
 CP_NEP_sahel_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_sahel_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{7,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -362,6 +376,7 @@ EP_NEP_westna_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(epi, NEP_westna_annual_mean);
 EP_NEP_westna_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_westna_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_nep_95CI{8,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
@@ -384,6 +399,7 @@ CP_NEP_westna_annual_beta = NaN(1, length(models));
 
 mdl = fitlm(cpi, NEP_westna_annual_mean);
 CP_NEP_westna_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_westna_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_nep_95CI{8,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
 for i = 1:12
