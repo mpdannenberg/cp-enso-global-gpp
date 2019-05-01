@@ -102,7 +102,7 @@ area = reshape(area, length(lat), length(lon));
 clear LON LAT;
 
 % Amazon
-rlim = [-30 10; -80 -35];
+rlim = [-25 10; -80 -35];
 latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
 lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
 GPP_amazon_monthly = NaN(size(GPP_annual, 3), 12, length(models));
@@ -148,7 +148,7 @@ end
 GPP_sahel_annual_mean = nanmean(GPP_sahel_annual, 2);
 
 % Tropical and subtropical Africa
-rlim = [-30 5; 10 40];
+rlim = [-35 5; 8 42];
 latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
 lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
 GPP_africa_monthly = NaN(size(GPP_annual, 3), 12, length(models));
@@ -262,8 +262,8 @@ for i = 1:length(yrs)
 end
 GPP_europe_annual_mean = nanmean(GPP_europe_annual, 2);
 
-% Central Asia and southern Russia
-rlim = [45 65; 50 100];
+% Tropical Asia
+rlim = [-10 25; 80 150];
 latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
 lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
 GPP_casia_monthly = NaN(size(GPP_annual, 3), 12, length(models));
