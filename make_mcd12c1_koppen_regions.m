@@ -2,10 +2,20 @@
 % classes
 
 %% MCD12C1, aggregated to three classes (forest, savanna/shrub, grass/crop)
-mcd12c1 = double(hdfread('./data/MCD12C1.A2001001.006.2018053185512.hdf', 'Majority_Land_Cover_Type_3'));
+%mcd12c1 = double(hdfread('./data/MCD12C1.A2001001.006.2018053185512.hdf', 'Majority_Land_Cover_Type_3'));
 mcd12c1_lat = (90-0.025):-0.05:(-90+0.025);
 mcd12c1_lon = (-180+0.025):0.05:(180-0.025);
+mcd12c1 = NaN(length(mcd12c1_lat), length(mcd12c1_lon), 10);
 
+cd('D:\Data_Analysis\MCD12C1');
+fns = glob('*.hdf');
+for i = 1:length(fns)
+    mcd12c1(:,:,i) = double(hdfread(fns{i}, 'Majority_Land_Cover_Type_3'));
+end
+clear i fns;
+mcd12c1 = mode(mcd12c1, 3);
+
+cd('D:\Publications\Dannenberg_et_al_CPElNinoGlobalGPP');
 biome = zeros(size(mcd12c1));
 biome(mcd12c1 >= 5 & mcd12c1 <= 8) = 1; % Forest
 biome(mcd12c1 == 2 | mcd12c1 == 4) = 2; % Savanna & Shrub
@@ -181,7 +191,7 @@ textm(mean([rlim(1,1) rlim(1,2)]), mean([rlim(2,1) rlim(2,2)]),'Tropical Asia',.
     'FontSize',9, 'HorizontalAlignment','center','VerticalAlignment','middle')
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/supplemental-region-map-v2.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-region-map-v2-mcd12c1-v051.tif')
 close all;
 
 
