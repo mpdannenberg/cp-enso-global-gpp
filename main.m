@@ -3,6 +3,9 @@
 %% Calculate CP and EP indices from COBE-2 SST, and map/plot indices
 cobe2_sst_cp_ep; % Figure 1
 
+%% Define regions based on MODIS land cover and CRU climate
+make_mcd12c1_koppen_regions; % Fig. S1
+
 %% Read and process modeled GPP data
 % Data-driven models
 read_gpp_mod17;
@@ -38,14 +41,11 @@ cp_ep_nep_mstmip_regional;
 
 %% Main figures
 make_cp_ep_gpp_maps; % Figure 2
-make_cp_ep_nep_maps; % Figure 3
+make_cp_ep_ahlstrom_boxplots % Figure 3
+make_cp_ep_regional_boxplots % Figure 4
+make_cp_ep_nep_maps; % Figure 5
 
 %% Supplementary figures
-make_cp_ep_gpp_maps_byYear; % Figure S1
-supplemental_map_regions; % Figure S2
-make_cp_ep_gpp_regional_plots_tropics; % Figure S3
-make_cp_ep_gpp_regional_plots_temperate; % Figure S4
-make_cp_ep_nep_regional_plots_tropics; % Figure S5
-make_cp_ep_nep_regional_plots_temperate; % Figure S6
-supplemental_mauna_loa; % Fig. S#
+cp_ep_cru; % Figs. S2-S5
+supplemental_mauna_loa; % Fig. S6-S7
 
