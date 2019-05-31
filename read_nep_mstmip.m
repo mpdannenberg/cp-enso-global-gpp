@@ -35,7 +35,7 @@ for i = 1:length(models)
     nep = ncread([models{i},'_SG1_Monthly_NEE.nc4'],'NEE') * 60 * 60 * 24; % from kgC m-2 s-1 --> kgC m-2 day-1
     nep(nep==-9999) = NaN;
     
-    NEP(:, :, :, i) = permute(nep(:, :, idx), [2 1 3]); % NEE-->NEP and arrange dimensions
+    NEP(:, :, :, i) = -1 * permute(nep(:, :, idx), [2 1 3]); % NEE-->NEP and arrange dimensions
     
 end
 clear i nep idx;
