@@ -15,6 +15,13 @@ cpi = cpi(yr>=syear & yr<=eyear);
 epi = epi(yr>=syear & yr<=eyear);
 yr = yr(yr>=syear & yr<=eyear);
 
+NEP_annual_mean = NEP_annual_mean(:,:,years>=syear & years<=eyear);
+NEP_global_annual = NEP_global_annual(years>=syear & years<=eyear, :);
+NEP_global_annual_mean = NEP_global_annual_mean(years>=syear & years<=eyear, :);
+NEP_global_monthly = NEP_global_monthly(years>=syear & years<=eyear, :, :);
+NEP_global_monthly_mean = NEP_global_monthly_mean(years>=syear & years<=eyear, :);
+years = years(years>=syear & years<=eyear)';
+
 EP_NEP_global_monthly_beta = NaN(12, length(models));
 EP_NEP_global_monthly_mean_beta = NaN(12, 1);
 EP_NEP_global_monthly_mean_beta_CI = NaN(12, 1);
