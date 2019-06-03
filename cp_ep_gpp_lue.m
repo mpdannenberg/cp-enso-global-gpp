@@ -52,6 +52,7 @@ yr = yr(yr>=syear & yr<=eyear);
 EP_GPP_global_monthly_beta = NaN(12, length(models));
 EP_GPP_global_monthly_beta_CI = NaN(12, length(models));
 EP_GPP_global_monthly_mean_beta = NaN(12, 1);
+EP_GPP_global_monthly_mean_beta_CI = NaN(12, 1);
 EP_GPP_global_annual_beta = NaN(1, length(models));
 EP_GPP_global_annual_beta_CI = NaN(1, length(models));
 
@@ -60,6 +61,7 @@ EP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_global_monthly_mean(:, i));
     EP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    EP_GPP_global_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
     for j = 1:length(models)
         mdl = fitlm(epi, GPP_global_monthly(:, i, j));
         EP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
@@ -79,6 +81,7 @@ end
 CP_GPP_global_monthly_beta = NaN(12, length(models));
 CP_GPP_global_monthly_beta_CI = NaN(12, length(models));
 CP_GPP_global_monthly_mean_beta = NaN(12, 1);
+CP_GPP_global_monthly_mean_beta_CI = NaN(12, 1);
 CP_GPP_global_annual_beta = NaN(1, length(models));
 CP_GPP_global_annual_beta_CI = NaN(1, length(models));
 
@@ -87,6 +90,7 @@ CP_GPP_global_annual_mean_beta = mdl.Coefficients.Estimate(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_global_monthly_mean(:, i));
     CP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    CP_GPP_global_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
     for j = 1:length(models)
         mdl = fitlm(cpi, GPP_global_monthly(:, i, j));
         CP_GPP_global_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);

@@ -56,6 +56,7 @@ EP_GPP_africa_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_africa_annual_mean);
 EP_GPP_africa_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_africa_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_africa_monthly_mean(:, i));
     EP_GPP_africa_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -80,6 +81,7 @@ CP_GPP_africa_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_africa_annual_mean);
 CP_GPP_africa_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_africa_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_africa_monthly_mean(:, i));
     CP_GPP_africa_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -135,6 +137,7 @@ EP_GPP_amazon_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_amazon_annual_mean);
 EP_GPP_amazon_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_amazon_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_amazon_monthly_mean(:, i));
     EP_GPP_amazon_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -159,6 +162,7 @@ CP_GPP_amazon_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_amazon_annual_mean);
 CP_GPP_amazon_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_amazon_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_amazon_monthly_mean(:, i));
     CP_GPP_amazon_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -214,6 +218,7 @@ EP_GPP_austr_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_austr_annual_mean);
 EP_GPP_austr_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_austr_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_austr_monthly_mean(:, i));
     EP_GPP_austr_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -238,6 +243,7 @@ CP_GPP_austr_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_austr_annual_mean);
 CP_GPP_austr_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_austr_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_austr_monthly_mean(:, i));
     CP_GPP_austr_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -293,6 +299,7 @@ EP_GPP_casia_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_casia_annual_mean);
 EP_GPP_casia_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_casia_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_casia_monthly_mean(:, i));
     EP_GPP_casia_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -317,6 +324,7 @@ CP_GPP_casia_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_casia_annual_mean);
 CP_GPP_casia_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_casia_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_casia_monthly_mean(:, i));
     CP_GPP_casia_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -372,6 +380,7 @@ EP_GPP_eastus_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_eastus_annual_mean);
 EP_GPP_eastus_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_eastus_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_eastus_monthly_mean(:, i));
     EP_GPP_eastus_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -396,6 +405,7 @@ CP_GPP_eastus_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_eastus_annual_mean);
 CP_GPP_eastus_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_eastus_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_eastus_monthly_mean(:, i));
     CP_GPP_eastus_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -451,6 +461,7 @@ EP_GPP_europe_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_europe_annual_mean);
 EP_GPP_europe_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_europe_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_europe_monthly_mean(:, i));
     EP_GPP_europe_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -475,6 +486,7 @@ CP_GPP_europe_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_europe_annual_mean);
 CP_GPP_europe_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_europe_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_europe_monthly_mean(:, i));
     CP_GPP_europe_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -530,6 +542,7 @@ EP_GPP_sahel_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_sahel_annual_mean);
 EP_GPP_sahel_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_sahel_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_sahel_monthly_mean(:, i));
     EP_GPP_sahel_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -554,6 +567,7 @@ CP_GPP_sahel_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_sahel_annual_mean);
 CP_GPP_sahel_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_sahel_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_sahel_monthly_mean(:, i));
     CP_GPP_sahel_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -609,6 +623,7 @@ EP_GPP_westna_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_westna_annual_mean);
 EP_GPP_westna_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_westna_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_westna_monthly_mean(:, i));
     EP_GPP_westna_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -633,6 +648,7 @@ CP_GPP_westna_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_westna_annual_mean);
 CP_GPP_westna_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_westna_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_westna_monthly_mean(:, i));
     CP_GPP_westna_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -689,6 +705,7 @@ EP_GPP_tropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tropical_annual_mean);
 EP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_tropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_tropical_monthly_mean(:, i));
     EP_GPP_tropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -713,6 +730,7 @@ CP_GPP_tropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tropical_annual_mean);
 CP_GPP_tropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_tropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_tropical_monthly_mean(:, i));
     CP_GPP_tropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -768,6 +786,7 @@ EP_GPP_extratropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_extratropical_annual_mean);
 EP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_extratropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_extratropical_monthly_mean(:, i));
     EP_GPP_extratropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -792,6 +811,7 @@ CP_GPP_extratropical_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_extratropical_annual_mean);
 CP_GPP_extratropical_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_extratropical_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_extratropical_monthly_mean(:, i));
     CP_GPP_extratropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -847,6 +867,7 @@ EP_GPP_tundra_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_tundra_annual_mean);
 EP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_tundra_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_tundra_monthly_mean(:, i));
     EP_GPP_tundra_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -871,6 +892,7 @@ CP_GPP_tundra_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_tundra_annual_mean);
 CP_GPP_tundra_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_tundra_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_tundra_monthly_mean(:, i));
     CP_GPP_tundra_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -926,6 +948,7 @@ EP_GPP_grass_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_grass_annual_mean);
 EP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_grass_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_grass_monthly_mean(:, i));
     EP_GPP_grass_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -950,6 +973,7 @@ CP_GPP_grass_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_grass_annual_mean);
 CP_GPP_grass_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_grass_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_grass_monthly_mean(:, i));
     CP_GPP_grass_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -1005,6 +1029,7 @@ EP_GPP_semiarid_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(epi, GPP_semiarid_annual_mean);
 EP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_GPP_semiarid_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(epi, GPP_semiarid_monthly_mean(:, i));
     EP_GPP_semiarid_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
@@ -1029,6 +1054,7 @@ CP_GPP_semiarid_annual_beta_CI = NaN(1, length(models));
 
 mdl = fitlm(cpi, GPP_semiarid_annual_mean);
 CP_GPP_semiarid_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_GPP_semiarid_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 for i = 1:12
     mdl = fitlm(cpi, GPP_semiarid_monthly_mean(:, i));
     CP_GPP_semiarid_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
