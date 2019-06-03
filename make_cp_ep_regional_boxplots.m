@@ -457,14 +457,14 @@ scatter(8+offs-offs/3,EP_NEP_westna_annual_mean_beta*scale,15,clr(10,:),'filled'
 set(gca, 'XLim',[0.5 8.5], 'XTick',1:8, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Trop. S. Am.','Trop. & S. Africa',...
     'Trop. Asia','Australia','Eastern U.S.', 'Europe', 'The Sahel', 'W. N. America'},...
-    'FontSize',7, 'YLim',[-0.23 0.33], 'YDir','reverse'); xtickangle(20);
+    'FontSize',7, 'YLim',[-0.33 0.23]); xtickangle(20);
 box off;
-text(0.6, -0.23, 'B', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, 0.23, 'B', 'FontSize',12, 'VerticalAlignment','top')
 
-scatter(6, 0.22, 20, 'k', 'filled','s');
-text(6.1, 0.22, 'CO_{2} Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(6, 0.28, 20, 'k', 'filled','^');
-text(6.1, 0.28, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.22, 20, 'k', 'filled','s');
+text(6.1, -0.22, 'CO_{2} Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.28, 20, 'k', 'filled','^');
+text(6.1, -0.28, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 ylabel('NEE response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
