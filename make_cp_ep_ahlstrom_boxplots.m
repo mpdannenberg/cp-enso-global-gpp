@@ -272,9 +272,9 @@ scatter(5+offs,EP_NEP_tundra_annual_mean_beta*scale,15,clr(10,:),'filled','^');
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Tropical Forest','Semiarid',...
     'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
-    'FontSize',7, 'YLim',[-0.1 0.4], 'YDir','reverse')
+    'FontSize',7, 'YLim',[-0.4 0.1])
 box off;
-text(0.6, -0.1, 'B', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, 0.1, 'B', 'FontSize',12, 'VerticalAlignment','top')
 
 ylabel('NEE response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
