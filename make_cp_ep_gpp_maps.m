@@ -96,15 +96,15 @@ for i = 1:12
     dberg_box(i-offs,CP_GPP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth, 10);
     dberg_box(i+offs,EP_GPP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth, 10);
     
-    plot([i-offs i-offs],...
+    plot([i-offs+offs/3 i-offs+offs/3],...
         [CP_GPP_global_monthly_mean_beta(i)-CP_GPP_global_monthly_mean_beta_CI(i) CP_GPP_global_monthly_mean_beta(i)+CP_GPP_global_monthly_mean_beta_CI(i)],...
         '-','Color',clr2(2,:));
-    scatter(i-offs,CP_GPP_global_monthly_mean_beta(i),10,clr2(2,:),'filled','^');
+    scatter(i-offs+offs/3,CP_GPP_global_monthly_mean_beta(i),10,clr2(2,:),'filled','^');
     
-    plot([i+offs i+offs],...
+    plot([i+offs+offs/3 i+offs+offs/3],...
         [EP_GPP_global_monthly_mean_beta(i)-EP_GPP_global_monthly_mean_beta_CI(i) EP_GPP_global_monthly_mean_beta(i)+EP_GPP_global_monthly_mean_beta_CI(i)],...
         '-','Color',clr2(10,:));
-    scatter(i+offs,EP_GPP_global_monthly_mean_beta(i),10,clr2(10,:),'filled','^');
+    scatter(i+offs+offs/3,EP_GPP_global_monthly_mean_beta(i),10,clr2(10,:),'filled','^');
     
     
 end
@@ -118,15 +118,15 @@ yyaxis right;
 b1 = dberg_box(13.5-offs,CP_GPP_global_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
 b2 = dberg_box(13.5+offs,EP_GPP_global_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
 
-plot([13.5-offs 13.5-offs],...
+plot([13.5-offs+offs/3 13.5-offs+offs/3],...
     [CP_GPP_global_annual_mean_beta*scale-CP_GPP_global_annual_mean_beta_CI*scale CP_GPP_global_annual_mean_beta*scale+CP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs,CP_GPP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
+scatter(13.5-offs+offs/3,CP_GPP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
 
-plot([13.5+offs 13.5+offs],...
+plot([13.5+offs+offs/3 13.5+offs+offs/3],...
     [EP_GPP_global_annual_mean_beta*scale-EP_GPP_global_annual_mean_beta_CI*scale EP_GPP_global_annual_mean_beta*scale+EP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
+scatter(13.5+offs+offs/3,EP_GPP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
 set(gca, 'YLim',[-1000 1000]/1000);
 ylb = ylabel('Annual GPP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [14.7    0.0000   -1.0000];
@@ -188,69 +188,37 @@ yyaxis left;
 hold on;
 for i = 1:12
     
-    plot([i-offs+offs/2 i-offs+offs/2],...
-        [CP_GPP_global_monthly_beta(i,1)-CP_GPP_global_monthly_beta_CI(i,1) CP_GPP_global_monthly_beta(i,1)+CP_GPP_global_monthly_beta_CI(i,1)],...
+    plot([i-offs-offs/3 i-offs-offs/3],...
+        [CP_GPP_global_monthly_mean_beta(i)-CP_GPP_global_monthly_mean_beta_CI(i) CP_GPP_global_monthly_mean_beta(i)+CP_GPP_global_monthly_mean_beta_CI(i)],...
         '-','Color',clr2(2,:));
-    scatter(i-offs+offs/2,CP_GPP_global_monthly_beta(i,1),15,clr2(2,:),'x');
+    scatter(i-offs-offs/3,CP_GPP_global_monthly_mean_beta(i),15,clr2(2,:),'x');
     
-    plot([i+offs+offs/2 i+offs+offs/2],...
-        [EP_GPP_global_monthly_beta(i,1)-EP_GPP_global_monthly_beta_CI(i,1) EP_GPP_global_monthly_beta(i,1)+EP_GPP_global_monthly_beta_CI(i,1)],...
+    plot([i+offs-offs/3 i+offs-offs/3],...
+        [EP_GPP_global_monthly_mean_beta(i)-EP_GPP_global_monthly_mean_beta_CI(i) EP_GPP_global_monthly_mean_beta(i)+EP_GPP_global_monthly_mean_beta_CI(i)],...
         '-','Color',clr2(10,:));
-    scatter(i+offs+offs/2,EP_GPP_global_monthly_beta(i,1),15,clr2(10,:),'x');
+    scatter(i+offs-offs/3,EP_GPP_global_monthly_mean_beta(i),15,clr2(10,:),'x');
     
     
 end
 
 % Annual
 yyaxis right;
-plot([13.5-offs+offs/2 13.5-offs+offs/2],...
-    [CP_GPP_global_annual_beta(1)*scale-CP_GPP_global_annual_beta_CI(1)*scale CP_GPP_global_annual_beta(1)*scale+CP_GPP_global_annual_beta_CI(1)*scale],...
+plot([13.5-offs-offs/3 13.5-offs-offs/3],...
+    [CP_GPP_global_annual_mean_beta*scale-CP_GPP_global_annual_mean_beta_CI*scale CP_GPP_global_annual_mean_beta*scale+CP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs+offs/2,CP_GPP_global_annual_beta(1)*scale,15,clr2(2,:),'x');
+scatter(13.5-offs-offs/3,CP_GPP_global_annual_mean_beta*scale,15,clr2(2,:),'x');
 
-plot([13.5+offs+offs/2 13.5+offs+offs/2],...
-    [EP_GPP_global_annual_beta(1)*scale-EP_GPP_global_annual_beta_CI(1)*scale EP_GPP_global_annual_beta(1)*scale+EP_GPP_global_annual_beta_CI(1)*scale],...
+plot([13.5+offs-offs/3 13.5+offs-offs/3],...
+    [EP_GPP_global_annual_mean_beta*scale-EP_GPP_global_annual_mean_beta_CI*scale EP_GPP_global_annual_mean_beta*scale+EP_GPP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs+offs/2,EP_GPP_global_annual_beta(1)*scale,15,clr2(10,:),'x');
+scatter(13.5+offs-offs/3,EP_GPP_global_annual_mean_beta*scale,15,clr2(10,:),'x');
 
-% MOD17
-% Monthly
-yyaxis left;
-hold on;
-for i = 1:12
-    
-    plot([i-offs-offs/2 i-offs-offs/2],...
-        [CP_GPP_global_monthly_beta(i,2)-CP_GPP_global_monthly_beta_CI(i,2) CP_GPP_global_monthly_beta(i,2)+CP_GPP_global_monthly_beta_CI(i,2)],...
-        '-','Color',clr2(2,:));
-    scatter(i-offs-offs/2,CP_GPP_global_monthly_beta(i,2),12,clr2(2,:),'filled','s');
-    
-    plot([i+offs-offs/2 i+offs-offs/2],...
-        [EP_GPP_global_monthly_beta(i,2)-EP_GPP_global_monthly_beta_CI(i,2) EP_GPP_global_monthly_beta(i,2)+EP_GPP_global_monthly_beta_CI(i,2)],...
-        '-','Color',clr2(10,:));
-    scatter(i+offs-offs/2,EP_GPP_global_monthly_beta(i,2),12,clr2(10,:),'filled','s');
-    
-    
-end
-
-% Annual
-yyaxis right;
-plot([13.5-offs-offs/2 13.5-offs-offs/2],...
-    [CP_GPP_global_annual_beta(2)*scale-CP_GPP_global_annual_beta_CI(2)*scale CP_GPP_global_annual_beta(2)*scale+CP_GPP_global_annual_beta_CI(2)*scale],...
-    '-','Color',clr2(2,:));
-scatter(13.5-offs-offs/2,CP_GPP_global_annual_beta(2)*scale,12,clr2(2,:),'filled','s');
-
-plot([13.5+offs-offs/2 13.5+offs-offs/2],...
-    [EP_GPP_global_annual_beta(2)*scale-EP_GPP_global_annual_beta_CI(2)*scale EP_GPP_global_annual_beta(2)*scale+EP_GPP_global_annual_beta_CI(2)*scale],...
-    '-','Color',clr2(10,:));
-scatter(13.5+offs-offs/2,EP_GPP_global_annual_beta(2)*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
-scatter(2, 0.95, 20, 'k', 'filled','s');
-text(2.1, 0.95, 'MOD17', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(2, 0.8, 20, 'k', 'filled','^');
-text(2.1, 0.8, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(2, 0.65, 20, 'k', 'x');
-text(2.1, 0.65, 'CCW', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(2, 0.95, 20, 'k', 'filled','^');
+text(2.1, 0.95, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(2, 0.8, 20, 'k', 'x');
+text(2.1, 0.8, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','northwest', 'FontSize',9);
 legend('boxoff');
