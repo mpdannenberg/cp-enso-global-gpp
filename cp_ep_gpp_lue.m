@@ -2,7 +2,7 @@
 % 1982-2015 period
 
 syear = 1982;
-eyear = 2010;
+eyear = 2016;
 
 models = {'CCW','MOD17'}; nm = length(models);
 ny = 360;
