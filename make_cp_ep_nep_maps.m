@@ -1,6 +1,6 @@
 % Make some maps and stuff
 
-clr = flipud([103,0,31
+clr = [103,0,31
 178,24,43
 214,96,77
 244,165,130
@@ -9,7 +9,7 @@ clr = flipud([103,0,31
 146,197,222
 67,147,195
 33,102,172
-5,48,97]/255);
+5,48,97]/255;
 
 latlim = [-80 80];
 lonlim = [-180 180];
@@ -65,10 +65,10 @@ ttl.Position(2) = 1.75;
 cb = colorbar('eastoutside');
 cb.Position = [0.52 0.6 0.04 0.3];
 cb.Ticks = -0.025:0.005:0.025;
-cb.TickLength = 0.24;
+cb.TickLength = 0.23;
 cb.TickLabels = {'-25','','','','','0','','','','','25'};
-cb.YDir = 'reverse';
-ylb = ylabel(cb, {'Mean NEE response'; '(g C m^{-2} yr^{-1} SD^{-1})'});
+% cb.YDir = 'reverse';
+ylb = ylabel(cb, {'Mean NEP response'; '(g C m^{-2} yr^{-1} SD^{-1})'});
 ylb.Position = [-0.75 0.0000 0];
 
 %% Plot MsTMIP beta through time
@@ -110,9 +110,8 @@ for i = 1:12
     
     
 end
-set(gca, 'XLim',[0.5 14], 'YLim',[-3 5], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
-    'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'},...
-    'YDir','reverse');
+set(gca, 'XLim',[0.5 14], 'YLim',[-5 3], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
+    'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
 ylb = ylabel('Monthly NEE response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [-0.1 0.5 -1];
 text(0.9, -2.75, 'C', 'FontSize',12);
@@ -131,7 +130,7 @@ plot([13.5+offs+offs/3 13.5+offs+offs/3],...
     [EP_NEP_global_annual_mean_beta*scale-EP_NEP_global_annual_mean_beta_CI*scale EP_NEP_global_annual_mean_beta*scale+EP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
 scatter(13.5+offs+offs/3,EP_NEP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
-set(gca, 'YLim',[-750 1250]/1000, 'YDir','reverse');
+set(gca, 'YLim',[-1250 750]/1000);
 ylb = ylabel('Annual NEP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [14.7    0.25   -1.0000];
 
@@ -171,10 +170,10 @@ plot([13.5+offs-offs/3 13.5+offs-offs/3],...
 scatter(13.5+offs-offs/3,EP_NEP_global_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
-scatter(11, 1.05, 20, 'k', 'filled','s');
-text(11.1, 1.05, 'Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(11, 0.85, 20, 'k', 'filled','^');
-text(11.1, 0.85, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(11, -1.05, 20, 'k', 'filled','s');
+text(11.1, -1.05, 'Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(11, -0.85, 20, 'k', 'filled','^');
+text(11.1, -0.85, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
