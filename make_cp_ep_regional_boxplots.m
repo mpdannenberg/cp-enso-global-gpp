@@ -1,4 +1,4 @@
-% Make plots of Ahlstrom regional GPP/NEE response to EP/CP ENSO
+% Make plots of Ahlstrom regional GPP/NEP response to EP/CP ENSO
 
 % Parameters
 wdth = 0.25;
@@ -208,7 +208,7 @@ legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
 
 
-%% NEE
+%% NEP
 clear *_GPP_*;
 subplot(2,1,2)
 plot([0 9], [0 0], 'k-')
@@ -393,7 +393,7 @@ text(6.1, -0.22, 'CO_{2} Inversions', 'HorizontalAlignment','left', 'VerticalAli
 scatter(6, -0.28, 20, 'k', 'filled','^');
 text(6.1, -0.28, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
-ylabel('NEE response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('NEP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
 
 set(gcf,'PaperPositionMode','auto')

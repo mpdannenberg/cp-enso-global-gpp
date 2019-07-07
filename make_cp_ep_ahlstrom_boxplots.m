@@ -152,7 +152,7 @@ legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
 
 
-%% NEE
+%% NEP
 clear *_GPP_*;
 subplot(2,1,2)
 plot([0 6], [0 0], 'k-')
@@ -227,7 +227,7 @@ set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
 box off;
 text(0.6, 0.1, 'B', 'FontSize',12, 'VerticalAlignment','top')
 
-ylabel('NEE response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('NEP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
 
 
 set(gcf,'PaperPositionMode','auto')

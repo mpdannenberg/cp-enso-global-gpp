@@ -112,7 +112,7 @@ for i = 1:12
 end
 set(gca, 'XLim',[0.5 14], 'YLim',[-5 3], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-ylb = ylabel('Monthly NEE response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
+ylb = ylabel('Monthly NEP response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
 ylb.Position = [-0.1 0.5 -1];
 text(0.9, -2.75, 'C', 'FontSize',12);
 
