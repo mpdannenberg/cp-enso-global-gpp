@@ -1,9 +1,9 @@
 % Examine relationships between modeled MsTMIP GPP and EPI/CPI over 
 % 1951-2010 period
 syear = 1979;
-eyear = 2013;
+eyear = 2016;
 
-models = {'v15r2','v15r4','v13r1','v14r2'}; nm = length(models);
+models = {'v18r2'}; nm = length(models);
 
 %% Regress monthly & annual gpp against CPI and EPI indices
 load ./data/nep_inversions_regional.mat;
