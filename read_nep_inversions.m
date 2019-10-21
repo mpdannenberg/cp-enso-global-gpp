@@ -9,15 +9,15 @@
 
 %% Setup
 syear = 1979; % First year of analysis
-eyear = 2013; % Last year of analysis
+eyear = 2016; % Last year of analysis
 scale = 10^-9; % kg --> Tg
-models = {'v15r2','v15r4','v13r1','v14r2'};
+models = {'v18r2'};
 
 %% Load MsTMIP NEP data
 cd('D:\Data_Analysis\CAMS_Inversion');
-lat = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'latitude');
-lon = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'longitude');
-area = ncread('z_cams_l_lsce_197901_v15r4_ra_sfc_mm_co2flux.nc', 'area');
+lat = ncread('z_cams_l_lsce_197901_v18r2_ra_sfc_mm_co2flux.nc', 'latitude');
+lon = ncread('z_cams_l_lsce_197901_v18r2_ra_sfc_mm_co2flux.nc', 'longitude');
+area = ncread('z_cams_l_lsce_197901_v18r2_ra_sfc_mm_co2flux.nc', 'area');
 ny = length(lat); nx = length(lon);
 
 yr = reshape(repmat(syear:eyear, 12, 1), [], 1);
@@ -36,23 +36,6 @@ for i = 1:nt
     nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
     NEP(:, :, i, 1) = nep;
     
-    fn = ['z_cams_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{2},'_ra_sfc_mm_co2flux.nc'];
-    nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
-    NEP(:, :, i, 2) = nep;
-    
-    % MACC-III 
-    cd('D:\Data_Analysis\MACC-III_Inversion');
-    
-    fn = ['z_macc_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{3},'_ra_sfc_mm_co2flux.nc'];
-    nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
-    NEP(:, :, i, 3) = nep;
-    
-    fn = ['z_macc_l_lsce_',sprintf('%04d%02d',yr(i),mo(i)),'_',models{4},'_ra_sfc_mm_co2flux.nc'];
-    nep = ncread(fn, 'flux_apos_bio');
-    nep = -1 * nep ./ ndys(i); % from kgC m-2 month-1 --> kgC m-2 day-1 _AND_ from NEE to NEP
-    NEP(:, :, i, 4) = nep;
     
 end
 clear i nep idx fn;
@@ -99,7 +82,7 @@ years = yrs;
 mdl = fitlm(years', NEP_global_annual_mean);
 NEP_global_annual_mean = mdl.Residuals.Raw;
 
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_global_annual(:,k));
     NEP_global_annual(:,k) = mdl.Residuals.Raw;
 end
@@ -108,7 +91,7 @@ for i = 1:12
     mdl = fitlm(years', NEP_global_monthly_mean(:,i));
     NEP_global_monthly_mean(:,i) = mdl.Residuals.Raw;
     
-    for k =1:4
+    for k =1:length(models)
         
         mdl = fitlm(years', NEP_global_monthly(:,i,k));
         NEP_global_monthly(:,i,k) = mdl.Residuals.Raw;
@@ -314,14 +297,14 @@ NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 % Africa
 mdl = fitlm(years', NEP_africa_annual_mean);
 NEP_africa_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_africa_annual(:,k));
     NEP_africa_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_africa_monthly_mean(:,i));
     NEP_africa_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_africa_monthly(:,i,k));
         NEP_africa_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -330,14 +313,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_amazon_annual_mean);
 NEP_amazon_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_amazon_annual(:,k));
     NEP_amazon_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_amazon_monthly_mean(:,i));
     NEP_amazon_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_amazon_monthly(:,i,k));
         NEP_amazon_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -346,14 +329,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_austr_annual_mean);
 NEP_austr_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_austr_annual(:,k));
     NEP_austr_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_austr_monthly_mean(:,i));
     NEP_austr_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_austr_monthly(:,i,k));
         NEP_austr_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -362,14 +345,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_casia_annual_mean);
 NEP_casia_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_casia_annual(:,k));
     NEP_casia_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_casia_monthly_mean(:,i));
     NEP_casia_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_casia_monthly(:,i,k));
         NEP_casia_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -378,14 +361,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_eastus_annual_mean);
 NEP_eastus_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_eastus_annual(:,k));
     NEP_eastus_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_eastus_monthly_mean(:,i));
     NEP_eastus_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_eastus_monthly(:,i,k));
         NEP_eastus_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -394,14 +377,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_europe_annual_mean);
 NEP_europe_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_europe_annual(:,k));
     NEP_europe_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_europe_monthly_mean(:,i));
     NEP_europe_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_europe_monthly(:,i,k));
         NEP_europe_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -410,14 +393,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_sahel_annual_mean);
 NEP_sahel_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_sahel_annual(:,k));
     NEP_sahel_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_sahel_monthly_mean(:,i));
     NEP_sahel_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_sahel_monthly(:,i,k));
         NEP_sahel_monthly(:,i,k) = mdl.Residuals.Raw;
     end
@@ -426,14 +409,14 @@ end
 % Africa
 mdl = fitlm(years', NEP_westna_annual_mean);
 NEP_westna_annual_mean = mdl.Residuals.Raw;
-for k=1:4
+for k=1:length(models)
     mdl = fitlm(years', NEP_westna_annual(:,k));
     NEP_westna_annual(:,k) = mdl.Residuals.Raw;
 end
 for i = 1:12
     mdl = fitlm(years', NEP_westna_monthly_mean(:,i));
     NEP_westna_monthly_mean(:,i) = mdl.Residuals.Raw;
-    for k =1:4
+    for k =1:length(models)
         mdl = fitlm(years', NEP_westna_monthly(:,i,k));
         NEP_westna_monthly(:,i,k) = mdl.Residuals.Raw;
     end
