@@ -171,7 +171,7 @@ scatter(13.5+offs-offs/3,EP_NEP_global_annual_mean_beta*scale,12,clr2(10,:),'fil
 
 %% Legend
 scatter(11, -1.05, 20, 'k', 'filled','s');
-text(11.1, -1.05, 'Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+text(11.1, -1.05, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 scatter(11, -0.85, 20, 'k', 'filled','^');
 text(11.1, -0.85, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 

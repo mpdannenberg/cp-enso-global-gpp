@@ -389,7 +389,7 @@ box off;
 text(0.6, 0.23, 'B', 'FontSize',12, 'VerticalAlignment','top')
 
 scatter(6, -0.22, 20, 'k', 'filled','s');
-text(6.1, -0.22, 'CO_{2} Inversions', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+text(6.1, -0.22, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 scatter(6, -0.28, 20, 'k', 'filled','^');
 text(6.1, -0.28, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
