@@ -293,6 +293,29 @@ for i = 1:length(yrs)
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 
+% Tropical BAND
+rlim = [-23.5 23.5; -180 180];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+NEP_tropics_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP(:, :, yr==yrs(i) & mo==j, k);
+            NEP_tropics_monthly(i,j,k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_tropics_monthly_mean = nanmean(NEP_tropics_monthly, 3);
+NEP_tropics_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_tropics_annual(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_tropics_annual_mean = nanmean(NEP_tropics_annual, 2);
+
 %% Detrend regional NEP
 % Africa
 mdl = fitlm(years', NEP_africa_annual_mean);
@@ -310,7 +333,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Amazon
 mdl = fitlm(years', NEP_amazon_annual_mean);
 NEP_amazon_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -326,7 +349,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Australia
 mdl = fitlm(years', NEP_austr_annual_mean);
 NEP_austr_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -342,7 +365,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Tropical Asia
 mdl = fitlm(years', NEP_casia_annual_mean);
 NEP_casia_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -358,7 +381,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Eastern U.S.
 mdl = fitlm(years', NEP_eastus_annual_mean);
 NEP_eastus_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -374,7 +397,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Europe
 mdl = fitlm(years', NEP_europe_annual_mean);
 NEP_europe_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -390,7 +413,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Sahel
 mdl = fitlm(years', NEP_sahel_annual_mean);
 NEP_sahel_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -406,7 +429,7 @@ for i = 1:12
     end
 end
 
-% Africa
+% Western North America
 mdl = fitlm(years', NEP_westna_annual_mean);
 NEP_westna_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
@@ -419,6 +442,22 @@ for i = 1:12
     for k =1:length(models)
         mdl = fitlm(years', NEP_westna_monthly(:,i,k));
         NEP_westna_monthly(:,i,k) = mdl.Residuals.Raw;
+    end
+end
+
+% Tropical BAND
+mdl = fitlm(years', NEP_tropics_annual_mean);
+NEP_tropics_annual_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_tropics_annual(:,k));
+    NEP_tropics_annual(:,k) = mdl.Residuals.Raw;
+end
+for i = 1:12
+    mdl = fitlm(years', NEP_tropics_monthly_mean(:,i));
+    NEP_tropics_monthly_mean(:,i) = mdl.Residuals.Raw;
+    for k =1:length(models)
+        mdl = fitlm(years', NEP_tropics_monthly(:,i,k));
+        NEP_tropics_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
 

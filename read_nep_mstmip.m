@@ -286,6 +286,29 @@ for i = 1:length(yrs)
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 
+% Tropical BAND
+rlim = [-23.5 23.5; -180 180];
+latidx = lat>=min(rlim(1,:)) & lat<=max(rlim(1,:));
+lonidx = lon>=min(rlim(2,:)) & lon<=max(rlim(2,:));
+NEP_tropics_monthly = NaN(size(NEP_annual, 3), 12, length(models));
+for i = 1:size(NEP_annual, 3)
+    for j = 1:12
+        for k = 1:length(models)
+            nep = NEP.NEP(:, :, find(yr==yrs(i) & mo==j), k);
+            NEP_tropics_monthly(i,j,k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC day-1
+        end
+    end
+end
+NEP_tropics_monthly_mean = nanmean(NEP_tropics_monthly, 3);
+NEP_tropics_annual = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_annual(:,:,i,k);
+        NEP_tropics_annual(i, k) = nansum(nansum( nep(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_tropics_annual_mean = nanmean(NEP_tropics_annual, 2);
+
 %% Calculate regional GPP (Ahlstrom et al. 2015 version) at monthly and annual scale
 
 yrs = years;
