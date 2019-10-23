@@ -173,5 +173,5 @@ end
 
 clear eyear i j ts r p mdl nt nx ny scale syear NEP mo;
 
-save('./data/cp_ep_gpp_mstmip.mat');
+save('./data/cp_ep_nep_mstmip.mat');
 
