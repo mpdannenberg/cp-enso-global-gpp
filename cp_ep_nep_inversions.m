@@ -102,6 +102,75 @@ for i = 1:ny
         end
     end
 end
+clear i j mdl ts r p;
+
+
+%% Regress monthly & annual gpp against CPI and EPI indices
+load ./data/nep_inversions_regional.mat;
+clear temp *africa* *amazon* *austr* *casia* *eastus* *europe* *extratropical* *grass* *sahel* *semiarid* *tropical* *tundra* *westna*;
+load ./data/cpi_epi_1951-2016.mat;
+
+cpi = cpi(yr>=syear & yr<=eyear);
+epi = epi(yr>=syear & yr<=eyear);
+yr = yr(yr>=syear & yr<=eyear);
+
+NEP_tropics_annual = NEP_tropics_annual(years>=syear & years<=eyear, :);
+NEP_tropics_annual_mean = NEP_tropics_annual_mean(years>=syear & years<=eyear, :);
+NEP_tropics_monthly = NEP_tropics_monthly(years>=syear & years<=eyear, :, :);
+NEP_tropics_monthly_mean = NEP_tropics_monthly_mean(years>=syear & years<=eyear, :);
+years = years(years>=syear & years<=eyear)';
+
+EP_NEP_tropics_monthly_beta = NaN(12, length(models));
+EP_NEP_tropics_monthly_mean_beta = NaN(12, 1);
+EP_NEP_tropics_monthly_mean_beta_CI = NaN(12, 1);
+EP_NEP_tropics_annual_beta = NaN(1, length(models));
+
+mdl = fitlm(epi, NEP_tropics_annual_mean);
+EP_NEP_tropics_annual_mean_beta = mdl.Coefficients.Estimate(2);
+EP_NEP_tropics_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
+disp(['Tropical inversion mean response to EPI (PgC yr-1): ',...
+    num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+    num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
+for i = 1:12
+    mdl = fitlm(epi, NEP_tropics_monthly_mean(:, i));
+    EP_NEP_tropics_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    EP_NEP_tropics_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
+    for j = 1:length(models)
+        mdl = fitlm(epi, NEP_tropics_monthly(:, i, j));
+        EP_NEP_tropics_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        if i == 1
+            mdl = fitlm(epi, NEP_tropics_annual(:, j));
+            EP_NEP_tropics_annual_beta(j) = mdl.Coefficients.Estimate(2);
+        end
+    end
+    
+end
+
+CP_NEP_tropics_monthly_beta = NaN(12, length(models));
+CP_NEP_tropics_monthly_mean_beta = NaN(12, 1);
+CP_NEP_tropics_monthly_mean_beta_CI = NaN(12, 1);
+CP_NEP_tropics_annual_beta = NaN(1, length(models));
+
+mdl = fitlm(cpi, NEP_tropics_annual_mean);
+CP_NEP_tropics_annual_mean_beta = mdl.Coefficients.Estimate(2);
+CP_NEP_tropics_annual_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
+disp(['Tropical inversion mean response to CPI (PgC yr-1): ',...
+    num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
+    num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
+for i = 1:12
+    mdl = fitlm(cpi, NEP_tropics_monthly_mean(:, i));
+    CP_NEP_tropics_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
+    CP_NEP_tropics_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
+    for j = 1:length(models)
+        mdl = fitlm(cpi, NEP_tropics_monthly(:, i, j));
+        CP_NEP_tropics_monthly_beta(i, j) = mdl.Coefficients.Estimate(2);
+        if i == 1
+            mdl = fitlm(cpi, NEP_tropics_annual(:, j));
+            CP_NEP_tropics_annual_beta(j) = mdl.Coefficients.Estimate(2);
+        end
+    end
+    
+end
 
 clear i j ts r p mdl nt nx ny scale syear NEP mo;
 
