@@ -207,3 +207,94 @@ lgd.Position = [0.15 0.1 0.1161 0.0757];
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r300','./output/epi-cpi-1951-2016.tif')
 close all;
+
+
+%% PRESENTATION Figure
+% ENSO regions
+nino3_lat = [-5 5 5 -5 -5]; nino3_lon = [-150 -150 -90 -90 -150];
+nino12_lat = [-10 0 0 -10 -10]; nino12_lon = [-90 -90 -80 -80 -90];
+nino4_lat = [-5 5 5 -5 -5]; nino4_lon = [160 160 -150 -150 160];
+nino34_lat = [-5 5 5 -5 -5]; nino34_lon = [-170 -170 -120 -120 -170];
+
+h = figure('Color','k');
+h.Units = 'inches';
+h.InvertHardcopy = 'off';
+h.Position = [1 1 7 6.4];
+
+clr = [103,0,31
+178,24,43
+214,96,77
+244,165,130
+253,219,199
+209,229,240
+146,197,222
+67,147,195
+33,102,172
+5,48,97]/255;
+
+latlim = [-25 25];
+
+ax = tight_subplot(3,1,0,0.1,[0.08 0.14]);
+
+axes(ax(1))
+axesm('mercator','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+            'off','PLineLocation',10,'MLineLocation',30,'MeridianLabel','on',...
+            'ParallelLabel','on','GLineWidth',0.5,'Frame','on','FFaceColor',...
+            [0.7 0.7 0.7], 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+            'FLineWidth',1, 'FontColor','w', 'MLabelParallel',25,...
+            'FEdgeColor','w','FontSize',10);
+axis off;
+axis image;
+contourm(lat, lon, epi_r, 'Fill','on', 'LevelList',-1:0.2:1);
+colormap(gca, flipud(clr));
+caxis([-1 1]);
+plotm(nino3_lat, nino3_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino4_lat, nino4_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino12_lat, nino12_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino34_lat, nino34_lon, '-', 'Color','k', 'LineWidth',2);
+textm(0,175, 'Niño 4', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
+
+axes(ax(2))
+axesm('mercator','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
+            'off','PLineLocation',10,'MLineLocation',30,'MeridianLabel','off',...
+            'ParallelLabel','on','GLineWidth',0.5,'Frame','on','FFaceColor',...
+            [0.7 0.7 0.7], 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
+            'FLineWidth',1, 'FontColor','w', 'MLabelParallel',25,...
+            'FEdgeColor','w','FontSize',10);
+axis off;
+axis image;
+contourm(lat, lon, cpi_r, 'Fill','on', 'LevelList',-1:0.2:1);
+colormap(gca, flipud(clr));
+caxis([-1 1]);
+plotm(nino3_lat, nino3_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino4_lat, nino4_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino12_lat, nino12_lon, '-', 'Color',[0.3 0.3 0.3], 'LineWidth',1.5);
+plotm(nino34_lat, nino34_lon, '-', 'Color','k', 'LineWidth',2);
+textm(0,175, 'Niño 4', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','middle','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
+textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
+
+cb = colorbar('eastoutside');
+cb.Position = [0.87 0.367 0.04 0.535];
+cb.TickLength = 0.08;
+cb.Color = 'w';
+cb.FontSize = 10;
+xlabel(cb, 'Pearson''s R', 'FontSize',11, 'Color','w');
+
+axes(ax(3))
+plot(yr, epi, 'w-', 'LineWidth',2);
+hold on;
+plot(yr, cpi, '-', 'Color',clr(2,:), 'LineWidth',2);
+set(gca, 'YLim',[-3.5 3.5],'YTick',-3:3, 'XLim',[1950 2016], 'TickLength',[0 0],...
+    'XColor',[0.2 0.2 0.2], 'YColor',[0.2 0.2 0.2], 'Color','k', 'XColor','w', 'YColor','w', 'FontSize',10)
+grid on;
+hold off;
+xlabel('Year')
+
+set(gcf,'PaperPositionMode','auto')
+print('-dtiff','-f1','-r600','./output/epi-cpi-1951-2016-PRESENTATION.tif')
+close all;
