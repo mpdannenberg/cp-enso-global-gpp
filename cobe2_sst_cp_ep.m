@@ -79,6 +79,7 @@ cp_eof = reshape(cp_eof, ny, nx);
 ep_idx = ep_pc(:, 1);
 cp_idx = cp_pc(:, 1);
 clear sst_idx w_tp ny nx;
+save('./data/cpi_epi_monthly.mat', 'cp_idx','ep_idx','yr','mo', '-v7.3');
 
 %% Get spatial patterns by correlating SSTa against CPI and EPI
 [ny, nx, nt] = size(ssta);
