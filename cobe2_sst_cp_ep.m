@@ -38,7 +38,6 @@ lat_weight = repmat(sqrt(cosd(lat)), 1, length(lon));
 nino4 = ssta(lat>=-5 & lat<=5, lon>=160 & lon<=210, :);
 nino4 = reshape(permute(nino4, [3 1 2]), length(yr), []);
 w = repmat(reshape(lat_weight(lat>=-5 & lat<=5, lon>=160 & lon<=210), 1, []), length(yr), 1);
-% nino4 = mean(nino4, 2);
 nino4 = sum(nino4.*w, 2) ./ sum(w, 2);
 clear w;
 
@@ -46,7 +45,6 @@ nino12 = ssta(lat>=-10 & lat<=0, lon>=270 & lon<=280, :);
 nino12 = reshape(permute(nino12, [3 1 2]), length(yr), []);
 idx = sum(isnan(nino12))==0;
 w = repmat(reshape(lat_weight(lat>=-10 & lat<=0, lon>=270 & lon<=280), 1, []), length(yr), 1);
-% nino12 = nanmean(nino12, 2);
 nino12 = sum(nino12(:,idx).*w(:,idx), 2) ./ sum(w(:,idx), 2);
 clear w idx;
 
@@ -68,14 +66,12 @@ for i = 1:size(sst_tp, 2)
 end
 clear y lm_ep lm_cp i sst_tp;
 
-[ep_coef, ep_pc, ep_latent] = pca(sst_ep, 'VariableWeights',w_tp);
-[cp_coef, cp_pc, cp_latent] = pca(sst_cp, 'VariableWeights',w_tp);
+[ep_coef, ep_pc] = pca(sst_ep, 'VariableWeights',w_tp);
+[cp_coef, cp_pc] = pca(sst_cp, 'VariableWeights',w_tp);
 ep_eof = NaN(size(sst_idx));
 cp_eof = NaN(size(sst_idx));
 ep_eof(sst_idx) = ep_coef(:, 1);
 cp_eof(sst_idx) = cp_coef(:, 1);
-ep_eof = reshape(ep_eof, ny, nx);
-cp_eof = reshape(cp_eof, ny, nx);
 ep_idx = ep_pc(:, 1);
 cp_idx = cp_pc(:, 1);
 clear sst_idx w_tp ny nx;
@@ -93,7 +89,6 @@ for i = 1:ny
     end
 end
 clear i j y;
-
 
 %% Filter to 6-month mean CPI and EPI
 b = ones(1,windowSize)/windowSize;
