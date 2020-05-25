@@ -101,12 +101,12 @@ clear b a windowSize;
 idx = yr >= syear & mo == endMonth; % Sep-Feb 1951-2016
 cpi = cpi(idx);
 epi = epi(idx);
-yr_long = yr; yr = yr(idx);
+yr = yr(idx);
 
 %% Standardize CPI and EPI
 cpi = (cpi - mean(cpi(yr>=1981 & yr<=2010))) / std(cpi(yr>=1981 & yr<=2010));
 epi = (epi - mean(epi(yr>=1981 & yr<=2010))) / std(epi(yr>=1981 & yr<=2010));
-clear cp_coef cp_eof cp_latent cp_pc ep_coef ep_eof ep_latent ep_pc;
+clear cp_coef cp_eof cp_idx cp_latent cp_pc ep_coef ep_eof ep_idx ep_latent ep_pc;
 
 save('./data/cpi_epi_1951-2016.mat', 'cpi','epi','yr', '-v7.3');
 
@@ -116,6 +116,10 @@ nino3_lat = [-5 5 5 -5 -5]; nino3_lon = [-150 -150 -90 -90 -150];
 nino12_lat = [-10 0 0 -10 -10]; nino12_lon = [-90 -90 -80 -80 -90];
 nino4_lat = [-5 5 5 -5 -5]; nino4_lon = [160 160 -150 -150 160];
 nino34_lat = [-5 5 5 -5 -5]; nino34_lon = [-170 -170 -120 -120 -170];
+
+h = figure('Color','w');
+h.Units = 'inches';
+h.Position = [1 1 7 6.4];
 
 clr = [103,0,31
 178,24,43
@@ -130,21 +134,15 @@ clr = [103,0,31
 
 latlim = [-25 25];
 
-h = figure('Color','w');
-h.Units = 'inches';
-% h.Position = [1 1 7 6.4];
-h.Position = [1 1 6.5 4.5];
+ax = tight_subplot(3,1,0,0.1,[0.06 0.14]);
 
-% ax = tight_subplot(3,1,0,0.1,[0.06 0.14]);
-
-% axes(ax(1))
-subplot(6,3,[1:2 4:5])
+axes(ax(1))
 axesm('mercator','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
             'on','PLineLocation',10,'MLineLocation',30,'MeridianLabel','on',...
             'ParallelLabel','on','GLineWidth',0.5,'Frame','on','FFaceColor',...
             [0.7 0.7 0.7], 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
-            'FLineWidth',1, 'FontColor',[0.2 0.2 0.2], 'MLabelParallel',24.9,...
-            'FEdgeColor','w','FontSize',7,'PLabelMeridian','east');
+            'FLineWidth',1, 'FontColor',[0.2 0.2 0.2], 'MLabelParallel',25,...
+            'FEdgeColor','w','FontSize',7);
 axis off;
 axis image;
 contourm(lat, lon, epi_r, 'Fill','on', 'LevelList',-1:0.2:1);
@@ -159,17 +157,14 @@ textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','midd
 textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
 textm(20,125,'A', 'FontSize',12);
-ax = gca;
-ax.Position = [0.075    0.7    0.65    0.27];
 
-% axes(ax(2))
-subplot(6,3,[7:8 10:11])
+axes(ax(2))
 axesm('mercator','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
             'on','PLineLocation',10,'MLineLocation',30,'MeridianLabel','off',...
             'ParallelLabel','on','GLineWidth',0.5,'Frame','on','FFaceColor',...
             [0.7 0.7 0.7], 'FontName', 'Helvetica','GColor',[0.6 0.6 0.6],...
             'FLineWidth',1, 'FontColor',[0.2 0.2 0.2], 'MLabelParallel',25,...
-            'FEdgeColor','w','FontSize',7,'PLabelMeridian','east');
+            'FEdgeColor','w','FontSize',7);
 axis off;
 axis image;
 contourm(lat, lon, cpi_r, 'Fill','on', 'LevelList',-1:0.2:1);
@@ -184,53 +179,26 @@ textm(0,-105, 'Niño 3', 'HorizontalAlignment','center','VerticalAlignment','midd
 textm(-10,-85, 'Niño 1+2', 'HorizontalAlignment','center','VerticalAlignment','top','Color',[0.3 0.3 0.3], 'FontWeight','bold')
 textm(5,-145, 'Niño 3.4', 'HorizontalAlignment','center','VerticalAlignment','bottom','Color','k', 'FontWeight','bold')
 textm(20,125,'B', 'FontSize',12);
-ax = gca;
-ax.Position = [0.075    0.4    0.65    0.27];
 
-cb = colorbar('westoutside');
-cb.Position = [0.065 0.4 0.025 0.57];
-cb.TickLength = 0.065;
-cb.Ticks = -1:0.2:1;
-lbl = xlabel(cb, 'Pearson''s R', 'FontSize',11);
-lbl.Position(1) = -1.45;
+cb = colorbar('eastoutside');
+cb.Position = [0.87 0.367 0.04 0.535];
+cb.TickLength = 0.08;
+xlabel(cb, 'Pearson''s R', 'FontSize',11);
 
-% axes(ax(3))
-subplot(6,3,13:14)
-plot([1950 max(yr)], [0 0], 'k-', 'LineWidth',0.5);
+axes(ax(3))
+plot(yr, epi, 'k-', 'LineWidth',2);
 hold on;
-plot(yr_long+(mo-1)/12, zscore(ep_idx), 'k-', 'LineWidth',1.5);
-plot(yr_long+(mo-1)/12, zscore(cp_idx), '-', 'Color',[0.5 0.5 0.5], 'LineWidth',1.5);
-set(gca, 'YLim',[-5.5 5.5],'YTick',-5:5, 'XLim',[1950 2016], 'TickLength',[0.015 0],...
-    'XColor',[0.2 0.2 0.2], 'YColor',[0.2 0.2 0.2], 'TickDir','out',...
-    'YTickLabel',{'','-4','','-2','','0','','2','','4',''},'XColor','w')
-% grid on;
+plot(yr, cpi, '-', 'Color',[0.5 0.5 0.5], 'LineWidth',2);
+set(gca, 'YLim',[-3.5 3.5],'YTick',-3:3, 'XLim',[1950 2016], 'TickLength',[0 0],...
+    'XColor',[0.2 0.2 0.2], 'YColor',[0.2 0.2 0.2])
+grid on;
 hold off;
-box off;
-ax = gca;
-ax.Position = [0.065 0.25 0.67 0.13];
-ylabel('Monthly', 'FontSize',11)
-text(1951,4, 'E', 'FontSize',12)
-
-subplot(6,3,16:17)
-plot([1950 max(yr)], [0 0], 'k-', 'LineWidth',0.5);
-hold on;
-p1 = plot(yr, epi, 'k-', 'LineWidth',1.5);
-p2 = plot(yr, cpi, '-', 'Color',[0.5 0.5 0.5], 'LineWidth',1.5);
-set(gca, 'YLim',[-3.5 3.5],'YTick',-3:3, 'XLim',[1950 2016], 'TickLength',[0.015 0],...
-    'XColor',[0.2 0.2 0.2], 'YColor',[0.2 0.2 0.2], 'TickDir','out','YTickLabel',{'-3','','-1','','1','','3'})
-% grid on;
-hold off;
-box off;
 xlabel('Year')
-ax = gca;
-ax.Position = [0.065 0.1 0.67 0.13];
-ylabel('Sep-Feb', 'FontSize',11)
-text(1951,2.5, 'F', 'FontSize',12)
-
-lgd = legend([p1 p2], 'Eastern Pacific','Central Pacific','Location','southwest');
+text(1952,2.5, 'C', 'FontSize',12)
+lgd = legend('Eastern Pacific ENSO','Central Pacific ENSO','Location','southwest');
 legend('boxoff');
-lgd.FontSize = 9;
-lgd.Position = [0.2 0.2 0.1161 0.0757];
+lgd.FontSize = 11;
+lgd.Position = [0.15 0.1 0.1161 0.0757];
 
 set(gcf,'PaperPositionMode','auto')
 print('-dtiff','-f1','-r300','./output/epi-cpi-1951-2016.tif')
