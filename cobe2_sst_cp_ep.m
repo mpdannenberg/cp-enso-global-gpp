@@ -66,14 +66,38 @@ for i = 1:size(sst_tp, 2)
 end
 clear y lm_ep lm_cp i sst_tp;
 
-[ep_coef, ep_pc] = pca(sst_ep, 'VariableWeights',w_tp);
-[cp_coef, cp_pc] = pca(sst_cp, 'VariableWeights',w_tp);
-ep_eof = NaN(size(sst_idx));
-cp_eof = NaN(size(sst_idx));
-ep_eof(sst_idx) = ep_coef(:, 1);
-cp_eof(sst_idx) = cp_coef(:, 1);
-ep_idx = ep_pc(:, 1);
-cp_idx = cp_pc(:, 1);
+% [ep_coef, ep_pc] = pca(sst_ep, 'VariableWeights',w_tp);
+% [cp_coef, cp_pc] = pca(sst_cp, 'VariableWeights',w_tp);
+% ep_eof = NaN(size(sst_idx));
+% cp_eof = NaN(size(sst_idx));
+% ep_eof(sst_idx) = ep_coef(:, 1);
+% cp_eof(sst_idx) = cp_coef(:, 1);
+% ep_idx = ep_pc(:, 1);
+% cp_idx = cp_pc(:, 1);
+
+%% Calculate Nino4 and Nino1+2 after removing the other
+lat_tp = lat(lat>=min(latlim) & lat<=max(latlim));
+lon_tp = lon(lon>=min(lonlim) & lon<=max(lonlim));
+sst_ep_full = NaN(length(yr), ny*nx);
+sst_ep_full(:, sst_idx) = sst_ep;
+sst_ep_full = reshape(sst_ep_full, length(yr), ny, nx);
+sst_cp_full = NaN(length(yr), ny*nx);
+sst_cp_full(:, sst_idx) = sst_cp;
+sst_cp_full = reshape(sst_cp_full, length(yr), ny, nx);
+
+cp_idx = sst_cp_full(:, lat_tp>=-5 & lat_tp<=5, lon_tp>=160 & lon_tp<=210);
+cp_idx = reshape(cp_idx, length(yr), []);
+w = repmat(reshape(lat_weight(lat>=-5 & lat<=5, lon>=160 & lon<=210), 1, []), length(yr), 1);
+cp_idx = sum(cp_idx.*w, 2) ./ sum(w, 2);
+clear w;
+
+ep_idx = sst_ep_full(:, lat_tp>=-10 & lat_tp<=0, lon_tp>=270 & lon_tp<=280);
+ep_idx = reshape(ep_idx, length(yr), []);
+idx = sum(isnan(ep_idx))==0;
+w = repmat(reshape(lat_weight(lat>=-10 & lat<=0, lon>=270 & lon<=280), 1, []), length(yr), 1);
+ep_idx = sum(ep_idx(:,idx).*w(:,idx), 2) ./ sum(w(:,idx), 2);
+clear w idx;
+
 clear sst_idx w_tp ny nx;
 save('./data/cpi_epi_monthly.mat', 'cp_idx','ep_idx','yr','mo', '-v7.3');
 
@@ -104,8 +128,8 @@ epi = epi(idx);
 yr = yr(idx);
 
 %% Standardize CPI and EPI
-cpi = (cpi - mean(cpi(yr>=1981 & yr<=2010))) / std(cpi(yr>=1981 & yr<=2010));
-epi = (epi - mean(epi(yr>=1981 & yr<=2010))) / std(epi(yr>=1981 & yr<=2010));
+% cpi = (cpi - mean(cpi(yr>=1981 & yr<=2010))) / std(cpi(yr>=1981 & yr<=2010));
+% epi = (epi - mean(epi(yr>=1981 & yr<=2010))) / std(epi(yr>=1981 & yr<=2010));
 clear cp_coef cp_eof cp_idx cp_latent cp_pc ep_coef ep_eof ep_idx ep_latent ep_pc;
 
 save('./data/cpi_epi_1951-2016.mat', 'cpi','epi','yr', '-v7.3');
