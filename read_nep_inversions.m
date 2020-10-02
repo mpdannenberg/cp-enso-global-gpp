@@ -50,8 +50,11 @@ windowSize = 12;
 b = ones(1,windowSize);
 a = 1;
 NEP_annual = filter(b, a, NEP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
+NEP_annual(:,:,1:(windowSize-1),:) = NaN;
+NEP_shyear = NEP_annual(:, :, mo==6, :); % Get July-June sum
 NEP_annual = NEP_annual(:, :, mo==12, :); % Get calendar year sum
 NEP_annual_mean = nanmean(NEP_annual, 4);
+NEP_shyear_mean = nanmean(NEP_shyear, 4);
 clear NEP_monthly a b windowSize ndys;
 
 %% Calculate global NEP at monthly and annual scale
@@ -75,6 +78,18 @@ for i = 1:length(yrs)
     end
 end
 NEP_global_annual_mean = nanmean(NEP_global_annual, 2);
+
+NEP_global_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        nep = NEP_shyear(:,:,i,k);
+        NEP_global_shyear(i, k) = nansum(nansum( nep.*area )) * scale; % TgC yr-1
+    end
+end
+NEP_global_shyear_mean = nanmean(NEP_global_shyear, 2);
+NEP_global_shyear_mean(1) = NaN;
+NEP_global_shyear(1,:) = NaN;
+
 years = yrs;
 
 %% Detrend (strong long-term increases in NEP)
@@ -85,6 +100,14 @@ NEP_global_annual_mean = mdl.Residuals.Raw;
 for k=1:length(models)
     mdl = fitlm(years', NEP_global_annual(:,k));
     NEP_global_annual(:,k) = mdl.Residuals.Raw;
+end
+
+mdl = fitlm(years', NEP_global_shyear_mean);
+NEP_global_shyear_mean = mdl.Residuals.Raw;
+
+for k=1:length(models)
+    mdl = fitlm(years', NEP_global_shyear(:,k));
+    NEP_global_shyear(:,k) = mdl.Residuals.Raw;
 end
 
 for i = 1:12
@@ -102,7 +125,7 @@ clear i j k mdl nep yrs nt nx ny scale syear eyear info;
 
 save('./data/nep_inversions.mat', 'NEP_annual_mean','NEP_global_annual',...
     'NEP_global_annual_mean','NEP_global_monthly','NEP_global_monthly_mean',...
-    'lat','lon','models','years');
+    'NEP_global_shyear','NEP_global_shyear_mean','lat','lon','models','years');
 
 %% Calculate regional NEP at monthly and annual scale
 
@@ -131,6 +154,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_amazon_annual_mean = nanmean(NEP_amazon_annual, 2);
+NEP_amazon_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_amazon_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_amazon_shyear_mean = nanmean(NEP_amazon_shyear, 2);
+NEP_amazon_shyear_mean(1) = NaN;
+NEP_amazon_shyear(1,:) = NaN;
 
 % Sahel
 rlim = [5 15; -20 50];
@@ -154,6 +187,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_sahel_annual_mean = nanmean(NEP_sahel_annual, 2);
+NEP_sahel_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_sahel_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_sahel_shyear_mean = nanmean(NEP_sahel_shyear, 2);
+NEP_sahel_shyear_mean(1) = NaN;
+NEP_sahel_shyear(1,:) = NaN;
 
 % Tropical and subtropical Africa
 rlim = [-35 5; 8 42];
@@ -177,6 +220,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_africa_annual_mean = nanmean(NEP_africa_annual, 2);
+NEP_africa_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_africa_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_africa_shyear_mean = nanmean(NEP_africa_shyear, 2);
+NEP_africa_shyear_mean(1) = NaN;
+NEP_africa_shyear(1,:) = NaN;
 
 % Australia
 rlim = [-40 -10; 110 155];
@@ -200,6 +253,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_austr_annual_mean = nanmean(NEP_austr_annual, 2);
+NEP_austr_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_austr_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_austr_shyear_mean = nanmean(NEP_austr_shyear, 2);
+NEP_austr_shyear_mean(1) = NaN;
+NEP_austr_shyear(1,:) = NaN;
 
 % Western North America
 rlim = [20 70; -165 -100];
@@ -223,6 +286,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_westna_annual_mean = nanmean(NEP_westna_annual, 2);
+NEP_westna_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_westna_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_westna_shyear_mean = nanmean(NEP_westna_shyear, 2);
+NEP_westna_shyear_mean(1) = NaN;
+NEP_westna_shyear(1,:) = NaN;
 
 % Eastern U.S.
 rlim = [25 50; -100 -60];
@@ -246,6 +319,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_eastus_annual_mean = nanmean(NEP_eastus_annual, 2);
+NEP_eastus_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_eastus_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_eastus_shyear_mean = nanmean(NEP_eastus_shyear, 2);
+NEP_eastus_shyear_mean(1) = NaN;
+NEP_eastus_shyear(1,:) = NaN;
 
 % Europe
 rlim = [35 60; -10 40];
@@ -269,6 +352,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_europe_annual_mean = nanmean(NEP_europe_annual, 2);
+NEP_europe_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_europe_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_europe_shyear_mean = nanmean(NEP_europe_shyear, 2);
+NEP_europe_shyear_mean(1) = NaN;
+NEP_europe_shyear(1,:) = NaN;
 
 % Tropical Asia
 rlim = [-10 25; 80 150];
@@ -292,6 +385,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
+NEP_casia_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_casia_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_casia_shyear_mean = nanmean(NEP_casia_shyear, 2);
+NEP_casia_shyear_mean(1) = NaN;
+NEP_casia_shyear(1,:) = NaN;
 
 % Tropical BAND
 rlim = [-23.5 23.5; -180 180];
@@ -315,6 +418,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_tropics_annual_mean = nanmean(NEP_tropics_annual, 2);
+NEP_tropics_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_tropics_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_tropics_shyear_mean = nanmean(NEP_tropics_shyear, 2);
+NEP_tropics_shyear_mean(1) = NaN;
+NEP_tropics_shyear(1,:) = NaN;
 
 %% Detrend regional NEP
 % Africa
@@ -332,6 +445,12 @@ for i = 1:12
         NEP_africa_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
+mdl = fitlm(years', NEP_africa_shyear_mean);
+NEP_africa_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_africa_shyear(:,k));
+    NEP_africa_shyear(:,k) = mdl.Residuals.Raw;
+end
 
 % Amazon
 mdl = fitlm(years', NEP_amazon_annual_mean);
@@ -347,6 +466,12 @@ for i = 1:12
         mdl = fitlm(years', NEP_amazon_monthly(:,i,k));
         NEP_amazon_monthly(:,i,k) = mdl.Residuals.Raw;
     end
+end
+mdl = fitlm(years', NEP_amazon_shyear_mean);
+NEP_amazon_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_amazon_shyear(:,k));
+    NEP_amazon_shyear(:,k) = mdl.Residuals.Raw;
 end
 
 % Australia
@@ -364,6 +489,12 @@ for i = 1:12
         NEP_austr_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
+mdl = fitlm(years', NEP_austr_shyear_mean);
+NEP_austr_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_austr_shyear(:,k));
+    NEP_austr_shyear(:,k) = mdl.Residuals.Raw;
+end
 
 % Tropical Asia
 mdl = fitlm(years', NEP_casia_annual_mean);
@@ -379,6 +510,12 @@ for i = 1:12
         mdl = fitlm(years', NEP_casia_monthly(:,i,k));
         NEP_casia_monthly(:,i,k) = mdl.Residuals.Raw;
     end
+end
+mdl = fitlm(years', NEP_casia_shyear_mean);
+NEP_casia_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_casia_shyear(:,k));
+    NEP_casia_shyear(:,k) = mdl.Residuals.Raw;
 end
 
 % Eastern U.S.
@@ -396,6 +533,12 @@ for i = 1:12
         NEP_eastus_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
+mdl = fitlm(years', NEP_eastus_shyear_mean);
+NEP_eastus_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_eastus_shyear(:,k));
+    NEP_eastus_shyear(:,k) = mdl.Residuals.Raw;
+end
 
 % Europe
 mdl = fitlm(years', NEP_europe_annual_mean);
@@ -411,6 +554,12 @@ for i = 1:12
         mdl = fitlm(years', NEP_europe_monthly(:,i,k));
         NEP_europe_monthly(:,i,k) = mdl.Residuals.Raw;
     end
+end
+mdl = fitlm(years', NEP_europe_shyear_mean);
+NEP_europe_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_europe_shyear(:,k));
+    NEP_europe_shyear(:,k) = mdl.Residuals.Raw;
 end
 
 % Sahel
@@ -428,6 +577,12 @@ for i = 1:12
         NEP_sahel_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
+mdl = fitlm(years', NEP_sahel_shyear_mean);
+NEP_sahel_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_sahel_shyear(:,k));
+    NEP_sahel_shyear(:,k) = mdl.Residuals.Raw;
+end
 
 % Western North America
 mdl = fitlm(years', NEP_westna_annual_mean);
@@ -443,6 +598,12 @@ for i = 1:12
         mdl = fitlm(years', NEP_westna_monthly(:,i,k));
         NEP_westna_monthly(:,i,k) = mdl.Residuals.Raw;
     end
+end
+mdl = fitlm(years', NEP_westna_shyear_mean);
+NEP_westna_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_westna_shyear(:,k));
+    NEP_westna_shyear(:,k) = mdl.Residuals.Raw;
 end
 
 % Tropical BAND
@@ -460,8 +621,62 @@ for i = 1:12
         NEP_tropics_monthly(:,i,k) = mdl.Residuals.Raw;
     end
 end
+mdl = fitlm(years', NEP_tropics_shyear_mean);
+NEP_tropics_shyear_mean = mdl.Residuals.Raw;
+for k=1:length(models)
+    mdl = fitlm(years', NEP_tropics_shyear(:,k));
+    NEP_tropics_shyear(:,k) = mdl.Residuals.Raw;
+end
 
 clear i j k mdl nep yrs area e eyear syear R nt nx ny scale NEP NEP_monthly NEP_annual NEP_global* latidx lonidx lat lon yr mo rlim;
+
+%% 6 month lags for monthly analyses
+NEPlag = lagmatrix(NEP_africa_monthly_mean, 1); NEP_africa_monthly_mean = [NEPlag(:,7:12) NEP_africa_monthly_mean];
+NEPlag = NaN(size(NEP_africa_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_africa_monthly(:,:,i), 1); end
+NEP_africa_monthly = cat(2, NEPlag(:,7:12,:), NEP_africa_monthly);
+
+NEPlag = lagmatrix(NEP_amazon_monthly_mean, 1); NEP_amazon_monthly_mean = [NEPlag(:,7:12) NEP_amazon_monthly_mean];
+NEPlag = NaN(size(NEP_amazon_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_amazon_monthly(:,:,i), 1); end
+NEP_amazon_monthly = cat(2, NEPlag(:,7:12,:), NEP_amazon_monthly);
+
+NEPlag = lagmatrix(NEP_austr_monthly_mean, 1); NEP_austr_monthly_mean = [NEPlag(:,7:12) NEP_austr_monthly_mean];
+NEPlag = NaN(size(NEP_austr_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_austr_monthly(:,:,i), 1); end
+NEP_austr_monthly = cat(2, NEPlag(:,7:12,:), NEP_austr_monthly);
+
+NEPlag = lagmatrix(NEP_casia_monthly_mean, 1); NEP_casia_monthly_mean = [NEPlag(:,7:12) NEP_casia_monthly_mean];
+NEPlag = NaN(size(NEP_casia_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_casia_monthly(:,:,i), 1); end
+NEP_casia_monthly = cat(2, NEPlag(:,7:12,:), NEP_casia_monthly);
+
+NEPlag = lagmatrix(NEP_eastus_monthly_mean, 1); NEP_eastus_monthly_mean = [NEPlag(:,7:12) NEP_eastus_monthly_mean];
+NEPlag = NaN(size(NEP_eastus_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_eastus_monthly(:,:,i), 1); end
+NEP_eastus_monthly = cat(2, NEPlag(:,7:12,:), NEP_eastus_monthly);
+
+NEPlag = lagmatrix(NEP_europe_monthly_mean, 1); NEP_europe_monthly_mean = [NEPlag(:,7:12) NEP_europe_monthly_mean];
+NEPlag = NaN(size(NEP_europe_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_europe_monthly(:,:,i), 1); end
+NEP_europe_monthly = cat(2, NEPlag(:,7:12,:), NEP_europe_monthly);
+
+NEPlag = lagmatrix(NEP_sahel_monthly_mean, 1); NEP_sahel_monthly_mean = [NEPlag(:,7:12) NEP_sahel_monthly_mean];
+NEPlag = NaN(size(NEP_sahel_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_sahel_monthly(:,:,i), 1); end
+NEP_sahel_monthly = cat(2, NEPlag(:,7:12,:), NEP_sahel_monthly);
+
+NEPlag = lagmatrix(NEP_tropics_monthly_mean, 1); NEP_tropics_monthly_mean = [NEPlag(:,7:12) NEP_tropics_monthly_mean];
+NEPlag = NaN(size(NEP_tropics_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_tropics_monthly(:,:,i), 1); end
+NEP_tropics_monthly = cat(2, NEPlag(:,7:12,:), NEP_tropics_monthly);
+
+NEPlag = lagmatrix(NEP_westna_monthly_mean, 1); NEP_westna_monthly_mean = [NEPlag(:,7:12) NEP_westna_monthly_mean];
+NEPlag = NaN(size(NEP_westna_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_westna_monthly(:,:,i), 1); end
+NEP_westna_monthly = cat(2, NEPlag(:,7:12,:), NEP_westna_monthly);
+
+clear i NEPlag;
 
 save('./data/nep_inversions_regional.mat');
 
