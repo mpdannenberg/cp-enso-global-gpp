@@ -62,8 +62,11 @@ windowSize = 12;
 b = ones(1,windowSize);
 a = 1;
 GPP_annual = filter(b, a, GPP_monthly, [], 3); % 12-month running sums (kgC m-2 yr-1)
+GPP_annual(:,:,1:(windowSize-1)) = NaN;
+GPP_shyear = GPP_annual(:, :, mo==6); % Get July-June sum
 GPP_annual = GPP_annual(:, :, mo==12); % Get calendar year sum
 GPP_annual(repmat(biomes',1,1,length(years))==0) = NaN; % Return ocean values to NaN
+GPP_shyear(repmat(biomes',1,1,length(years))==0) = NaN; % Return ocean values to NaN
 
 clear GPP_monthly a b windowSize ndys biomes;
 
@@ -76,12 +79,20 @@ for i = 1:size(GPP_annual, 3)
         GPP_global_monthly(i,j) = nansum(nansum( gpp.*area )) * scale; % TgC day-1
     end
 end
+GPPlag = lagmatrix(GPP_global_monthly, 1); GPP_global_monthly = [GPPlag(:,7:12) GPP_global_monthly]; clear GPPlag;
 
 GPP_global_annual = NaN(length(yrs), 1);
 for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_global_annual(i) = nansum(nansum( gpp.*area )) * scale; % TgC yr-1
 end
+
+GPP_global_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_global_shyear(i) = nansum(nansum( gpp.*area )) * scale; % TgC yr-1
+end
+GPP_global_shyear(1) = NaN;
 
 clear i j k gpp yrs area e eyear syear R nt nx ny scale info;
 
@@ -117,6 +128,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_amazon_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_amazon_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_amazon_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_amazon_shyear(1) = NaN;
 
 % Sahel
 rlim = [5 15; -20 50];
@@ -135,6 +152,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_sahel_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_sahel_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_sahel_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_sahel_shyear(1) = NaN;
 
 % Tropical and subtropical Africa
 rlim = [-35 5; 8 42];
@@ -153,6 +176,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_africa_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_africa_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_africa_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_africa_shyear(1) = NaN;
 
 % Australia
 rlim = [-40 -10; 110 155];
@@ -171,6 +200,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_austr_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_austr_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_austr_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_austr_shyear(1) = NaN;
 
 % Western North America
 rlim = [20 70; -165 -100];
@@ -189,6 +224,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_westna_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_westna_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_westna_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_westna_shyear(1) = NaN;
 
 % Eastern U.S.
 rlim = [25 50; -100 -60];
@@ -207,6 +248,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_eastus_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_eastus_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_eastus_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_eastus_shyear(1) = NaN;
 
 % Europe
 rlim = [35 60; -10 40];
@@ -225,6 +272,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_europe_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_europe_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_europe_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_europe_shyear(1) = NaN;
 
 % Tropical Asia
 rlim = [-10 25; 80 150];
@@ -243,6 +296,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_casia_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_casia_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_casia_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_casia_shyear(1) = NaN;
 
 % Tropical BAND
 rlim = [-23.5 23.5; -180 180];
@@ -261,6 +320,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_tropics_annual(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
 end
+GPP_tropics_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_tropics_shyear(i) = nansum(nansum( gpp(latidx,lonidx).*area(latidx,lonidx) )) * scale; % TgC yr-1
+end
+GPP_tropics_shyear(1) = NaN;
 
 
 %% Calculate regional GPP (Ahlstrom et al. 2015 version) at monthly and annual scale
@@ -290,6 +355,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_tropical_annual(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
 end
+GPP_tropical_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_tropical_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+GPP_tropical_shyear(1) = NaN;
 
 % Extratropical forest
 GPP_extratropical_monthly = NaN(size(GPP_annual, 3), 12);
@@ -305,6 +376,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_extratropical_annual(i) = nansum(nansum( gpp(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
 end
+GPP_extratropical_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_extratropical_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+GPP_extratropical_shyear(1) = NaN;
 
 % Tundra & Arctic shrubland
 GPP_tundra_monthly = NaN(size(GPP_annual, 3), 12);
@@ -320,6 +397,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_tundra_annual(i) = nansum(nansum( gpp(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
 end
+GPP_tundra_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_tundra_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+GPP_tundra_shyear(1) = NaN;
 
 % Grass/crop
 GPP_grass_monthly = NaN(size(GPP_annual, 3), 12);
@@ -335,6 +418,12 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_grass_annual(i) = nansum(nansum( gpp(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
 end
+GPP_grass_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_grass_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+GPP_grass_shyear(1) = NaN;
 
 % Semiarid
 GPP_semiarid_monthly = NaN(size(GPP_annual, 3), 12);
@@ -350,9 +439,33 @@ for i = 1:length(yrs)
     gpp = GPP_annual(:,:,i);
     GPP_semiarid_annual(i) = nansum(nansum( gpp(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
 end
+GPP_semiarid_shyear = NaN(length(yrs), 1);
+for i = 1:length(yrs)
+    gpp = GPP_shyear(:,:,i);
+    GPP_semiarid_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+end
+GPP_semiarid_shyear(1) = NaN;
 
 
-clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_global* latidx lonidx lat lon yr mo rlim biome*;
+clear i j k gpp yrs area e eyear syear R nt nx ny scale GPP GPP_monthly GPP_annual GPP_shyear GPP_global* latidx lonidx lat lon yr mo rlim biome*;
+
+
+%% 6 month lags for monthly analyses
+GPPlag = lagmatrix(GPP_africa_monthly, 1); GPP_africa_monthly = [GPPlag(:,7:12) GPP_africa_monthly];
+GPPlag = lagmatrix(GPP_amazon_monthly, 1); GPP_amazon_monthly = [GPPlag(:,7:12) GPP_amazon_monthly];
+GPPlag = lagmatrix(GPP_austr_monthly, 1); GPP_austr_monthly = [GPPlag(:,7:12) GPP_austr_monthly];
+GPPlag = lagmatrix(GPP_casia_monthly, 1); GPP_casia_monthly = [GPPlag(:,7:12) GPP_casia_monthly];
+GPPlag = lagmatrix(GPP_eastus_monthly, 1); GPP_eastus_monthly = [GPPlag(:,7:12) GPP_eastus_monthly];
+GPPlag = lagmatrix(GPP_europe_monthly, 1); GPP_europe_monthly = [GPPlag(:,7:12) GPP_europe_monthly];
+GPPlag = lagmatrix(GPP_extratropical_monthly, 1); GPP_extratropical_monthly = [GPPlag(:,7:12) GPP_extratropical_monthly];
+GPPlag = lagmatrix(GPP_grass_monthly, 1); GPP_grass_monthly = [GPPlag(:,7:12) GPP_grass_monthly];
+GPPlag = lagmatrix(GPP_sahel_monthly, 1); GPP_sahel_monthly = [GPPlag(:,7:12) GPP_sahel_monthly];
+GPPlag = lagmatrix(GPP_semiarid_monthly, 1); GPP_semiarid_monthly = [GPPlag(:,7:12) GPP_semiarid_monthly];
+GPPlag = lagmatrix(GPP_tropical_monthly, 1); GPP_tropical_monthly = [GPPlag(:,7:12) GPP_tropical_monthly];
+GPPlag = lagmatrix(GPP_tropics_monthly, 1); GPP_tropics_monthly = [GPPlag(:,7:12) GPP_tropics_monthly];
+GPPlag = lagmatrix(GPP_tundra_monthly, 1); GPP_tundra_monthly = [GPPlag(:,7:12) GPP_tundra_monthly];
+GPPlag = lagmatrix(GPP_westna_monthly, 1); GPP_westna_monthly = [GPPlag(:,7:12) GPP_westna_monthly];
+clear GPPlag;
 
 save('./data/gpp_mod17_regional.mat');
 
