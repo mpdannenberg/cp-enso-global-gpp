@@ -438,8 +438,8 @@ NEP_tropical_annual_mean = nanmean(NEP_tropical_annual, 2);
 NEP_tropical_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_tropical_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_tropical_shyear(i, k) = nansum(nansum( nep(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
     end
 end
 NEP_tropical_shyear_mean = nanmean(NEP_tropical_shyear, 2);
@@ -468,8 +468,8 @@ NEP_extratropical_annual_mean = nanmean(NEP_extratropical_annual, 2);
 NEP_extratropical_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_extratropical_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_extratropical_shyear(i, k) = nansum(nansum( nep(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
     end
 end
 NEP_extratropical_shyear_mean = nanmean(NEP_extratropical_shyear, 2);
@@ -498,8 +498,8 @@ NEP_tundra_annual_mean = nanmean(NEP_tundra_annual, 2);
 NEP_tundra_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_tundra_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_tundra_shyear(i, k) = nansum(nansum( nep(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
     end
 end
 NEP_tundra_shyear_mean = nanmean(NEP_tundra_shyear, 2);
@@ -528,8 +528,8 @@ NEP_grass_annual_mean = nanmean(NEP_grass_annual, 2);
 NEP_grass_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_grass_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_grass_shyear(i, k) = nansum(nansum( nep(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
     end
 end
 NEP_grass_shyear_mean = nanmean(NEP_grass_shyear, 2);
@@ -558,8 +558,8 @@ NEP_semiarid_annual_mean = nanmean(NEP_semiarid_annual, 2);
 NEP_semiarid_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_semiarid_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_semiarid_shyear(i, k) = nansum(nansum( nep(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
     end
 end
 NEP_semiarid_shyear_mean = nanmean(NEP_semiarid_shyear, 2);

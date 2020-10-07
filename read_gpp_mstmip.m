@@ -449,7 +449,7 @@ GPP_tropical_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_shyear(:,:,i,k);
-        GPP_tropical_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        GPP_tropical_shyear(i, k) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
     end
 end
 GPP_tropical_shyear_mean = nanmean(GPP_tropical_shyear, 2);
@@ -479,7 +479,7 @@ GPP_extratropical_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_shyear(:,:,i,k);
-        GPP_extratropical_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        GPP_extratropical_shyear(i, k) = nansum(nansum( gpp(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
     end
 end
 GPP_extratropical_shyear_mean = nanmean(GPP_extratropical_shyear, 2);
@@ -509,7 +509,7 @@ GPP_tundra_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_shyear(:,:,i,k);
-        GPP_tundra_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        GPP_tundra_shyear(i, k) = nansum(nansum( gpp(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
     end
 end
 GPP_tundra_shyear_mean = nanmean(GPP_tundra_shyear, 2);
@@ -539,7 +539,7 @@ GPP_grass_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_shyear(:,:,i,k);
-        GPP_grass_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        GPP_grass_shyear(i, k) = nansum(nansum( gpp(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
     end
 end
 GPP_grass_shyear_mean = nanmean(GPP_grass_shyear, 2);
@@ -569,7 +569,7 @@ GPP_semiarid_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = GPP_shyear(:,:,i,k);
-        GPP_semiarid_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        GPP_semiarid_shyear(i, k) = nansum(nansum( gpp(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
     end
 end
 GPP_semiarid_shyear_mean = nanmean(GPP_semiarid_shyear, 2);

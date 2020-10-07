@@ -405,7 +405,7 @@ end
 GPP_extratropical_shyear = NaN(length(yrs), 1);
 for i = 1:length(yrs)
     gpp = GPP_shyear(:,:,i);
-    GPP_extratropical_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+    GPP_extratropical_shyear(i) = nansum(nansum( gpp(biome_half==2).*area(biome_half==2) )) * scale; % TgC yr-1
 end
 GPP_extratropical_shyear(1) = NaN;
 
@@ -426,7 +426,7 @@ end
 GPP_tundra_shyear = NaN(length(yrs), 1);
 for i = 1:length(yrs)
     gpp = GPP_shyear(:,:,i);
-    GPP_tundra_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+    GPP_tundra_shyear(i) = nansum(nansum( gpp(biome_half==3).*area(biome_half==3) )) * scale; % TgC yr-1
 end
 GPP_tundra_shyear(1) = NaN;
 
@@ -447,7 +447,7 @@ end
 GPP_grass_shyear = NaN(length(yrs), 1);
 for i = 1:length(yrs)
     gpp = GPP_shyear(:,:,i);
-    GPP_grass_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+    GPP_grass_shyear(i) = nansum(nansum( gpp(biome_half==4).*area(biome_half==4) )) * scale; % TgC yr-1
 end
 GPP_grass_shyear(1) = NaN;
 
@@ -468,7 +468,7 @@ end
 GPP_semiarid_shyear = NaN(length(yrs), 1);
 for i = 1:length(yrs)
     gpp = GPP_shyear(:,:,i);
-    GPP_semiarid_shyear(i) = nansum(nansum( gpp(biome_half==1).*area(biome_half==1) )) * scale; % TgC yr-1
+    GPP_semiarid_shyear(i) = nansum(nansum( gpp(biome_half==5).*area(biome_half==5) )) * scale; % TgC yr-1
 end
 GPP_semiarid_shyear(1) = NaN;
 
