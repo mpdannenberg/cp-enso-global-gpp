@@ -270,6 +270,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_westna_annual_mean = nanmean(NEP_westna_annual, 2);
+NEP_westna_shyear = NaN(length(yrs), length(models));
+for i = 1:length(yrs)
+    for k = 1:length(models)
+        gpp = NEP_shyear(:,:,i,k);
+        NEP_westna_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+    end
+end
+NEP_westna_shyear_mean = nanmean(NEP_westna_shyear, 2);
+NEP_westna_shyear_mean(1) = NaN;
+NEP_westna_shyear(1,:) = NaN;
 
 % Eastern U.S.
 rlim = [25 50; -100 -60];
@@ -293,16 +303,16 @@ for i = 1:length(yrs)
     end
 end
 NEP_eastus_annual_mean = nanmean(NEP_eastus_annual, 2);
-NEP_westna_shyear = NaN(length(yrs), length(models));
+NEP_eastus_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
         gpp = NEP_shyear(:,:,i,k);
-        NEP_westna_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        NEP_eastus_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
     end
 end
-NEP_westna_shyear_mean = nanmean(NEP_westna_shyear, 2);
-NEP_westna_shyear_mean(1) = NaN;
-NEP_westna_shyear(1,:) = NaN;
+NEP_eastus_shyear_mean = nanmean(NEP_eastus_shyear, 2);
+NEP_eastus_shyear_mean(1) = NaN;
+NEP_eastus_shyear(1,:) = NaN;
 
 % Europe
 rlim = [35 60; -10 40];
