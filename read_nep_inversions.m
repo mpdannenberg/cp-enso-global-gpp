@@ -123,6 +123,12 @@ for i = 1:12
 end
 clear i j k mdl nep yrs nt nx ny scale syear eyear info;
 
+NEPlag = lagmatrix(NEP_global_monthly_mean, 1); NEP_global_monthly_mean = [NEPlag(:,7:12) NEP_global_monthly_mean];
+NEPlag = NaN(size(NEP_global_monthly));
+for i=1:length(models); NEPlag(:,:,i) = lagmatrix(NEP_global_monthly(:,:,i), 1); end
+NEP_global_monthly = cat(2, NEPlag(:,7:12,:), NEP_global_monthly);
+clear NEPlag i;
+
 save('./data/nep_inversions.mat', 'NEP_annual_mean','NEP_shyear_mean','NEP_global_annual',...
     'NEP_global_annual_mean','NEP_global_monthly','NEP_global_monthly_mean',...
     'NEP_global_shyear','NEP_global_shyear_mean','lat','lon','models','years');

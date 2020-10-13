@@ -102,6 +102,12 @@ years = yrs;
 
 clear i j k gpp yrs area nt nx ny scale syear eyear;
 
+GPPlag = lagmatrix(GPP_global_monthly_mean, 1); GPP_global_monthly_mean = [GPPlag(:,7:12) GPP_global_monthly_mean];
+GPPlag = NaN(size(GPP_global_monthly));
+for i=1:length(models); GPPlag(:,:,i) = lagmatrix(GPP_global_monthly(:,:,i), 1); end
+GPP_global_monthly = cat(2, GPPlag(:,7:12,:), GPP_global_monthly);
+clear GPPlag i;
+
 save('./data/gpp_mstmip.mat', 'GPP_annual_mean','GPP_shyear_mean','GPP_global_annual',...
     'GPP_global_annual_mean','GPP_global_monthly','GPP_global_monthly_mean',...
     'GPP_global_shyear','GPP_global_shyear_mean','lat','lon','models','years');
