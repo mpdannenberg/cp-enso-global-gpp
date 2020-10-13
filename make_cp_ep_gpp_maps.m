@@ -1,15 +1,6 @@
 % Make some maps and stuff
 
-clr = [103,0,31
-178,24,43
-214,96,77
-244,165,130
-253,219,199
-209,229,240
-146,197,222
-67,147,195
-33,102,172
-5,48,97]/255;
+clr = cbrewer('div','RdBu',12);
 
 latlim = [-80 80];
 lonlim = [-180 180];
@@ -33,7 +24,7 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, EP_GPP_annual_beta)
-caxis([-0.05 0.05])
+caxis([-0.06 0.06])
 colormap(clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
@@ -52,7 +43,7 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, CP_GPP_annual_beta)
-caxis([-0.05 0.05])
+caxis([-0.06 0.06])
 colormap(clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
@@ -62,10 +53,10 @@ text(-2.2,1.3,'D', 'FontSize',12);
 
 cb = colorbar('eastoutside');
 cb.Position = [0.51    0.57    0.04    0.38];
-cb.Ticks = -0.05:0.01:0.05;
+cb.Ticks = -0.06:0.01:0.06;
 cb.TickLength = 0.09;
-cb.TickLabels = {'-50','-40','-30','-20','-10','0','10','20','30','40','50'};
-ylb = ylabel(cb, 'Mean GPP response (g C m^{-2} yr^{-1} SD^{-1})', 'FontSize',9);
+cb.TickLabels = {'-60','-50','-40','-30','-20','-10','0','10','20','30','40','50','60'};
+ylb = ylabel(cb, 'Mean GPP response (g C m^{-2} yr^{-1} K^{-1})', 'FontSize',9);
 ylb.Position = [-0.95 0.0000 0];
 
 %% Plot MsTMIP beta through time
@@ -91,7 +82,7 @@ set(ax1, 'Position', [0.09 0.32 0.835 0.2])
 % Monthly
 yyaxis left;
 hold on;
-for i = 1:12
+for i = 1:18
     
     dberg_box(i-offs,CP_GPP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth, 10);
     dberg_box(i+offs,EP_GPP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth, 10);
@@ -214,7 +205,7 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, EP_GPP_annual_beta)
-caxis([-0.05 0.05])
+caxis([-0.06 0.06])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
@@ -236,7 +227,7 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, CP_GPP_annual_beta)
-caxis([-0.05 0.05])
+caxis([-0.06 0.06])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
