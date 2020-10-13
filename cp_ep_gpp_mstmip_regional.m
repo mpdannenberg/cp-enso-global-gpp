@@ -38,8 +38,8 @@ yr = yr(yr>=syear & yr<=eyear);
 idx = years>=syear & years<=eyear;
 
 % Africa
-EP_GPP_africa_monthly_beta = NaN(12, length(models));
-EP_GPP_africa_monthly_mean_beta = NaN(12, 1);
+EP_GPP_africa_monthly_beta = NaN(18, length(models));
+EP_GPP_africa_monthly_mean_beta = NaN(18, 1);
 EP_GPP_africa_annual_beta = NaN(1, length(models));
 EP_GPP_africa_shyear_beta = NaN(1, length(models));
 
@@ -53,7 +53,7 @@ EP_GPP_africa_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_africa_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{1,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_africa_monthly_mean(idx, i));
     EP_GPP_africa_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -70,8 +70,8 @@ for i = 1:12
     
 end
 
-CP_GPP_africa_monthly_beta = NaN(12, length(models));
-CP_GPP_africa_monthly_mean_beta = NaN(12, 1);
+CP_GPP_africa_monthly_beta = NaN(18, length(models));
+CP_GPP_africa_monthly_mean_beta = NaN(18, 1);
 CP_GPP_africa_annual_beta = NaN(1, length(models));
 CP_GPP_africa_shyear_beta = NaN(1, length(models));
 
@@ -85,7 +85,7 @@ CP_GPP_africa_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_africa_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{1,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_africa_monthly_mean(idx, i));
     CP_GPP_africa_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -105,8 +105,8 @@ end
 clear i j mdl;
 
 % Amazonia
-EP_GPP_amazon_monthly_beta = NaN(12, length(models));
-EP_GPP_amazon_monthly_mean_beta = NaN(12, 1);
+EP_GPP_amazon_monthly_beta = NaN(18, length(models));
+EP_GPP_amazon_monthly_mean_beta = NaN(18, 1);
 EP_GPP_amazon_annual_beta = NaN(1, length(models));
 EP_GPP_amazon_shyear_beta = NaN(1, length(models));
 
@@ -120,7 +120,7 @@ EP_GPP_amazon_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_amazon_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{2,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_amazon_monthly_mean(idx, i));
     EP_GPP_amazon_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -137,8 +137,8 @@ for i = 1:12
     
 end
 
-CP_GPP_amazon_monthly_beta = NaN(12, length(models));
-CP_GPP_amazon_monthly_mean_beta = NaN(12, 1);
+CP_GPP_amazon_monthly_beta = NaN(18, length(models));
+CP_GPP_amazon_monthly_mean_beta = NaN(18, 1);
 CP_GPP_amazon_annual_beta = NaN(1, length(models));
 CP_GPP_amazon_shyear_beta = NaN(1, length(models));
 
@@ -152,7 +152,7 @@ CP_GPP_amazon_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_amazon_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{2,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_amazon_monthly_mean(idx, i));
     CP_GPP_amazon_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -172,8 +172,8 @@ end
 clear i j mdl;
 
 % Australia
-EP_GPP_austr_monthly_beta = NaN(12, length(models));
-EP_GPP_austr_monthly_mean_beta = NaN(12, 1);
+EP_GPP_austr_monthly_beta = NaN(18, length(models));
+EP_GPP_austr_monthly_mean_beta = NaN(18, 1);
 EP_GPP_austr_annual_beta = NaN(1, length(models));
 EP_GPP_austr_shyear_beta = NaN(1, length(models));
 
@@ -187,7 +187,7 @@ EP_GPP_austr_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_austr_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{3,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_austr_monthly_mean(idx, i));
     EP_GPP_austr_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -204,8 +204,8 @@ for i = 1:12
     
 end
 
-CP_GPP_austr_monthly_beta = NaN(12, length(models));
-CP_GPP_austr_monthly_mean_beta = NaN(12, 1);
+CP_GPP_austr_monthly_beta = NaN(18, length(models));
+CP_GPP_austr_monthly_mean_beta = NaN(18, 1);
 CP_GPP_austr_annual_beta = NaN(1, length(models));
 CP_GPP_austr_shyear_beta = NaN(1, length(models));
 
@@ -219,7 +219,7 @@ CP_GPP_austr_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_austr_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{3,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_austr_monthly_mean(idx, i));
     CP_GPP_austr_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -239,8 +239,8 @@ end
 clear i j mdl;
 
 % Central Asia
-EP_GPP_casia_monthly_beta = NaN(12, length(models));
-EP_GPP_casia_monthly_mean_beta = NaN(12, 1);
+EP_GPP_casia_monthly_beta = NaN(18, length(models));
+EP_GPP_casia_monthly_mean_beta = NaN(18, 1);
 EP_GPP_casia_annual_beta = NaN(1, length(models));
 EP_GPP_casia_shyear_beta = NaN(1, length(models));
 
@@ -254,7 +254,7 @@ EP_GPP_casia_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_casia_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{4,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_casia_monthly_mean(idx, i));
     EP_GPP_casia_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -271,8 +271,8 @@ for i = 1:12
     
 end
 
-CP_GPP_casia_monthly_beta = NaN(12, length(models));
-CP_GPP_casia_monthly_mean_beta = NaN(12, 1);
+CP_GPP_casia_monthly_beta = NaN(18, length(models));
+CP_GPP_casia_monthly_mean_beta = NaN(18, 1);
 CP_GPP_casia_annual_beta = NaN(1, length(models));
 CP_GPP_casia_shyear_beta = NaN(1, length(models));
 
@@ -286,7 +286,7 @@ CP_GPP_casia_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_casia_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{4,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_casia_monthly_mean(idx, i));
     CP_GPP_casia_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -306,8 +306,8 @@ end
 clear i j mdl;
 
 % Eastern US
-EP_GPP_eastus_monthly_beta = NaN(12, length(models));
-EP_GPP_eastus_monthly_mean_beta = NaN(12, 1);
+EP_GPP_eastus_monthly_beta = NaN(18, length(models));
+EP_GPP_eastus_monthly_mean_beta = NaN(18, 1);
 EP_GPP_eastus_annual_beta = NaN(1, length(models));
 EP_GPP_eastus_shyear_beta = NaN(1, length(models));
 
@@ -321,7 +321,7 @@ EP_GPP_eastus_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_eastus_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{5,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_eastus_monthly_mean(idx, i));
     EP_GPP_eastus_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -338,8 +338,8 @@ for i = 1:12
     
 end
 
-CP_GPP_eastus_monthly_beta = NaN(12, length(models));
-CP_GPP_eastus_monthly_mean_beta = NaN(12, 1);
+CP_GPP_eastus_monthly_beta = NaN(18, length(models));
+CP_GPP_eastus_monthly_mean_beta = NaN(18, 1);
 CP_GPP_eastus_annual_beta = NaN(1, length(models));
 CP_GPP_eastus_shyear_beta = NaN(1, length(models));
 
@@ -353,7 +353,7 @@ CP_GPP_eastus_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_eastus_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{5,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_eastus_monthly_mean(idx, i));
     CP_GPP_eastus_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -373,8 +373,8 @@ end
 clear i j mdl;
 
 % Europe
-EP_GPP_europe_monthly_beta = NaN(12, length(models));
-EP_GPP_europe_monthly_mean_beta = NaN(12, 1);
+EP_GPP_europe_monthly_beta = NaN(18, length(models));
+EP_GPP_europe_monthly_mean_beta = NaN(18, 1);
 EP_GPP_europe_annual_beta = NaN(1, length(models));
 EP_GPP_europe_shyear_beta = NaN(1, length(models));
 
@@ -388,7 +388,7 @@ EP_GPP_europe_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_europe_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{6,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_europe_monthly_mean(idx, i));
     EP_GPP_europe_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -405,8 +405,8 @@ for i = 1:12
     
 end
 
-CP_GPP_europe_monthly_beta = NaN(12, length(models));
-CP_GPP_europe_monthly_mean_beta = NaN(12, 1);
+CP_GPP_europe_monthly_beta = NaN(18, length(models));
+CP_GPP_europe_monthly_mean_beta = NaN(18, 1);
 CP_GPP_europe_annual_beta = NaN(1, length(models));
 CP_GPP_europe_shyear_beta = NaN(1, length(models));
 
@@ -420,7 +420,7 @@ CP_GPP_europe_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_europe_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{6,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_europe_monthly_mean(idx, i));
     CP_GPP_europe_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -440,8 +440,8 @@ end
 clear i j mdl;
 
 % The Sahel
-EP_GPP_sahel_monthly_beta = NaN(12, length(models));
-EP_GPP_sahel_monthly_mean_beta = NaN(12, 1);
+EP_GPP_sahel_monthly_beta = NaN(18, length(models));
+EP_GPP_sahel_monthly_mean_beta = NaN(18, 1);
 EP_GPP_sahel_annual_beta = NaN(1, length(models));
 EP_GPP_sahel_shyear_beta = NaN(1, length(models));
 
@@ -455,7 +455,7 @@ EP_GPP_sahel_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_sahel_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{7,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_sahel_monthly_mean(idx, i));
     EP_GPP_sahel_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -472,8 +472,8 @@ for i = 1:12
     
 end
 
-CP_GPP_sahel_monthly_beta = NaN(12, length(models));
-CP_GPP_sahel_monthly_mean_beta = NaN(12, 1);
+CP_GPP_sahel_monthly_beta = NaN(18, length(models));
+CP_GPP_sahel_monthly_mean_beta = NaN(18, 1);
 CP_GPP_sahel_annual_beta = NaN(1, length(models));
 CP_GPP_sahel_shyear_beta = NaN(1, length(models));
 
@@ -487,7 +487,7 @@ CP_GPP_sahel_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_sahel_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{7,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_sahel_monthly_mean(idx, i));
     CP_GPP_sahel_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -507,8 +507,8 @@ end
 clear i j mdl;
 
 % Western North America
-EP_GPP_westna_monthly_beta = NaN(12, length(models));
-EP_GPP_westna_monthly_mean_beta = NaN(12, 1);
+EP_GPP_westna_monthly_beta = NaN(18, length(models));
+EP_GPP_westna_monthly_mean_beta = NaN(18, 1);
 EP_GPP_westna_annual_beta = NaN(1, length(models));
 EP_GPP_westna_shyear_beta = NaN(1, length(models));
 
@@ -522,7 +522,7 @@ EP_GPP_westna_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_westna_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{8,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_westna_monthly_mean(idx, i));
     EP_GPP_westna_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -539,8 +539,8 @@ for i = 1:12
     
 end
 
-CP_GPP_westna_monthly_beta = NaN(12, length(models));
-CP_GPP_westna_monthly_mean_beta = NaN(12, 1);
+CP_GPP_westna_monthly_beta = NaN(18, length(models));
+CP_GPP_westna_monthly_mean_beta = NaN(18, 1);
 CP_GPP_westna_annual_beta = NaN(1, length(models));
 CP_GPP_westna_shyear_beta = NaN(1, length(models));
 
@@ -554,7 +554,7 @@ CP_GPP_westna_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_westna_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{8,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_westna_monthly_mean(idx, i));
     CP_GPP_westna_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -574,8 +574,8 @@ end
 clear i j mdl;
 
 % Tropical forest
-EP_GPP_tropical_monthly_beta = NaN(12, length(models));
-EP_GPP_tropical_monthly_mean_beta = NaN(12, 1);
+EP_GPP_tropical_monthly_beta = NaN(18, length(models));
+EP_GPP_tropical_monthly_mean_beta = NaN(18, 1);
 EP_GPP_tropical_annual_beta = NaN(1, length(models));
 EP_GPP_tropical_shyear_beta = NaN(1, length(models));
 
@@ -589,7 +589,7 @@ EP_GPP_tropical_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_tropical_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{9,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_tropical_monthly_mean(idx, i));
     EP_GPP_tropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -606,8 +606,8 @@ for i = 1:12
     
 end
 
-CP_GPP_tropical_monthly_beta = NaN(12, length(models));
-CP_GPP_tropical_monthly_mean_beta = NaN(12, 1);
+CP_GPP_tropical_monthly_beta = NaN(18, length(models));
+CP_GPP_tropical_monthly_mean_beta = NaN(18, 1);
 CP_GPP_tropical_annual_beta = NaN(1, length(models));
 CP_GPP_tropical_shyear_beta = NaN(1, length(models));
 
@@ -621,7 +621,7 @@ CP_GPP_tropical_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_tropical_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{9,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_tropical_monthly_mean(idx, i));
     CP_GPP_tropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -641,8 +641,8 @@ end
 clear i j mdl;
 
 % Extratropical forest
-EP_GPP_extratropical_monthly_beta = NaN(12, length(models));
-EP_GPP_extratropical_monthly_mean_beta = NaN(12, 1);
+EP_GPP_extratropical_monthly_beta = NaN(18, length(models));
+EP_GPP_extratropical_monthly_mean_beta = NaN(18, 1);
 EP_GPP_extratropical_annual_beta = NaN(1, length(models));
 EP_GPP_extratropical_shyear_beta = NaN(1, length(models));
 
@@ -656,7 +656,7 @@ EP_GPP_extratropical_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_extratropical_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{10,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_extratropical_monthly_mean(idx, i));
     EP_GPP_extratropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -673,8 +673,8 @@ for i = 1:12
     
 end
 
-CP_GPP_extratropical_monthly_beta = NaN(12, length(models));
-CP_GPP_extratropical_monthly_mean_beta = NaN(12, 1);
+CP_GPP_extratropical_monthly_beta = NaN(18, length(models));
+CP_GPP_extratropical_monthly_mean_beta = NaN(18, 1);
 CP_GPP_extratropical_annual_beta = NaN(1, length(models));
 CP_GPP_extratropical_shyear_beta = NaN(1, length(models));
 
@@ -688,7 +688,7 @@ CP_GPP_extratropical_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_extratropical_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{10,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_extratropical_monthly_mean(idx, i));
     CP_GPP_extratropical_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -708,8 +708,8 @@ end
 clear i j mdl;
 
 % Tundra/Arctic shrub
-EP_GPP_tundra_monthly_beta = NaN(12, length(models));
-EP_GPP_tundra_monthly_mean_beta = NaN(12, 1);
+EP_GPP_tundra_monthly_beta = NaN(18, length(models));
+EP_GPP_tundra_monthly_mean_beta = NaN(18, 1);
 EP_GPP_tundra_annual_beta = NaN(1, length(models));
 EP_GPP_tundra_shyear_beta = NaN(1, length(models));
 
@@ -723,7 +723,7 @@ EP_GPP_tundra_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_tundra_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{11,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_tundra_monthly_mean(idx, i));
     EP_GPP_tundra_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -740,8 +740,8 @@ for i = 1:12
     
 end
 
-CP_GPP_tundra_monthly_beta = NaN(12, length(models));
-CP_GPP_tundra_monthly_mean_beta = NaN(12, 1);
+CP_GPP_tundra_monthly_beta = NaN(18, length(models));
+CP_GPP_tundra_monthly_mean_beta = NaN(18, 1);
 CP_GPP_tundra_annual_beta = NaN(1, length(models));
 CP_GPP_tundra_shyear_beta = NaN(1, length(models));
 
@@ -755,7 +755,7 @@ CP_GPP_tundra_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_tundra_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{11,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_tundra_monthly_mean(idx, i));
     CP_GPP_tundra_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -775,8 +775,8 @@ end
 clear i j mdl;
 
 % Grass/crop
-EP_GPP_grass_monthly_beta = NaN(12, length(models));
-EP_GPP_grass_monthly_mean_beta = NaN(12, 1);
+EP_GPP_grass_monthly_beta = NaN(18, length(models));
+EP_GPP_grass_monthly_mean_beta = NaN(18, 1);
 EP_GPP_grass_annual_beta = NaN(1, length(models));
 EP_GPP_grass_shyear_beta = NaN(1, length(models));
 
@@ -790,7 +790,7 @@ EP_GPP_grass_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_grass_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{12,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_grass_monthly_mean(idx, i));
     EP_GPP_grass_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -807,8 +807,8 @@ for i = 1:12
     
 end
 
-CP_GPP_grass_monthly_beta = NaN(12, length(models));
-CP_GPP_grass_monthly_mean_beta = NaN(12, 1);
+CP_GPP_grass_monthly_beta = NaN(18, length(models));
+CP_GPP_grass_monthly_mean_beta = NaN(18, 1);
 CP_GPP_grass_annual_beta = NaN(1, length(models));
 CP_GPP_grass_shyear_beta = NaN(1, length(models));
 
@@ -822,7 +822,7 @@ CP_GPP_grass_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_grass_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{12,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_grass_monthly_mean(idx, i));
     CP_GPP_grass_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -842,8 +842,8 @@ end
 clear i j mdl;
 
 % Semiarid
-EP_GPP_semiarid_monthly_beta = NaN(12, length(models));
-EP_GPP_semiarid_monthly_mean_beta = NaN(12, 1);
+EP_GPP_semiarid_monthly_beta = NaN(18, length(models));
+EP_GPP_semiarid_monthly_mean_beta = NaN(18, 1);
 EP_GPP_semiarid_annual_beta = NaN(1, length(models));
 EP_GPP_semiarid_shyear_beta = NaN(1, length(models));
 
@@ -857,7 +857,7 @@ EP_GPP_semiarid_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 EP_GPP_semiarid_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 ep_gpp_95CI_shyear{13,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_semiarid_monthly_mean(idx, i));
     EP_GPP_semiarid_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)
@@ -874,8 +874,8 @@ for i = 1:12
     
 end
 
-CP_GPP_semiarid_monthly_beta = NaN(12, length(models));
-CP_GPP_semiarid_monthly_mean_beta = NaN(12, 1);
+CP_GPP_semiarid_monthly_beta = NaN(18, length(models));
+CP_GPP_semiarid_monthly_mean_beta = NaN(18, 1);
 CP_GPP_semiarid_annual_beta = NaN(1, length(models));
 CP_GPP_semiarid_shyear_beta = NaN(1, length(models));
 
@@ -889,7 +889,7 @@ CP_GPP_semiarid_shyear_mean_beta = mdl.Coefficients.Estimate(2);
 CP_GPP_semiarid_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 cp_gpp_95CI_shyear{13,1} = cellstr(sprintf(['%.02f ',char(177),' %.02f'],...
     mdl.Coefficients.Estimate(2)/1000, 1.96*mdl.Coefficients.SE(2)/1000));
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_semiarid_monthly_mean(idx, i));
     CP_GPP_semiarid_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     for j = 1:length(models)

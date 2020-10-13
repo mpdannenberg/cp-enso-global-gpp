@@ -24,9 +24,9 @@ GPP_global_monthly = GPP_global_monthly(years>=syear & years<=eyear, :, :);
 GPP_global_monthly_mean = GPP_global_monthly_mean(years>=syear & years<=eyear, :);
 years = years(years>=syear & years<=eyear)';
 
-EP_GPP_global_monthly_beta = NaN(12, length(models));
-EP_GPP_global_monthly_mean_beta = NaN(12, 1);
-EP_GPP_global_monthly_mean_beta_CI = NaN(12, 1);
+EP_GPP_global_monthly_beta = NaN(18, length(models));
+EP_GPP_global_monthly_mean_beta = NaN(18, 1);
+EP_GPP_global_monthly_mean_beta_CI = NaN(18, 1);
 EP_GPP_global_annual_beta = NaN(1, length(models));
 EP_GPP_global_shyear_beta = NaN(1, length(models));
 
@@ -42,7 +42,7 @@ EP_GPP_global_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 disp(['Global Jul-Jun MsTMIP mean response to EPI (PgC yr-1): ',...
     num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
     num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_global_monthly_mean(:, i));
     EP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     EP_GPP_global_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
@@ -59,9 +59,9 @@ for i = 1:12
     
 end
 
-CP_GPP_global_monthly_beta = NaN(12, length(models));
-CP_GPP_global_monthly_mean_beta = NaN(12, 1);
-CP_GPP_global_monthly_mean_beta_CI = NaN(12, 1);
+CP_GPP_global_monthly_beta = NaN(18, length(models));
+CP_GPP_global_monthly_mean_beta = NaN(18, 1);
+CP_GPP_global_monthly_mean_beta_CI = NaN(18, 1);
 CP_GPP_global_annual_beta = NaN(1, length(models));
 CP_GPP_global_shyear_beta = NaN(1, length(models));
 
@@ -77,7 +77,7 @@ CP_GPP_global_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 disp(['Global Jul-Jun MsTMIP mean response to CPI (PgC yr-1): ',...
     num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
     num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_global_monthly_mean(:, i));
     CP_GPP_global_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     CP_GPP_global_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
@@ -163,9 +163,9 @@ GPP_tropics_monthly = GPP_tropics_monthly(years>=syear & years<=eyear, :, :);
 GPP_tropics_monthly_mean = GPP_tropics_monthly_mean(years>=syear & years<=eyear, :);
 years = years(years>=syear & years<=eyear)';
 
-EP_GPP_tropics_monthly_beta = NaN(12, length(models));
-EP_GPP_tropics_monthly_mean_beta = NaN(12, 1);
-EP_GPP_tropics_monthly_mean_beta_CI = NaN(12, 1);
+EP_GPP_tropics_monthly_beta = NaN(18, length(models));
+EP_GPP_tropics_monthly_mean_beta = NaN(18, 1);
+EP_GPP_tropics_monthly_mean_beta_CI = NaN(18, 1);
 EP_GPP_tropics_annual_beta = NaN(1, length(models));
 EP_GPP_tropics_shyear_beta = NaN(1, length(models));
 
@@ -181,7 +181,7 @@ EP_GPP_tropics_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 disp(['Tropical Jul-Jun MsTMIP mean response to EPI (PgC yr-1): ',...
     num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
     num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
-for i = 1:12
+for i = 1:18
     mdl = fitlm(epi, GPP_tropics_monthly_mean(:, i));
     EP_GPP_tropics_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     EP_GPP_tropics_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);
@@ -198,9 +198,9 @@ for i = 1:12
     
 end
 
-CP_GPP_tropics_monthly_beta = NaN(12, length(models));
-CP_GPP_tropics_monthly_mean_beta = NaN(12, 1);
-CP_GPP_tropics_monthly_mean_beta_CI = NaN(12, 1);
+CP_GPP_tropics_monthly_beta = NaN(18, length(models));
+CP_GPP_tropics_monthly_mean_beta = NaN(18, 1);
+CP_GPP_tropics_monthly_mean_beta_CI = NaN(18, 1);
 CP_GPP_tropics_annual_beta = NaN(1, length(models));
 CP_GPP_tropics_shyear_beta = NaN(1, length(models));
 
@@ -216,7 +216,7 @@ CP_GPP_tropics_shyear_mean_beta_CI = 1.96*mdl.Coefficients.SE(2);
 disp(['Tropical Jul-Jun MsTMIP mean response to CPI (PgC yr-1): ',...
     num2str(round(mdl.Coefficients.Estimate(2)/1000,2)),' +/- ',...
     num2str(round(1.96*mdl.Coefficients.SE(2)/1000,2))]);
-for i = 1:12
+for i = 1:18
     mdl = fitlm(cpi, GPP_tropics_monthly_mean(:, i));
     CP_GPP_tropics_monthly_mean_beta(i) = mdl.Coefficients.Estimate(2);
     CP_GPP_tropics_monthly_mean_beta_CI(i) = 1.96*mdl.Coefficients.SE(2);

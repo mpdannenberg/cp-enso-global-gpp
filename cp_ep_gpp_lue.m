@@ -92,10 +92,10 @@ for i = 1:18
     
 end
 
-CP_GPP_global_monthly_beta = NaN(12, length(models));
-CP_GPP_global_monthly_beta_CI = NaN(12, length(models));
-CP_GPP_global_monthly_mean_beta = NaN(12, 1);
-CP_GPP_global_monthly_mean_beta_CI = NaN(12, 1);
+CP_GPP_global_monthly_beta = NaN(18, length(models));
+CP_GPP_global_monthly_beta_CI = NaN(18, length(models));
+CP_GPP_global_monthly_mean_beta = NaN(18, 1);
+CP_GPP_global_monthly_mean_beta_CI = NaN(18, 1);
 CP_GPP_global_annual_beta = NaN(1, length(models));
 CP_GPP_global_annual_beta_CI = NaN(1, length(models));
 CP_GPP_global_shyear_beta = NaN(1, length(models));
