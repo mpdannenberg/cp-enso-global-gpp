@@ -24,22 +24,26 @@ read_nep_mstmip; % Slow!
 %% Estimate responses of GPP to CP/EP ENSO events - Table 1
 % Global
 cp_ep_gpp_lue; % slow!
+clear all;
 cp_ep_gpp_mstmip; % slow!
 clear all;
 
 % Regional
 cp_ep_gpp_lue_regional;
+clear all;
 cp_ep_gpp_mstmip_regional;
 clear all;
 
 %% Estimate responses of NEP to CP/EP ENSO events - Table 2
 % Global
 cp_ep_nep_inversions; 
+clear all;
 cp_ep_nep_mstmip; % slow!
 clear all;
 
 % Regional
 cp_ep_nep_inversions_regional;
+clear all;
 cp_ep_nep_mstmip_regional;
 clear all;
 
