@@ -20,6 +20,7 @@ clear GPP_annual GPP_global_annual GPP_monthly temp lat lon;
 gpp_yr = yr; clear yr years;
 gpp_mo = mo; clear mo;
 
+GPP_global_monthly = GPP_global_monthly(:, 7:end);
 GPP_global_monthly_anom = reshape([GPP_global_monthly - repmat(mean(GPP_global_monthly), length(syear:eyear), 1)]', length(gpp_yr), []);
 
 %% Wavelet coherence of CCW GPP and CP/EP indices
@@ -61,6 +62,7 @@ clear GPP_annual GPP_global_annual GPP_monthly temp lat lon;
 gpp_yr = yr; clear yr years;
 gpp_mo = mo; clear mo;
 
+GPP_global_monthly = GPP_global_monthly(:, 7:end);
 GPP_global_monthly_anom = reshape([GPP_global_monthly - repmat(mean(GPP_global_monthly), length(syear:eyear), 1)]', length(gpp_yr), []);
 
 %% Wavelet coherence of MOD17 GPP and CP/EP indices
@@ -105,6 +107,7 @@ clear GPP_annual_mean GPP_global_annual* GPP_monthly GPP_global_monthly temp lat
 gpp_yr = reshape(repmat(syear:eyear, 12, 1), 1, [])'; clear years;
 gpp_mo = repmat(1:12, 1, length(syear:eyear))';
 
+GPP_global_monthly_mean = GPP_global_monthly_mean(:, 7:end);
 GPP_global_monthly_anom = reshape([GPP_global_monthly_mean - repmat(mean(GPP_global_monthly_mean), length(syear:eyear), 1)]', length(gpp_yr), []);
 
 %% Wavelet coherence of MsTMIP GPP and CP/EP indices
