@@ -1,11 +1,11 @@
-% Examine relationships between modeled MsTMIP GPP and EPI/CPI over 
+% Examine relationships between CAMS NEP and EPI/CPI over 
 % 1951-2010 period
 syear = 1979;
 eyear = 2016;
 
 models = {'v18r2'}; nm = length(models);
 
-%% Regress monthly & annual gpp against CPI and EPI indices
+%% Regress monthly & annual nep against CPI and EPI indices
 load ./data/nep_inversions_regional.mat;
 load ./data/cpi_epi_1951-2016.mat;
 

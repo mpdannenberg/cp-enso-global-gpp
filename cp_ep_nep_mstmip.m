@@ -4,7 +4,7 @@
 syear = 1951;
 eyear = 2010;
 
-%% Regress monthly & annual gpp against CPI and EPI indices
+%% Regress monthly & annual nep against CPI and EPI indices
 load ./data/nep_mstmip.mat;
 load ./data/cpi_epi_1951-2016.mat;
 
