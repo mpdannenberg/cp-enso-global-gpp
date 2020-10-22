@@ -21,7 +21,7 @@ read_nep_inversions;
 % Process-based models
 read_nep_mstmip; % Slow!
 
-%% Estimate responses of GPP to CP/EP ENSO events - Table 1
+%% Estimate responses of GPP to CP/EP ENSO events 
 % Global
 cp_ep_gpp_lue; % slow!
 clear all;
@@ -34,7 +34,7 @@ clear all;
 cp_ep_gpp_mstmip_regional;
 clear all;
 
-%% Estimate responses of NEP to CP/EP ENSO events - Table 2
+%% Estimate responses of NEP to CP/EP ENSO events 
 % Global
 cp_ep_nep_inversions; 
 clear all;
@@ -48,12 +48,21 @@ cp_ep_nep_mstmip_regional;
 clear all;
 
 %% Main figures
-make_cp_ep_gpp_maps; % Figure 2
-make_cp_ep_ahlstrom_boxplots % Figure 3
-make_cp_ep_regional_boxplots % Figure 4
-make_cp_ep_nep_maps; % Figure 5
+make_cp_ep_wavelet_coherence; % Figure 2
+make_cp_ep_gpp_maps; % Figure 3
+make_cp_ep_ahlstrom_boxplots % Figure 4
 
-%% Supplementary figures
-cp_ep_cru; % Figs. S2-S5
-supplemental_mauna_loa; % Fig. S6-S7
+%% Build supplementary tables
+build_gpp_response_tables; % Tables S#-S#
+build_nep_response_tables; % Tables S#-S#
+build_gpp_model_agreement_table_figures; % Table S#
+build_nep_model_agreement_table_figures; % Table S#
+
+%% Make supplementary figures
+supplemental_make_cp_ep_wavelet_coherence_with_phase_arrows; % Figure #
+supplemental_make_cp_ep_regional_boxplots % Figure #
+supplemental_make_cp_ep_nep_maps; % Figure #
+supplemental_cp_ep_cru; % Figs. #-#
+supplemental_mauna_loa; % Fig. #-#
+supplemental_make_cp_ep_gpp_maps_byYear; % Fig. #
 
