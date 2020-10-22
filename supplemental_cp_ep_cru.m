@@ -196,7 +196,7 @@ ylb = ylabel(cb, 'Pearson''s \itR', 'FontSize',11);
 cbarrow;
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-tmn.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-tmn.tif')
 close all;
 
 %% Maximum temperature ~ EPI/CPI
@@ -335,7 +335,7 @@ ylb = ylabel(cb, 'Pearson''s \itR', 'FontSize',11);
 cbarrow;
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-tmx.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-tmx.tif')
 close all;
 
 %% Precipitation ~ EPI/CPI
@@ -474,7 +474,7 @@ ylb = ylabel(cb, 'Pearson''s \itR', 'FontSize',11);
 cbarrow;
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-pre.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-pre.tif')
 close all;
 
 %% VPD ~ EPI/CPI
@@ -613,7 +613,7 @@ ylb = ylabel(cb, 'Pearson''s \itR', 'FontSize',11);
 cbarrow;
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-vpd.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-vpd.tif')
 close all;
 
 

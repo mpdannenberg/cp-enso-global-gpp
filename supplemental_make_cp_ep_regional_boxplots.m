@@ -399,6 +399,6 @@ ylabel('NEP response (Pg C yr^{-1} K^{-1})','FontSize',9)
 
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-gpp-nee-bySpecificRegion.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-gpp-nee-bySpecificRegion.tif')
 close all;
 
