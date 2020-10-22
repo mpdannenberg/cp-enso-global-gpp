@@ -113,5 +113,6 @@ T.Jul_Jun('Tundra & Arctic Shrubland') = sum(tundra_diff_shyear > 0);
 T.Jan_Dec('W. North America') = sum(westna_diff_annual > 0);
 T.Jul_Jun('W. North America') = sum(westna_diff_shyear > 0);
 
+clearvars -except T;
 writetable(T, './output/gpp-model-agreement.xlsx');
 
