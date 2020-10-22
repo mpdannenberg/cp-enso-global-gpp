@@ -137,16 +137,17 @@ scatter(5+offs-offs/3,EP_GPP_tundra_annual_mean_beta*scale,15,clr(10,:),'x');
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Tropical Forest','Semiarid',...
     'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
-    'FontSize',7, 'YLim',[-0.5 0.3], 'YTick',-0.4:0.2:0.2)
+    'FontSize',7, 'YLim',[-0.7 0.4], 'YTick',-0.8:0.2:0.4)
+ylim = get(gca, 'YLim');
 box off;
-text(0.6, 0.3, 'A', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, ylim(2), 'A', 'FontSize',12, 'VerticalAlignment','top')
 
-ylabel('GPP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('GPP response (Pg C yr^{-1} K^{-1})','FontSize',9)
 
-scatter(3.5, -0.32, 20, 'k', 'filled','^');
-text(3.6, -0.32, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(3.5, -0.4, 20, 'k', 'x');
-text(3.6, -0.4, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(3.5, -0.46, 20, 'k', 'filled','^');
+text(3.6, -0.46, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(3.5, -0.56, 20, 'k', 'x');
+text(3.6, -0.56, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
@@ -223,11 +224,12 @@ scatter(5+offs,EP_NEP_tundra_annual_mean_beta*scale,15,clr(10,:),'filled','^');
 set(gca, 'XLim',[0.5 5.5], 'XTick',1:5, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Tropical Forest','Semiarid',...
     'Extratropical Forest','Grass/Crop','Tundra/Arctic Shrub'},...
-    'FontSize',7, 'YLim',[-0.4 0.1])
+    'FontSize',7, 'YLim',[-0.6 0.2], 'YTick',-0.6:0.2:0.2)
+ylim = get(gca, 'YLim');
 box off;
-text(0.6, 0.1, 'B', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, ylim(2), 'B', 'FontSize',12, 'VerticalAlignment','top')
 
-ylabel('NEP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('NEP response (Pg C yr^{-1} K^{-1})','FontSize',9)
 
 
 set(gcf,'PaperPositionMode','auto')

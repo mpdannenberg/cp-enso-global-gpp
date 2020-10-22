@@ -193,16 +193,17 @@ scatter(8+offs-offs/3,EP_GPP_westna_annual_mean_beta*scale,15,clr(10,:),'x');
 set(gca, 'XLim',[0.5 8.5], 'XTick',1:8, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Trop. S. Am.','Trop. & S. Africa',...
     'Trop. Asia','Australia','Eastern U.S.', 'Europe', 'The Sahel', 'W. N. America'},...
-    'FontSize',7, 'YLim',[-0.5 0.3]); xtickangle(20)
+    'FontSize',7, 'YLim',[-0.7 0.4],'YTick',-0.6:0.2:0.4); xtickangle(20)
+ylim = get(gca, 'YLim');
 box off;
-text(0.6, 0.3, 'A', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, ylim(2), 'A', 'FontSize',12, 'VerticalAlignment','top')
 
-ylabel('GPP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('GPP response (Pg C yr^{-1} K^{-1})','FontSize',9)
 
-scatter(6, -0.32, 20, 'k', 'filled','^');
-text(6.1, -0.32, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(6, -0.4, 20, 'k', 'x');
-text(6.1, -0.4, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.46, 20, 'k', 'filled','^');
+text(6.1, -0.46, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.56, 20, 'k', 'x');
+text(6.1, -0.56, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
@@ -384,16 +385,17 @@ scatter(8+offs-offs/3,EP_NEP_westna_annual_mean_beta*scale,15,clr(10,:),'filled'
 set(gca, 'XLim',[0.5 8.5], 'XTick',1:8, 'TickDir','out',...
     'TickLength',[0.02 0.04], 'XTickLabels',{'Trop. S. Am.','Trop. & S. Africa',...
     'Trop. Asia','Australia','Eastern U.S.', 'Europe', 'The Sahel', 'W. N. America'},...
-    'FontSize',7, 'YLim',[-0.33 0.23]); xtickangle(20);
+    'FontSize',7, 'YLim',[-0.5 0.3], 'YTick',-0.6:0.2:0.2); xtickangle(20);
+ylim = get(gca, 'YLim');
 box off;
-text(0.6, 0.23, 'B', 'FontSize',12, 'VerticalAlignment','top')
+text(0.6, ylim(2), 'B', 'FontSize',12, 'VerticalAlignment','top')
 
-scatter(6, -0.22, 20, 'k', 'filled','s');
-text(6.1, -0.22, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(6, -0.28, 20, 'k', 'filled','^');
-text(6.1, -0.28, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.32, 20, 'k', 'filled','s');
+text(6.1, -0.32, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(6, -0.38, 20, 'k', 'filled','^');
+text(6.1, -0.38, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
-ylabel('NEP response (Pg C yr^{-1} SD^{-1})','FontSize',9)
+ylabel('NEP response (Pg C yr^{-1} K^{-1})','FontSize',9)
 
 
 set(gcf,'PaperPositionMode','auto')
