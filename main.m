@@ -61,8 +61,10 @@ build_nep_model_agreement_table_figures; % Table S#
 %% Make supplementary figures
 supplemental_make_cp_ep_gpp_wavelet_coherence_with_phase_arrows; % Figure #
 supplemental_make_cp_ep_regional_boxplots % Figure #
-supplemental_make_cp_ep_nep_maps; % Figure # - need to update this one for the new Jul-Jun period!!!!
+supplemental_make_cp_ep_nep_maps; % Figure # 
 supplemental_cp_ep_cru; % Figs. #-#
 supplemental_mauna_loa; % Fig. #-#
 supplemental_make_cp_ep_gpp_maps_byYear; % Fig. #
+supplemental_make_cp_ep_ahlstrom_boxplots_shyear;
+supplemental_make_cp_ep_regional_boxplots_shyear;
 
