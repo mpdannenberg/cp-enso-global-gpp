@@ -6,8 +6,8 @@ eyear = 2010;
 models = {'v18r2'}; nm = length(models);
 
 %% Regress monthly & annual nep against CPI and EPI indices
-load ./data/nep_inversions_regional.mat;
-load ./data/cpi_epi_1951-2016.mat;
+load ../data/nep_inversions_regional.mat;
+load ../data/cpi_epi_1951-2016.mat;
 
 ep_nep_95CI_annual = cell2table(cell(8,1), 'VariableNames',{'Inversions'},...
     'RowNames',{'Africa','Amazonia','Australia','Central Asia','Eastern US','Europe','The Sahel','Western North America'});

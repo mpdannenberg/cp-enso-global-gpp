@@ -6,8 +6,8 @@ eyear = 2010;
 models = {'v18r2'}; nm = length(models);
 
 %% Regress monthly & annual nep against CPI and EPI indices
-load ./data/nep_inversions.mat;
-load ./data/cpi_epi_1951-2016.mat;
+load ../data/nep_inversions.mat;
+load ../data/cpi_epi_1951-2016.mat;
 
 [ny,nx,~] = size(NEP_annual_mean);
 
@@ -147,9 +147,9 @@ clear i j mdl ts r p;
 
 
 %% Regress monthly & annual nep against CPI and EPI indices
-load ./data/nep_inversions_regional.mat;
+load ../data/nep_inversions_regional.mat;
 clear temp *africa* *amazon* *austr* *casia* *eastus* *europe* *extratropical* *grass* *sahel* *semiarid* *tropical* *tundra* *westna*;
-load ./data/cpi_epi_1951-2016.mat;
+load ../data/cpi_epi_1951-2016.mat;
 
 cpi = cpi(yr>=syear & yr<=eyear);
 epi = epi(yr>=syear & yr<=eyear);
