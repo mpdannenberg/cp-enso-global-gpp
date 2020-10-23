@@ -163,8 +163,8 @@ NEP_amazon_annual_mean = nanmean(NEP_amazon_annual, 2);
 NEP_amazon_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_amazon_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_amazon_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_amazon_shyear_mean = nanmean(NEP_amazon_shyear, 2);
@@ -196,8 +196,8 @@ NEP_sahel_annual_mean = nanmean(NEP_sahel_annual, 2);
 NEP_sahel_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_sahel_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_sahel_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_sahel_shyear_mean = nanmean(NEP_sahel_shyear, 2);
@@ -229,8 +229,8 @@ NEP_africa_annual_mean = nanmean(NEP_africa_annual, 2);
 NEP_africa_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_africa_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_africa_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_africa_shyear_mean = nanmean(NEP_africa_shyear, 2);
@@ -262,8 +262,8 @@ NEP_austr_annual_mean = nanmean(NEP_austr_annual, 2);
 NEP_austr_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_austr_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_austr_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_austr_shyear_mean = nanmean(NEP_austr_shyear, 2);
@@ -295,8 +295,8 @@ NEP_westna_annual_mean = nanmean(NEP_westna_annual, 2);
 NEP_westna_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_westna_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_westna_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_westna_shyear_mean = nanmean(NEP_westna_shyear, 2);
@@ -328,8 +328,8 @@ NEP_eastus_annual_mean = nanmean(NEP_eastus_annual, 2);
 NEP_eastus_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_eastus_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_eastus_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_eastus_shyear_mean = nanmean(NEP_eastus_shyear, 2);
@@ -361,8 +361,8 @@ NEP_europe_annual_mean = nanmean(NEP_europe_annual, 2);
 NEP_europe_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_europe_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_europe_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_europe_shyear_mean = nanmean(NEP_europe_shyear, 2);
@@ -394,8 +394,8 @@ NEP_casia_annual_mean = nanmean(NEP_casia_annual, 2);
 NEP_casia_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_casia_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_casia_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_casia_shyear_mean = nanmean(NEP_casia_shyear, 2);
@@ -427,8 +427,8 @@ NEP_tropics_annual_mean = nanmean(NEP_tropics_annual, 2);
 NEP_tropics_shyear = NaN(length(yrs), length(models));
 for i = 1:length(yrs)
     for k = 1:length(models)
-        gpp = NEP_shyear(:,:,i,k);
-        NEP_tropics_shyear(i, k) = nansum(nansum( gpp(latidx, lonidx).*area(latidx, lonidx) )) * scale; % TgC yr-1
+        nep = NEP_shyear(:,:,i,k);
+        NEP_tropics_shyear(i, k) = nansum(nansum( nep(lonidx, latidx).*area(lonidx, latidx) )) * scale; % TgC yr-1
     end
 end
 NEP_tropics_shyear_mean = nanmean(NEP_tropics_shyear, 2);
