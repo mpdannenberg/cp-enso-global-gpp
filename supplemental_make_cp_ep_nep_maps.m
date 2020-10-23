@@ -1,15 +1,6 @@
 % Make some maps and stuff
 
-clr = [103,0,31
-178,24,43
-214,96,77
-244,165,130
-253,219,199
-209,229,240
-146,197,222
-67,147,195
-33,102,172
-5,48,97]/255;
+clr = cbrewer('div','RdBu',12);
 
 latlim = [-80 80];
 lonlim = [-180 180];
@@ -33,14 +24,14 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, EP_NEP_annual_beta)
-caxis([-0.025 0.025])
+caxis([-0.03 0.03])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'A', 'FontSize',12);
-ttl = title('Eastern Pacific ENSO', 'FontSize',12);
+ttl = title('Eastern Pacific', 'FontSize',12);
 ttl.Position(2) = 1.75;
 
 subplot(3,2,2)
@@ -52,23 +43,23 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
 axis off;
 axis image;
 surfm(lat, lon, CP_NEP_annual_beta)
-caxis([-0.025 0.025])
+caxis([-0.03 0.03])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)+0.02;
 set(gca, 'Position',pos);
 text(-2.2,1.3,'B', 'FontSize',12);
-ttl = title('Central Pacific ENSO', 'FontSize',12);
+ttl = title('Central Pacific', 'FontSize',12);
 ttl.Position(2) = 1.75;
 
 cb = colorbar('eastoutside');
 cb.Position = [0.52 0.71 0.04 0.21];
-cb.Ticks = -0.025:0.005:0.025;
+cb.Ticks = -0.03:0.005:0.03;
 cb.TickLength = 0.23;
-cb.TickLabels = {'-25','','','','','0','','','','','25'};
+cb.TickLabels = {'-30','','-20','','-10','','0','','10','','20','','30'};
 % cb.YDir = 'reverse';
-ylb = ylabel(cb, {'Mean NEP response'; '(g C m^{-2} yr^{-1} SD^{-1})'});
+ylb = ylabel(cb, {'Mean NEP response'; '(g C m^{-2} yr^{-1} K^{-1})'});
 ylb.Position = [-0.75 0.0000 0];
 
 %% Plot MsTMIP beta through time
@@ -87,13 +78,13 @@ clr2 = [103,0,31
     26,26,26]/255;
 
 ax1 = subplot(3,2,[3 4]);
-plot([0 15], [0 0], 'k-')
+plot([0 22], [0 0], 'k-')
 set(ax1, 'Position', [0.09 0.41 0.835 0.22])
 
 % Monthly
 yyaxis left;
 hold on;
-for i = 1:12
+for i = 1:18
     
     dberg_box(i-offs,CP_NEP_global_monthly_beta(i,:), clr2(4,:), 'w', wdth, 10);
     dberg_box(i+offs,EP_NEP_global_monthly_beta(i,:), clr2(8,:), 'w', wdth, 10);
@@ -110,29 +101,38 @@ for i = 1:12
     
     
 end
-set(gca, 'XLim',[0.5 14], 'YLim',[-5 3], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0.5 21.5], 'YLim',[-6 4], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels','');
-ylb = ylabel('Monthly NEP response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
-ylb.Position = [-0.1 -1 -1];
+ylb = ylabel('Monthly NEP response (Tg C day^{-1} K^{-1})', 'FontSize',7);
 text(0.9, 3.5, 'C) Global', 'FontSize',12);
 
-% Annual
+% Prior Jul-Jun
 yyaxis right;
-b1 = dberg_box(13.5-offs,CP_NEP_global_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
-b2 = dberg_box(13.5+offs,EP_NEP_global_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
+b1 = dberg_box(20-offs,CP_NEP_global_shyear_beta*scale, clr2(4,:), 'w', wdth, 10);
+b2 = dberg_box(20+offs,EP_NEP_global_shyear_beta*scale, clr2(8,:), 'w', wdth, 10);
+plot([20-offs+offs/3 20-offs+offs/3],...
+    [CP_NEP_global_shyear_mean_beta*scale-CP_NEP_global_shyear_mean_beta_CI*scale CP_NEP_global_shyear_mean_beta*scale+CP_NEP_global_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(20-offs+offs/3,CP_NEP_global_shyear_mean_beta*scale,10,clr2(2,:),'filled','^');
+plot([20+offs+offs/3 20+offs+offs/3],...
+    [EP_NEP_global_shyear_mean_beta*scale-EP_NEP_global_shyear_mean_beta_CI*scale EP_NEP_global_shyear_mean_beta*scale+EP_NEP_global_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(20+offs+offs/3,EP_NEP_global_shyear_mean_beta*scale,10,clr2(10,:),'filled','^');
 
-plot([13.5-offs+offs/3 13.5-offs+offs/3],...
+% Calendar year
+b1 = dberg_box(21-offs,CP_NEP_global_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
+b2 = dberg_box(21+offs,EP_NEP_global_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
+plot([21-offs+offs/3 21-offs+offs/3],...
     [CP_NEP_global_annual_mean_beta*scale-CP_NEP_global_annual_mean_beta_CI*scale CP_NEP_global_annual_mean_beta*scale+CP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs+offs/3,CP_NEP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
-
-plot([13.5+offs+offs/3 13.5+offs+offs/3],...
+scatter(21-offs+offs/3,CP_NEP_global_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
+plot([21+offs+offs/3 21+offs+offs/3],...
     [EP_NEP_global_annual_mean_beta*scale-EP_NEP_global_annual_mean_beta_CI*scale EP_NEP_global_annual_mean_beta*scale+EP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs+offs/3,EP_NEP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
-set(gca, 'YLim',[-1250 750]/1000);
-ylb = ylabel('Annual NEP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
-ylb.Position = [14.7    -0.25   -1.0000];
+scatter(21+offs+offs/3,EP_NEP_global_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
+
+set(gca, 'YLim',[-1500 1000]/1000);
+ylb = ylabel('Annual NEP response (Pg C yr^{-1} K^{-1})', 'FontSize',7);
 
 hold off;
 box off;
@@ -154,13 +154,13 @@ clr2 = [103,0,31
     26,26,26]/255;
 
 ax2 = subplot(3,2,[5 6]);
-plot([0 15], [0 0], 'k-')
+plot([0 22], [0 0], 'k-')
 set(ax2, 'Position', [0.09 0.08 0.835 0.22])
 
 % Monthly
 yyaxis left;
 hold on;
-for i = 1:12
+for i = 1:18
     
     dberg_box(i-offs,CP_NEP_tropics_monthly_beta(i,:), clr2(4,:), 'w', wdth, 10);
     dberg_box(i+offs,EP_NEP_tropics_monthly_beta(i,:), clr2(8,:), 'w', wdth, 10);
@@ -177,40 +177,50 @@ for i = 1:12
     
     
 end
-set(gca, 'XLim',[0.5 14], 'YLim',[-4 2], 'XTick',[1:12 13.5], 'TickDir','out', 'FontSize',8,...
-    'TickLength',[0.01 0.05], 'XTickLabels',{'J','F','M','A','M','J','J','A','S','O','N','D','Annual'});
-ylb = ylabel('Monthly NEP response (Tg C day^{-1} SD^{-1})', 'FontSize',7);
-ylb.Position = [-0.1 -1 -1];
+set(gca, 'XLim',[0.5 21.5], 'YLim',[-5 3], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
+    'TickLength',[0.01 0.05], 'XTickLabels',...
+    {'Jul*','Aug*','Sep*','Oct*','Nov*','Dec*','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jul*-Jun','Jan-Dec'});
+ylb = ylabel('Monthly NEP response (Tg C day^{-1} K^{-1})', 'FontSize',7);
 text(0.9, 2.5, 'D) Tropics', 'FontSize',12);
 
-% Annual
+% prior Jul - Jun
 yyaxis right;
-b1 = dberg_box(13.5-offs,CP_NEP_tropics_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
-b2 = dberg_box(13.5+offs,EP_NEP_tropics_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
+b1 = dberg_box(20-offs,CP_NEP_tropics_shyear_beta*scale, clr2(4,:), 'w', wdth, 10);
+b2 = dberg_box(20+offs,EP_NEP_tropics_shyear_beta*scale, clr2(8,:), 'w', wdth, 10);
+plot([20-offs+offs/3 20-offs+offs/3],...
+    [CP_NEP_tropics_shyear_mean_beta*scale-CP_NEP_tropics_shyear_mean_beta_CI*scale CP_NEP_tropics_shyear_mean_beta*scale+CP_NEP_tropics_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(20-offs+offs/3,CP_NEP_tropics_shyear_mean_beta*scale,10,clr2(2,:),'filled','^');
+plot([20+offs+offs/3 20+offs+offs/3],...
+    [EP_NEP_tropics_shyear_mean_beta*scale-EP_NEP_tropics_shyear_mean_beta_CI*scale EP_NEP_tropics_shyear_mean_beta*scale+EP_NEP_tropics_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(20+offs+offs/3,EP_NEP_tropics_shyear_mean_beta*scale,10,clr2(10,:),'filled','^');
 
-plot([13.5-offs+offs/3 13.5-offs+offs/3],...
+% Calendar year
+b1 = dberg_box(21-offs,CP_NEP_tropics_annual_beta*scale, clr2(4,:), 'w', wdth, 10);
+b2 = dberg_box(21+offs,EP_NEP_tropics_annual_beta*scale, clr2(8,:), 'w', wdth, 10);
+plot([21-offs+offs/3 21-offs+offs/3],...
     [CP_NEP_tropics_annual_mean_beta*scale-CP_NEP_tropics_annual_mean_beta_CI*scale CP_NEP_tropics_annual_mean_beta*scale+CP_NEP_tropics_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs+offs/3,CP_NEP_tropics_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
-
-plot([13.5+offs+offs/3 13.5+offs+offs/3],...
+scatter(21-offs+offs/3,CP_NEP_tropics_annual_mean_beta*scale,10,clr2(2,:),'filled','^');
+plot([21+offs+offs/3 21+offs+offs/3],...
     [EP_NEP_tropics_annual_mean_beta*scale-EP_NEP_tropics_annual_mean_beta_CI*scale EP_NEP_tropics_annual_mean_beta*scale+EP_NEP_tropics_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs+offs/3,EP_NEP_tropics_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
-set(gca, 'YLim',[-1000 500]/1000);
-ylb = ylabel('Annual NEP response (Pg C yr^{-1} SD^{-1})', 'FontSize',7);
-ylb.Position = [14.7    -0.25   -1.0000];
+scatter(21+offs+offs/3,EP_NEP_tropics_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
+
+set(gca, 'YLim',[-1000 600]/1000, 'YTick',-0.8:0.4:0.8);
+ylb = ylabel('Annual NEP response (Pg C yr^{-1} K^{-1})', 'FontSize',7);
 
 hold off;
 box off;
 
 
-%% Plot inversion beta through time
+%% Plot inversion beta through time: global
 load('./data/cp_ep_nep_inversions.mat');
 set(h, 'currentaxes',ax1);
 yyaxis left;
 hold on;
-for i = 1:12
+for i = 1:18
     
     plot([i-offs-offs/3 i-offs-offs/3],...
         [CP_NEP_global_monthly_mean_beta(i)-CP_NEP_global_monthly_mean_beta_CI(i) CP_NEP_global_monthly_mean_beta(i)+CP_NEP_global_monthly_mean_beta_CI(i)],...
@@ -225,24 +235,34 @@ for i = 1:12
     
 end
 
-% Annual
+% prior Jul-Jun
 yyaxis right;
-plot([13.5-offs-offs/3 13.5-offs-offs/3],...
+plot([20-offs-offs/3 20-offs-offs/3],...
+    [CP_NEP_global_shyear_mean_beta*scale-CP_NEP_global_shyear_mean_beta_CI*scale CP_NEP_global_shyear_mean_beta*scale+CP_NEP_global_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(20-offs-offs/3,CP_NEP_global_shyear_mean_beta*scale,12,clr2(2,:),'filled','s');
+plot([20+offs-offs/3 20+offs-offs/3],...
+    [EP_NEP_global_shyear_mean_beta*scale-EP_NEP_global_shyear_mean_beta_CI*scale EP_NEP_global_shyear_mean_beta*scale+EP_NEP_global_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(20+offs-offs/3,EP_NEP_global_shyear_mean_beta*scale,12,clr2(10,:),'filled','s');
+
+% Calendar year
+yyaxis right;
+plot([21-offs-offs/3 21-offs-offs/3],...
     [CP_NEP_global_annual_mean_beta*scale-CP_NEP_global_annual_mean_beta_CI*scale CP_NEP_global_annual_mean_beta*scale+CP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs-offs/3,CP_NEP_global_annual_mean_beta*scale,12,clr2(2,:),'filled','s');
-
-plot([13.5+offs-offs/3 13.5+offs-offs/3],...
+scatter(21-offs-offs/3,CP_NEP_global_annual_mean_beta*scale,12,clr2(2,:),'filled','s');
+plot([21+offs-offs/3 21+offs-offs/3],...
     [EP_NEP_global_annual_mean_beta*scale-EP_NEP_global_annual_mean_beta_CI*scale EP_NEP_global_annual_mean_beta*scale+EP_NEP_global_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs-offs/3,EP_NEP_global_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
+scatter(21+offs-offs/3,EP_NEP_global_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
 
-%% Plot inversion beta through time
+%% Plot inversion beta through time: tropics
 load('./data/cp_ep_nep_inversions.mat');
 set(h, 'currentaxes',ax2);
 yyaxis left;
 hold on;
-for i = 1:12
+for i = 1:18
     
     plot([i-offs-offs/3 i-offs-offs/3],...
         [CP_NEP_tropics_monthly_mean_beta(i)-CP_NEP_tropics_monthly_mean_beta_CI(i) CP_NEP_tropics_monthly_mean_beta(i)+CP_NEP_tropics_monthly_mean_beta_CI(i)],...
@@ -257,30 +277,42 @@ for i = 1:12
     
 end
 
-% Annual
+% prior Jul-Jun
 yyaxis right;
-plot([13.5-offs-offs/3 13.5-offs-offs/3],...
+plot([20-offs-offs/3 20-offs-offs/3],...
+    [CP_NEP_tropics_shyear_mean_beta*scale-CP_NEP_tropics_shyear_mean_beta_CI*scale CP_NEP_tropics_shyear_mean_beta*scale+CP_NEP_tropics_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(2,:));
+scatter(20-offs-offs/3,CP_NEP_tropics_shyear_mean_beta*scale,12,clr2(2,:),'filled','s');
+
+plot([20+offs-offs/3 20+offs-offs/3],...
+    [EP_NEP_tropics_shyear_mean_beta*scale-EP_NEP_tropics_shyear_mean_beta_CI*scale EP_NEP_tropics_shyear_mean_beta*scale+EP_NEP_tropics_shyear_mean_beta_CI*scale],...
+    '-','Color',clr2(10,:));
+scatter(20+offs-offs/3,EP_NEP_tropics_shyear_mean_beta*scale,12,clr2(10,:),'filled','s');
+
+% Calendar year
+yyaxis right;
+plot([21-offs-offs/3 21-offs-offs/3],...
     [CP_NEP_tropics_annual_mean_beta*scale-CP_NEP_tropics_annual_mean_beta_CI*scale CP_NEP_tropics_annual_mean_beta*scale+CP_NEP_tropics_annual_mean_beta_CI*scale],...
     '-','Color',clr2(2,:));
-scatter(13.5-offs-offs/3,CP_NEP_tropics_annual_mean_beta*scale,12,clr2(2,:),'filled','s');
+scatter(21-offs-offs/3,CP_NEP_tropics_annual_mean_beta*scale,12,clr2(2,:),'filled','s');
 
-plot([13.5+offs-offs/3 13.5+offs-offs/3],...
+plot([21+offs-offs/3 21+offs-offs/3],...
     [EP_NEP_tropics_annual_mean_beta*scale-EP_NEP_tropics_annual_mean_beta_CI*scale EP_NEP_tropics_annual_mean_beta*scale+EP_NEP_tropics_annual_mean_beta_CI*scale],...
     '-','Color',clr2(10,:));
-scatter(13.5+offs-offs/3,EP_NEP_tropics_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
+scatter(21+offs-offs/3,EP_NEP_tropics_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
-scatter(10+0.1, -0.85, 20, 'k', 'filled','s');
-text(10.1+0.1, -0.85, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(10+0.1, -0.65, 20, 'k', 'filled','^');
-text(10.1+0.1, -0.65, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(12.5+0.1, -0.85, 20, 'k', 'filled','s');
+text(12.6+0.1, -0.85, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(12.5+0.1, -0.65, 20, 'k', 'filled','^');
+text(12.6+0.1, -0.65, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
-lgd.Position = [0.76 0.08 0.1012 0.075];
+lgd.Position = [0.66 0.075 0.1012 0.075];
 
 
 set(gcf,'PaperPositionMode','auto')
-print('-dtiff','-f1','-r300','./output/epi-cpi-nep.tif')
+print('-dtiff','-f1','-r300','./output/supplemental-epi-cpi-nep.tif')
 close all;
 
