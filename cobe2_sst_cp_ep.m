@@ -3,6 +3,7 @@ t0 = datenum(1891, 1, 1);
 latlim = [-20 20];
 lonlim = [120 290];
 syear = 1951;
+eyear = 2016;
 
 warning('off');
 
@@ -10,7 +11,6 @@ windowSize = 6; % Number of months over which to average SSTs
 endMonth = 2; % End month of integration period
 
 %% Load COBE-2 SST data
-% info = ncinfo('./data/sst.mon.mean.nc');
 lat = double(ncread('./data/sst.mon.mean.nc','lat'));
 lon = double(ncread('./data/sst.mon.mean.nc','lon'));
 t = ncread('./data/sst.mon.mean.nc','time');
@@ -18,6 +18,9 @@ sst = double(ncread('./data/sst.mon.mean.nc','sst'));
 sst = permute(sst, [2 1 3]);
 sst(sst>40) = NaN;
 [yr, mo] = datevec(t0 + t); clear t0 t;
+sst = sst(:,:,yr >= (syear-1) & yr <= eyear); 
+mo = mo(yr >= (syear-1) & yr <= eyear);
+yr = yr(yr >= (syear-1) & yr <= eyear);
 
 %% Need to do monthly anomalies
 ssta = NaN(size(sst));
@@ -35,26 +38,15 @@ clear x xclim xm i sst;
 lat_weight = repmat(sqrt(cosd(lat)), 1, length(lon));
 
 %% Regress SST data onto Nino-4 and Nino-1+2 indices to get independent CP- and EP- SST anomalies
-nino4 = ssta(lat>=-5 & lat<=5, lon>=160 & lon<=210, :);
-nino4 = reshape(permute(nino4, [3 1 2]), length(yr), []);
-w = repmat(reshape(lat_weight(lat>=-5 & lat<=5, lon>=160 & lon<=210), 1, []), length(yr), 1);
-nino4 = sum(nino4.*w, 2) ./ sum(w, 2);
-clear w;
-
-nino12 = ssta(lat>=-10 & lat<=0, lon>=270 & lon<=280, :);
-nino12 = reshape(permute(nino12, [3 1 2]), length(yr), []);
-idx = sum(isnan(nino12))==0;
-w = repmat(reshape(lat_weight(lat>=-10 & lat<=0, lon>=270 & lon<=280), 1, []), length(yr), 1);
-nino12 = sum(nino12(:,idx).*w(:,idx), 2) ./ sum(w(:,idx), 2);
-clear w idx;
+T = readtable('./data/NOAA_CPC_ERSST5_Nino.csv');
+nino12 = T.ANOM_1_2(T.YR >= (syear-1) & T.YR <= eyear);
+nino4 = T.ANOM_4(T.YR >= (syear-1) & T.YR <= eyear);
 
 sst_tp = ssta(lat>=min(latlim) & lat<=max(latlim), lon>=min(lonlim) & lon<=max(lonlim), :);
 [ny, nx, ~] = size(sst_tp);
 sst_tp = reshape(permute(sst_tp, [3 1 2]), length(yr), []);
-w_tp = reshape(lat_weight(lat>=min(latlim) & lat<=max(latlim), lon>=min(lonlim) & lon<=max(lonlim)), 1, []);
 sst_idx = sum(isnan(sst_tp)) == 0;
 sst_tp = sst_tp(:, sst_idx);
-w_tp = w_tp(sst_idx);
 sst_ep = NaN(size(sst_tp));
 sst_cp = NaN(size(sst_tp));
 for i = 1:size(sst_tp, 2)
@@ -90,7 +82,7 @@ ep_idx = sum(ep_idx(:,idx).*w(:,idx), 2) ./ sum(w(:,idx), 2);
 clear w idx;
 
 clear sst_idx w_tp ny nx;
-save('./data/cpi_epi_monthly.mat', 'cp_idx','ep_idx','yr','mo', '-v7.3');
+save('./data/cpi_epi_monthly.mat', 'cp_idx','ep_idx','nino12','nino4','yr','mo', '-v7.3');
 
 %% Get spatial patterns by correlating SSTa against CPI and EPI
 [ny, nx, nt] = size(ssta);
