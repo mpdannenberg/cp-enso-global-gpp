@@ -65,6 +65,4 @@ supplemental_make_cp_ep_nep_maps; % Figure #
 supplemental_cp_ep_cru; % Figs. #-#
 supplemental_mauna_loa; % Fig. #-#
 supplemental_make_cp_ep_gpp_maps_byYear; % Fig. #
-supplemental_make_cp_ep_ahlstrom_boxplots_shyear;
-supplemental_make_cp_ep_regional_boxplots_shyear;
 
