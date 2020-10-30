@@ -176,12 +176,12 @@ for i = 1:18
     
     
 end
-set(gca, 'XLim',[0.5 21.5], 'YLim',[-5 3], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0.5 21.5], 'YLim',[-6 2], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',...
     {'Jul*','Aug*','Sep*','Oct*','Nov*','Dec*','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jul*-Jun','Jan-Dec'});
 xtickangle(-45)
 ylabel('Monthly GPP response (Tg C day^{-1} K^{-1})', 'FontSize',7);
-text(0.9, 2.5, 'F) Tropics', 'FontSize',12);
+text(0.9, 1.5, 'F) Tropics', 'FontSize',12);
 
 % prior Jul - Jun
 yyaxis right;
@@ -208,9 +208,9 @@ plot([21+offs+offs/3 21+offs+offs/3],...
     '-','Color',clr2(10,:));
 scatter(21+offs+offs/3,EP_GPP_tropics_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
 
-set(gca, 'YLim',[-1000 600]/1000, 'YTick',-0.8:0.4:0.8);
+set(gca, 'YLim',[-1500 500]/1000, 'YTick',-1.5:0.5:0.5);
 ylb = ylabel('Annual GPP response (Pg C yr^{-1} K^{-1})', 'FontSize',7);
-ylb.Position = [22.4    -0.2   -1.0000];
+ylb.Position = [22.4    -0.5   -1.0000];
 
 hold off;
 box off;
@@ -354,14 +354,14 @@ scatter(21+offs-offs/3,EP_GPP_tropics_annual_mean_beta*scale,15,clr2(10,:),'x');
 
 
 %% Legend
-scatter(7-0.3, 0.58, 20, 'k', 'filled','^');
-text(7.1-0.3, 0.58, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(7-0.3, 0.38, 20, 'k', 'x');
-text(7.1-0.3, 0.38, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(7-0.3, 0.48, 20, 'k', 'filled','^');
+text(7.1-0.3, 0.48, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(7-0.3, 0.28, 20, 'k', 'x');
+text(7.1-0.3, 0.28, 'LUE', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','northwest', 'FontSize',9);
 legend('boxoff');
-lgd.Position = [0.42    0.223    0.1012    0.0634];
+lgd.Position = [0.42    0.23    0.1012    0.05];
 
 %% Save
 set(gcf,'PaperPositionMode','auto')
