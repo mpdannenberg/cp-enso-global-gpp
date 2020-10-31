@@ -177,11 +177,11 @@ for i = 1:18
     
     
 end
-set(gca, 'XLim',[0.5 21.5], 'YLim',[-5 3], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
+set(gca, 'XLim',[0.5 21.5], 'YLim',[-6 4], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',...
     {'Jul*','Aug*','Sep*','Oct*','Nov*','Dec*','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jul*-Jun','Jan-Dec'});
 ylb = ylabel('Monthly NEP response (Tg C day^{-1} K^{-1})', 'FontSize',7);
-text(0.9, 2.5, 'D) Tropics', 'FontSize',12);
+text(0.9, 3.5, 'D) Tropics', 'FontSize',12);
 
 % prior Jul - Jun
 yyaxis right;
@@ -208,7 +208,7 @@ plot([21+offs+offs/3 21+offs+offs/3],...
     '-','Color',clr2(10,:));
 scatter(21+offs+offs/3,EP_NEP_tropics_annual_mean_beta*scale,10,clr2(10,:),'filled','^');
 
-set(gca, 'YLim',[-1000 600]/1000, 'YTick',-0.8:0.4:0.8);
+set(gca, 'YLim',[-1500 1000]/1000, 'YTick',-1.5:0.5:1);
 ylb = ylabel('Annual NEP response (Pg C yr^{-1} K^{-1})', 'FontSize',7);
 
 hold off;
@@ -302,14 +302,14 @@ plot([21+offs-offs/3 21+offs-offs/3],...
 scatter(21+offs-offs/3,EP_NEP_tropics_annual_mean_beta*scale,12,clr2(10,:),'filled','s');
 
 %% Legend
-scatter(12.5+0.1, -0.85, 20, 'k', 'filled','s');
-text(12.6+0.1, -0.85, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
-scatter(12.5+0.1, -0.65, 20, 'k', 'filled','^');
-text(12.6+0.1, -0.65, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(12.5+0.1, -1.3, 20, 'k', 'filled','s');
+text(12.6+0.1, -1.3, 'CAMS', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
+scatter(12.5+0.1, -1, 20, 'k', 'filled','^');
+text(12.6+0.1, -1, 'MsTMIP', 'HorizontalAlignment','left', 'VerticalAlignment','middle', 'FontSize',9)
 
 lgd = legend([b1 b2], 'CP','EP', 'Location','southeast', 'FontSize',9);
 legend('boxoff');
-lgd.Position = [0.66 0.075 0.1012 0.075];
+lgd.Position = [0.66 0.075 0.1012 0.07];
 
 
 set(gcf,'PaperPositionMode','auto')
