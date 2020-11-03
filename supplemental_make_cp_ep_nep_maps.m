@@ -180,6 +180,7 @@ end
 set(gca, 'XLim',[0.5 21.5], 'YLim',[-6 4], 'XTick',[1:18 20 21], 'TickDir','out', 'FontSize',8,...
     'TickLength',[0.01 0.05], 'XTickLabels',...
     {'Jul*','Aug*','Sep*','Oct*','Nov*','Dec*','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jul*-Jun','Jan-Dec'});
+xtickangle(-45)
 ylb = ylabel('Monthly NEP response (Tg C day^{-1} K^{-1})', 'FontSize',7);
 text(0.9, 3.5, 'D) Tropics', 'FontSize',12);
 
