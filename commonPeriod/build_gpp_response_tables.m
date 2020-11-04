@@ -97,6 +97,6 @@ Tannual.CP_MsTMIP(3:end) = cp_gpp_95CI_annual.MsTMIP;
 Tshyear.CP_MsTMIP(3:end) = cp_gpp_95CI_shyear.MsTMIP;
 clearvars -except Tannual Tshyear
 
-writetable(Tannual, './output/gpp-responses-annual.xlsx');
-writetable(Tshyear, './output/gpp-responses-shyear.xlsx');
+writetable(Tannual, './output/gpp-responses-annual.xlsx', 'WriteRowNames',1);
+writetable(Tshyear, './output/gpp-responses-shyear.xlsx', 'WriteRowNames',1);
 

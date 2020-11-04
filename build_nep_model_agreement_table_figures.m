@@ -104,5 +104,5 @@ T.Jan_Dec('W. North America') = sum(westna_diff_annual > 0);
 T.Jul_Jun('W. North America') = sum(westna_diff_shyear > 0);
 
 clearvars -except T;
-writetable(T, './output/nep-model-agreement.xlsx');
+writetable(T, './output/nep-model-agreement.xlsx', 'WriteRowNames',1);
 

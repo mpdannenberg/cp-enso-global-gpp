@@ -77,6 +77,6 @@ Tannual.CP_CAMS(3:10) = cp_nep_95CI_annual.Inversions;
 Tshyear.CP_CAMS(3:10) = cp_nep_95CI_shyear.Inversions;
 clearvars -except Tannual Tshyear
 
-writetable(Tannual, './output/nep-responses-annual.xlsx');
-writetable(Tshyear, './output/nep-responses-shyear.xlsx');
+writetable(Tannual, './output/nep-responses-annual.xlsx', 'WriteRowNames',1);
+writetable(Tshyear, './output/nep-responses-shyear.xlsx', 'WriteRowNames',1);
 
