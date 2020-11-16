@@ -52,14 +52,14 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
         'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
 axis off;
 axis image;
-surfm(lat, lon, squeeze(GPP_annual_mean(:,:,years==2002)))
+surfm(lat, lon, squeeze(GPP_annual_mean(:,:,years==1997)))
 caxis([-0.2 0.2])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
-textm(-60,0,'2002', 'FontSize',14, 'FontWeight','bold', 'HorizontalAlignment','center', 'VerticalAlignment','bottom');
+textm(-60,0,'1997', 'FontSize',14, 'FontWeight','bold', 'HorizontalAlignment','center', 'VerticalAlignment','bottom');
 subplotsqueeze(gca,1.3);
 
 subplot(3,2,5)
@@ -70,14 +70,14 @@ ax = axesm('winkel','MapLatLimit',latlim,'MapLonLimit',lonlim,'grid',...
         'FLineWidth',1, 'FontColor',[0.5 0.5 0.5], 'MLabelParallel',min(latlim)+0.11);
 axis off;
 axis image;
-surfm(lat, lon, squeeze(GPP_annual_mean(:,:,years==2005)))
+surfm(lat, lon, squeeze(GPP_annual_mean(:,:,years==2002)))
 caxis([-0.2 0.2])
 colormap(gca, clr);
 geoshow(worldland,'FaceColor','none','EdgeColor',[0.6 0.6 0.6])
 pos = get(gca, 'Position');
 pos(1) = pos(1)-0.04;
 set(gca, 'Position',pos);
-textm(-60,0,'2005', 'FontSize',14, 'FontWeight','bold', 'HorizontalAlignment','center', 'VerticalAlignment','bottom');
+textm(-60,0,'2002', 'FontSize',14, 'FontWeight','bold', 'HorizontalAlignment','center', 'VerticalAlignment','bottom');
 subplotsqueeze(gca,1.3);
 
 %% Central Pacific El Niños
